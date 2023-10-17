@@ -24,12 +24,22 @@ class TheWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return const WidgetWithConfiguration(
-      content: SizedBox(
-        width: double.infinity,
-        child: BottomAppBar(),
+    return WidgetWithConfiguration(
+      initialFractions: const [0.5, 0.5],
+      content: Scaffold(
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+        floatingActionButton: FloatingActionButton(onPressed: () {}),
+        bottomNavigationBar: BottomAppBar(
+          notchMargin: 8,
+          shape: AutomaticNotchedShape(
+            const RoundedRectangleBorder(),
+            RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(16),
+            ),
+          ),
+        ),
       ),
-      configs: [],
+      configs: const [],
     );
   }
 }

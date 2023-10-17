@@ -5,8 +5,8 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import 'package:dreambook/src/ui/pages/shared/code_space/code_space.dart';
 import 'package:dreambook/src/ui/pages/shared/code_space/code_span.dart';
-import 'package:dreambook/src/ui/pages/shared/tiles/menu_tile.dart';
 import 'package:dreambook/src/ui/pages/shared/shared_code_view.dart';
+import 'package:dreambook/src/ui/pages/shared/tiles/menu_tile.dart';
 
 part 'fab.g.dart';
 
@@ -25,6 +25,33 @@ enum FabType {
 
   const FabType(this.contentName);
   final String contentName;
+}
+
+enum FabLocation {
+  startTop(FloatingActionButtonLocation.startTop),
+  miniStartTop(FloatingActionButtonLocation.miniStartTop),
+  centerTop(FloatingActionButtonLocation.centerTop),
+  miniCenterTop(FloatingActionButtonLocation.miniCenterTop),
+  endTop(FloatingActionButtonLocation.endTop),
+  miniEndTop(FloatingActionButtonLocation.miniEndTop),
+  startFloat(FloatingActionButtonLocation.startFloat),
+  miniStartFloat(FloatingActionButtonLocation.miniStartFloat),
+  centerFloat(FloatingActionButtonLocation.centerFloat),
+  miniCenterFloat(FloatingActionButtonLocation.miniCenterFloat),
+  endFloat(FloatingActionButtonLocation.endFloat),
+  miniEndFloat(FloatingActionButtonLocation.miniEndFloat),
+  startDocked(FloatingActionButtonLocation.startDocked),
+  miniStartDocked(FloatingActionButtonLocation.miniStartDocked),
+  centerDocked(FloatingActionButtonLocation.centerDocked),
+  miniCenterDocked(FloatingActionButtonLocation.miniCenterDocked),
+  endDocked(FloatingActionButtonLocation.endDocked),
+  miniEndDocked(FloatingActionButtonLocation.miniEndDocked),
+  endContained(FloatingActionButtonLocation.endContained),
+  ;
+
+  const FabLocation(this.rawType);
+
+  final FloatingActionButtonLocation rawType;
 }
 
 enum MaterialShapeDefined {
@@ -73,21 +100,25 @@ class FabConfig {
     this.enabled = true,
     this.type = FabType.normal,
     this.shape = MaterialShapeDefined.unset,
+    this.location = FabLocation.endFloat,
   });
 
   final bool enabled;
   final FabType type;
   final MaterialShapeDefined shape;
+  final FabLocation location;
 
   FabConfig copyWith({
     bool? enabled,
     FabType? type,
     MaterialShapeDefined? shape,
+    FabLocation? location,
   }) {
     return FabConfig(
       enabled: enabled ?? this.enabled,
       type: type ?? this.type,
       shape: shape ?? this.shape,
+      location: location ?? this.location,
     );
   }
 }
@@ -111,14 +142,18 @@ class TheCode extends ConsumerWidget {
     return CodeSpace([
       StaticCodes.material,
       '',
-      '${config.type.contentName}(',
-      config.enabled ? '  onPressed: () {},' : '  onPressed: null,',
+      'Scaffold(',
+      if (config.location != FabLocation.endFloat)
+        '  floatingActionButtonLocation: FloatingActionButtonLocation.${config.location.name},',
+      '  floatingActionButton: ${config.type.contentName}(',
+      config.enabled ? '    onPressed: () {},' : '  onPressed: null,',
       config.type == FabType.extended
-          ? '  icon: const Icon(Icons.add),'
-          : '  child: const Icon(Icons.add),',
-      if (config.type == FabType.extended) "  label: const Text('Extended')",
+          ? '    icon: const Icon(Icons.add),'
+          : '    child: const Icon(Icons.add),',
+      if (config.type == FabType.extended) "    label: const Text('Extended')",
       if (config.shape != MaterialShapeDefined.unset)
-        '  shape: ${config.shape.code},',
+        '    shape: ${config.shape.code},',
+      '  ),',
       ')',
     ]);
   }
@@ -131,6 +166,7 @@ class TheWidget extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final config = ref.watch(configProvider);
     return WidgetWithConfiguration(
+      initialFractions: const [0.5, 0.5],
       content: const TheFab(),
       configs: [
         MenuTile<FabType>(
@@ -160,6 +196,17 @@ class TheWidget extends ConsumerWidget {
                 .change(config.copyWith(enabled: state));
           },
         ),
+        MenuTile(
+          title: 'location',
+          items: FabLocation.values,
+          current: config.location,
+          onTap: (t) {
+            ref
+                .read(configProvider.notifier)
+                .change(config.copyWith(location: t));
+          },
+          contentBuilder: (t) => t.name,
+        ),
       ],
     );
   }
@@ -174,23 +221,32 @@ class TheFab extends ConsumerWidget {
     final VoidCallback? onPressed = config.enabled ? () {} : null;
     final shape = config.shape.shape;
     const icon = Icon(Icons.add);
+    late Widget fab;
     switch (config.type) {
       case FabType.normal:
-        return FloatingActionButton(
+        fab = FloatingActionButton(
             onPressed: onPressed, shape: shape, child: icon);
       case FabType.large:
-        return FloatingActionButton.large(
+        fab = FloatingActionButton.large(
             onPressed: onPressed, shape: shape, child: icon);
       case FabType.small:
-        return FloatingActionButton.small(
+        fab = FloatingActionButton.small(
             onPressed: onPressed, shape: shape, child: icon);
       case FabType.extended:
-        return FloatingActionButton.extended(
+        fab = FloatingActionButton.extended(
           onPressed: onPressed,
           icon: icon,
           shape: shape,
           label: const Text('extended'),
         );
     }
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Theme.of(context).colorScheme.primaryContainer,
+      ),
+      bottomNavigationBar: const BottomAppBar(),
+      floatingActionButton: fab,
+      floatingActionButtonLocation: config.location.rawType,
+    );
   }
 }

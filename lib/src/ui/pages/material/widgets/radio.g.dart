@@ -1,17 +1,17 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'checkbox.dart';
+part of 'radio.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$configHash() => r'1d4e640b06c6e4f4c87e6e5265c9b1b72a1e41c8';
+String _$configHash() => r'55b33cf7caecc50dc14538394632734745c522bf';
 
 /// See also [Config].
 @ProviderFor(Config)
 final configProvider =
-    AutoDisposeNotifierProvider<Config, CheckboxConfig>.internal(
+    AutoDisposeNotifierProvider<Config, RadioConfig>.internal(
   Config.new,
   name: r'configProvider',
   debugGetCreateSourceHash:
@@ -20,20 +20,21 @@ final configProvider =
   allTransitiveDependencies: null,
 );
 
-typedef _$Config = AutoDisposeNotifier<CheckboxConfig>;
-String _$theStateHash() => r'4e220b9eb9eeab44880206a9202082a34e913e28';
+typedef _$Config = AutoDisposeNotifier<RadioConfig>;
+String _$currentItemHash() => r'549189dc0c23448be91e793ea4b56cbdfeb9c8bf';
 
-/// See also [TheState].
-@ProviderFor(TheState)
-final theStateProvider = AutoDisposeNotifierProvider<TheState, bool?>.internal(
-  TheState.new,
-  name: r'theStateProvider',
+/// See also [CurrentItem].
+@ProviderFor(CurrentItem)
+final currentItemProvider =
+    AutoDisposeNotifierProvider<CurrentItem, int?>.internal(
+  CurrentItem.new,
+  name: r'currentItemProvider',
   debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$theStateHash,
+      const bool.fromEnvironment('dart.vm.product') ? null : _$currentItemHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef _$TheState = AutoDisposeNotifier<bool?>;
+typedef _$CurrentItem = AutoDisposeNotifier<int?>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

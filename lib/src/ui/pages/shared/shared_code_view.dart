@@ -135,14 +135,16 @@ class WidgetWithConfiguration extends StatelessWidget {
     required this.content,
     required this.configs,
     this.initialFractions = const <double>[0.2, 0.8],
+    this.axis = Axis.vertical,
   });
   final Widget content;
   final List<Widget> configs;
   final List<double> initialFractions;
+  final Axis axis;
   @override
   Widget build(BuildContext context) {
     return Split(
-      axis: Axis.vertical,
+      axis: axis,
       initialFractions: initialFractions,
       children: [
         Center(child: content),
