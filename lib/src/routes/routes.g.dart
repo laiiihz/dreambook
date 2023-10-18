@@ -24,6 +24,11 @@ RouteBase get $rootRoute => GoRouteData.$route(
           name: 'cupertino',
           factory: $CupertinoRouteExtension._fromState,
         ),
+        GoRouteData.$route(
+          path: 'painting',
+          name: 'painting',
+          factory: $PaintingRouteExtension._fromState,
+        ),
       ],
     );
 
@@ -66,6 +71,23 @@ extension $CupertinoRouteExtension on CupertinoRoute {
 
   String get location => GoRouteData.$location(
         '/cupertino',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+extension $PaintingRouteExtension on PaintingRoute {
+  static PaintingRoute _fromState(GoRouterState state) => PaintingRoute();
+
+  String get location => GoRouteData.$location(
+        '/painting',
       );
 
   void go(BuildContext context) => context.go(location);

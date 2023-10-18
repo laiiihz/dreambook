@@ -29,7 +29,7 @@ class TheCode extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     // final config = ref.watch(configProvider);
-    return const CodeSpace([
+    return CodeSpace(const [
       StaticCodes.material,
       '',
     ]);

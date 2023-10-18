@@ -44,6 +44,8 @@ dependencies:
     git:
       url: https://github.com/laiiihz/syntax_highlight
       ref: develop
+  code_builder: ^4.7.0
+  dart_style: ^2.3.3
 
 dev_dependencies:
   flutter_test:

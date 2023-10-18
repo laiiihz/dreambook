@@ -37,7 +37,7 @@ class TheCode extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return const CodeSpace([
+    return CodeSpace(const [
       StaticCodes.material,
       '',
       'int currentIndex = 0;',

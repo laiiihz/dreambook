@@ -1,6 +1,7 @@
 import 'package:dreambook/src/routes/routes.dart';
 import 'package:dreambook/src/ui/pages/cupertino/cupertino_page_view.dart';
 import 'package:dreambook/src/ui/pages/material/material_page_view.dart';
+import 'package:dreambook/src/ui/pages/painting/painting_page_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -42,6 +43,17 @@ class RootPage extends StatelessWidget {
                   CupertinoRoute().go(context);
                 },
                 child: const Text('Cupertino'),
+              ),
+              const SizedBox(height: 16),
+              FilledButton.icon(
+                style: FilledButton.styleFrom(
+                  minimumSize: const Size.fromHeight(56),
+                ),
+                onPressed: () {
+                  PaintingRoute().go(context);
+                },
+                icon: const Icon(Icons.format_paint),
+                label: const Text('Painting'),
               ),
             ]),
           ),

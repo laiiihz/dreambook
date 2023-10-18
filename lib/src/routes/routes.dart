@@ -1,5 +1,6 @@
 import 'package:dreambook/src/ui/pages/cupertino/cupertino_page_view.dart';
 import 'package:dreambook/src/ui/pages/material/material_page_view.dart';
+import 'package:dreambook/src/ui/pages/painting/painting_page_view.dart';
 import 'package:dreambook/src/ui/root.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -17,6 +18,7 @@ GoRouter appRoutes(AppRoutesRef ref) {
   routes: [
     TypedGoRoute<MaterialRoute>(path: 'material', name: 'material'),
     TypedGoRoute<CupertinoRoute>(path: 'cupertino', name: 'cupertino'),
+    TypedGoRoute<PaintingRoute>(path: 'painting', name: 'painting'),
   ],
 )
 class RootRoute extends GoRouteData {
