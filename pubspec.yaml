@@ -60,7 +60,7 @@ dev_dependencies:
   flutter_lints: ^3.0.0
   go_router_builder: ^2.3.3
   build_runner: ^2.4.6
-  riverpod_generator: ^2.3.4
+  riverpod_generator: ^2.3.3
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

@@ -6,7 +6,7 @@ part of 'code_space.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$showFullContentHash() => r'c2b43fc9896babef40d32245ae5a1ef2d8c029aa';
+String _$showFullContentHash() => r'002f2c6618248ec036958507a889e38a99a6ab6e';
 
 /// See also [ShowFullContent].
 @ProviderFor(ShowFullContent)
