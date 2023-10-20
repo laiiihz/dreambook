@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
 
 class SlidableTile extends StatelessWidget {
-  const SlidableTile(
-      {super.key,
-      required this.title,
-      this.min = 0,
-      this.max = 1.0,
-      required this.value,
-      required this.onChanged});
+  const SlidableTile({
+    super.key,
+    required this.title,
+    this.min = 0,
+    this.max = 1.0,
+    this.divisions,
+    required this.value,
+    required this.onChanged,
+  });
   final String title;
   final double min;
   final double max;
   final double value;
+  final int? divisions;
   final ValueChanged<double> onChanged;
   @override
   Widget build(BuildContext context) {
@@ -31,8 +34,13 @@ class SlidableTile extends StatelessWidget {
           ),
           const SizedBox(width: 16),
           Expanded(
-            child:
-                Slider(value: value, onChanged: onChanged, min: min, max: max),
+            child: Slider(
+              value: value,
+              onChanged: onChanged,
+              min: min,
+              max: max,
+              divisions: divisions,
+            ),
           ),
         ],
       ),

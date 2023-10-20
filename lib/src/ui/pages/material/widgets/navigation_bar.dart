@@ -1,5 +1,6 @@
+import 'package:code_builder/code_builder.dart';
+import 'package:dreambook/src/ui/pages/shared/code_space/code_builder_helper.dart';
 import 'package:dreambook/src/ui/pages/shared/code_space/code_space.dart';
-import 'package:dreambook/src/ui/pages/shared/code_space/code_span.dart';
 import 'package:dreambook/src/ui/pages/shared/shared_code_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -35,39 +36,42 @@ class CurrentIndex extends _$CurrentIndex {
 class TheCode extends ConsumerWidget {
   const TheCode({super.key});
 
+  InvokeExpression genNaviItem(String title, String icon, String selectIcon) {
+    return InvokeExpression.newOf(
+      refer('NavigationDestination'),
+      [],
+      {
+        'icon': refer('Icon(Icons.$icon)'),
+        'selectedIcon': refer('Icon(Icons.$selectIcon)'),
+        'label': refer("'$title'"),
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return CodeSpace(const [
-      StaticCodes.material,
-      '',
-      'int currentIndex = 0;',
-      '''NavigationBar(
-  selectedIndex: currentIndex,
-  onDestinationSelected: (value) {
-    setState(() {
-      currentIndex = value;
-    });
-  },
-  destinations: const [
-    NavigationDestination(
-      icon: Icon(Icons.home_outlined),
-      selectedIcon: Icon(Icons.home),
-      label: 'Home',
-    ),
-    NavigationDestination(
-      icon: Icon(Icons.favorite_outline),
-      selectedIcon: Icon(Icons.favorite),
-      label: 'Favorite',
-    ),
-    NavigationDestination(
-      icon: Icon(Icons.person_outline),
-      selectedIcon: Icon(Icons.person),
-      label: 'Profile',
-    ),
-  ],
-)
-''',
-    ]);
+    return AutoCode(
+      'NavigationBar',
+      custom: [
+        Field((f) => f
+          ..name = 'currentIndex'
+          ..assignment = const Code('0')),
+      ],
+      named: {
+        'selectedIndex': refer('currentIndex'),
+        'onDestinationSelected': Method((m) => m
+          ..body = Block((b) => b.addExpression(
+                CodeHelper.setState('currentIndex = value'),
+              ))).closure,
+        'destinations': literalConstList(
+          [
+            genNaviItem('Home', 'home', 'home_outlined'),
+            genNaviItem('Favorite', 'favorite', 'favorite_outline'),
+            genNaviItem('Profile', 'person', 'person_outlined'),
+          ],
+        ),
+      },
+    );
   }
 }
 

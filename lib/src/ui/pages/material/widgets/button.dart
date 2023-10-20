@@ -1,8 +1,8 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:code_builder/code_builder.dart';
 import 'package:dreambook/src/ui/pages/shared/code_space/code_space.dart';
-import 'package:dreambook/src/ui/pages/shared/code_space/code_span.dart';
-import 'package:dreambook/src/ui/pages/shared/tiles/menu_tile.dart';
 import 'package:dreambook/src/ui/pages/shared/shared_code_view.dart';
+import 'package:dreambook/src/ui/pages/shared/tiles/menu_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -99,20 +99,18 @@ class TheCode extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final config = ref.watch(configProvider);
-
-    return CodeSpace([
-      StaticCodes.material,
-      '',
-      '${config.type.contentName} (',
-      if (config.enabled) '  onPressed: () {},' else '  onPressed: null,',
-      if (config.type.hasIcon) '  icon: const Icon(Icons.category_rounded),',
-      if (!config.type.isIconButton)
-        if (config.type.hasIcon)
-          '  label: Text(\'${config.type.contentName}\'),'
-        else
-          '  child: Text(\'${config.type.contentName}\'),',
-      ')',
-    ]);
+    return AutoCode(
+      config.type.contentName,
+      named: {
+        'onPressed': config.enabled ? refer('() {}') : refer('null'),
+        if (config.type.hasIcon) 'icon': refer('Icon(Icons.category_rounded)'),
+        if (!config.type.isIconButton)
+          if (config.type.hasIcon)
+            'label': refer('Text(\'${config.type.contentName}\')')
+          else
+            'child': refer('Text(\'${config.type.contentName}\')'),
+      },
+    );
   }
 }
 

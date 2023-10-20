@@ -1,13 +1,12 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:code_builder/code_builder.dart';
+import 'package:dreambook/src/ui/pages/shared/code_space/code_space.dart';
+import 'package:dreambook/src/ui/pages/shared/shared_code_view.dart';
+import 'package:dreambook/src/ui/pages/shared/tiles/menu_tile.dart';
 import 'package:dreambook/src/ui/pages/shared/tiles/slidable_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-
-import 'package:dreambook/src/ui/pages/shared/code_space/code_space.dart';
-import 'package:dreambook/src/ui/pages/shared/code_space/code_span.dart';
-import 'package:dreambook/src/ui/pages/shared/shared_code_view.dart';
-import 'package:dreambook/src/ui/pages/shared/tiles/menu_tile.dart';
 
 part 'divider.g.dart';
 
@@ -64,25 +63,25 @@ class TheCode extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final config = ref.watch(configProvider);
     final sizeStr = config.size.toStringAsFixed(0);
-    return CodeSpace([
-      StaticCodes.material,
-      '',
+    return AutoCode(
       switch (config.axis) {
-        Axis.horizontal => 'Divider(',
-        Axis.vertical => 'VerticalDivider(',
+        Axis.horizontal => 'Divider',
+        Axis.vertical => 'VerticalDivider',
       },
-      if (sizeStr != '8')
-        switch (config.axis) {
-          Axis.horizontal => '  height: $sizeStr,',
-          Axis.vertical => '  width: $sizeStr,',
-        },
-      if (config.thickness > 1)
-        '  indent: ${config.thickness.toStringAsFixed(1)},',
-      if (config.indent != 0) '  indent: ${config.indent.toStringAsFixed(1)},',
-      if (config.endIndent != 0)
-        '  endIndent: ${config.endIndent.toStringAsFixed(1)},',
-      ')',
-    ]);
+      named: {
+        if (sizeStr != '8')
+          ...switch (config.axis) {
+            Axis.horizontal => {'height': refer(sizeStr)},
+            Axis.vertical => {'width': refer(sizeStr)},
+          },
+        if (config.thickness > 1)
+          'thickness': refer(config.thickness.toStringAsFixed(1)),
+        if (config.indent != 0)
+          'indent': refer(config.indent.toStringAsFixed(1)),
+        if (config.endIndent != 0)
+          'endIndent': refer(config.endIndent.toStringAsFixed(1)),
+      },
+    );
   }
 }
 

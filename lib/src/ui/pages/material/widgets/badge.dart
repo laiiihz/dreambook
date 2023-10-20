@@ -1,12 +1,11 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:code_builder/code_builder.dart';
+import 'package:dreambook/src/ui/pages/shared/code_space/code_space.dart';
+import 'package:dreambook/src/ui/pages/shared/shared_code_view.dart';
+import 'package:dreambook/src/ui/pages/shared/tiles/slidable_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-
-import 'package:dreambook/src/ui/pages/shared/code_space/code_space.dart';
-import 'package:dreambook/src/ui/pages/shared/code_space/code_span.dart';
-import 'package:dreambook/src/ui/pages/shared/shared_code_view.dart';
-import 'package:dreambook/src/ui/pages/shared/tiles/slidable_tile.dart';
 
 part 'badge.g.dart';
 
@@ -58,17 +57,20 @@ class TheCode extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final config = ref.watch(configProvider);
-    return CodeSpace([
-      StaticCodes.material,
-      '',
-      'Badge(',
-      '  smallSize: ${config.smallSize.toStringAsFixed(0)},',
-      '  margeSize: ${config.largeSize.toStringAsFixed(0)},',
-      if (config.hasLabel) "  label: const Text('99+'),",
-      if (!config.visible) '  isLabelVisible: false,',
-      '  child: const SomeWidget(),',
-      ')',
-    ]);
+    final small = config.smallSize.toStringAsFixed(0);
+    final large = config.largeSize.toStringAsFixed(0);
+    return AutoCode(
+      'Badge',
+      named: {
+        if (small != '6')
+          'smallSize': refer(config.smallSize.toStringAsFixed(0)),
+        if (large != '16')
+          'largeSize': refer(config.largeSize.toStringAsFixed(0)),
+        if (config.hasLabel) 'hasLabel': refer('const Text(\'99+\')'),
+        if (!config.visible) 'isLabelVisible': refer('false'),
+        'child': refer('const SomeWidget()'),
+      },
+    );
   }
 }
 
@@ -94,8 +96,9 @@ class TheWidget extends ConsumerWidget {
         SlidableTile(
           title: 'smallSize',
           value: config.smallSize,
-          min: 0,
-          max: 32,
+          min: 4,
+          max: 16,
+          divisions: 12,
           onChanged: (t) {
             ref
                 .read(configProvider.notifier)
@@ -105,8 +108,9 @@ class TheWidget extends ConsumerWidget {
         SlidableTile(
           title: 'largeSize',
           value: config.largeSize,
-          min: 0,
+          min: 12,
           max: 32,
+          divisions: 20,
           onChanged: (t) {
             ref
                 .read(configProvider.notifier)

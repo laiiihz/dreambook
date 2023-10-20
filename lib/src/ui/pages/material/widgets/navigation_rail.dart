@@ -1,4 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:code_builder/code_builder.dart';
+import 'package:dreambook/src/ui/pages/shared/code_space/code_builder_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -67,6 +69,28 @@ class TheCode extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final config = ref.watch(configProvider);
+    return AutoCode(
+      'NavigationRail',
+      custom: [
+        Field((f) => f
+          ..name = 'currentIndex'
+          ..assignment = const Code('0')
+          ..type = refer('int')),
+      ],
+      named: {
+        if (config.labelType != NavigationRailLabelType.none)
+          'labelType':
+              refer('NavigationRailLabelType.${config.labelType.name}'),
+        if (config.extended) 'extended': refer('true'),
+        if (config.leading) 'leading': refer('const Icon(Icons.menu)'),
+        if (config.trailing) 'trailing': refer('const Icon(Icons.settings)'),
+        if (config.hideIndicator) 'useIndicator': refer('false'),
+        'selectedIndex': refer('currentIndex'),
+        'onDestinationSelected': Method((m) => m.body = Block((b) =>
+                b.addExpression(CodeHelper.setState('currentIndex = value'))))
+            .closure,
+      },
+    );
     return CodeSpace([
       StaticCodes.material,
       '',

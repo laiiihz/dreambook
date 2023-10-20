@@ -3,14 +3,16 @@ import 'package:dart_style/dart_style.dart';
 
 class CodeWrapper {
   CodeWrapper({
-    this.import = Imports.material,
+    required this.import,
     required this.name,
-    this.namedArguments = const {},
-    this.typeArguments = const [],
-    this.positionalArguments = const [],
-    this.initState = const [],
-    this.dispose = const [],
-    this.fullContent = false,
+    required this.namedArguments,
+    required this.typeArguments,
+    required this.positionalArguments,
+    required this.initState,
+    required this.dispose,
+    required this.fullContent,
+    required this.middle,
+    required this.custom,
   });
 
   final Imports import;
@@ -21,6 +23,8 @@ class CodeWrapper {
   final Map<String, Expression> namedArguments;
   final List<Reference> typeArguments;
   final bool fullContent;
+  final List<Field> middle;
+  final List<Spec> custom;
 
   static final _formatter = DartFormatter();
   static final _emitter = DartEmitter();
@@ -102,8 +106,8 @@ class CodeWrapper {
       final clazzB = Class((c) => c
         ..name = '_SomeWidgetState'
         ..extend = refer('State<SomeWidget>')
-        ..methods.addAll(methods));
-
+        ..methods.addAll(methods)
+        ..fields.addAll(middle));
       nextSpec = <Spec>[
         clazzA,
         clazzB,
@@ -112,6 +116,8 @@ class CodeWrapper {
     return _formatter.format(
       <Spec>[
         import.directive,
+        ...custom,
+        if (!fullContent) ...middle,
         if (fullContent) ...nextSpec else ...methods,
       ].map((e) => e.accept(_emitter)).join('\n'),
     );

@@ -1,11 +1,10 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:code_builder/code_builder.dart';
+import 'package:dreambook/src/ui/pages/shared/code_space/code_space.dart';
+import 'package:dreambook/src/ui/pages/shared/shared_code_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-
-import 'package:dreambook/src/ui/pages/shared/code_space/code_space.dart';
-import 'package:dreambook/src/ui/pages/shared/code_space/code_span.dart';
-import 'package:dreambook/src/ui/pages/shared/shared_code_view.dart';
 
 part 'app_bar.g.dart';
 
@@ -65,29 +64,25 @@ class TheCode extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final config = ref.watch(configProvider);
-    return CodeSpace([
-      StaticCodes.material,
-      '',
-      'AppBar(',
-      if (config.showTitle) "  title: const Text('Title'),",
-      if (config.centerTitle) "  centerTitle: true,",
-      if (config.showLeading) "  leading: const Icon(Icons.arrow_back),",
-      if (config.showActions) ...[
-        "  actions: const [",
-        "    IconButton(onPressed: null, icon: Icon(Icons.share)),",
-        "    IconButton(onPressed: null, icon: Icon(Icons.more_vert)),",
-        "  ],",
-      ],
-      if (config.showFlexibleSpace)
-        "  flexibleSpace: const FlutterLogo(size: 256),",
-      if (config.showBottom) ...[
-        "  bottom: PreferredSize(",
-        "    preferredSize: Size.fromHeight(24),",
-        "    child: SizedBox(height: 24, child: Placeholder()),",
-        "  ),",
-      ],
-      ')',
-    ]);
+    return AutoCode(
+      'AppBar',
+      named: {
+        if (config.showTitle) 'showTitle': refer("const Text('Title')"),
+        if (config.centerTitle) 'centerTitle': refer('true'),
+        if (config.showLeading)
+          'leading': refer('const Icon(Icons.arrow_back)'),
+        if (config.showActions)
+          'actions': literalConstList([
+            refer('IconButton(onPressed: null, icon: Icon(Icons.share))'),
+            refer('IconButton(onPressed: null, icon: Icon(Icons.more_vert))'),
+          ]),
+        if (config.showFlexibleSpace)
+          'flexibleSpace': refer('const FlutterLogo(size: 256)'),
+        if (config.showBottom)
+          'bottom': refer(
+              'const PreferredSize(preferredSize: Size.fromHeight(24), child: SizedBox(height: 24, child: Placeholder()),)')
+      },
+    );
   }
 }
 

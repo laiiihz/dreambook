@@ -1,9 +1,8 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:flutter/material.dart';
-
+import 'package:code_builder/code_builder.dart';
 import 'package:dreambook/src/ui/pages/shared/code_space/code_space.dart';
-import 'package:dreambook/src/ui/pages/shared/code_space/code_span.dart';
 import 'package:dreambook/src/ui/pages/shared/shared_code_view.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -44,22 +43,31 @@ class TheCode extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final config = ref.watch(configProvider);
-    return CodeSpace([
-      StaticCodes.material,
-      '',
-      'bool state = false;',
-      'Switch(',
-      '  value: state,',
-      if (!config.enabled)
-        'onChanged: null,'
-      else
-        '''  onChanged: (value) {
-    setState(() {
-      state = value;
-    });
-  },''',
-      ')',
-    ]);
+    return AutoCode(
+      'Switch',
+      fields: [
+        Field((f) => f
+          ..name = 'state'
+          ..type = refer('bool')
+          ..assignment = const Code('false')),
+      ],
+      named: {
+        'value': refer('state'),
+        'onChanged': config.enabled
+            ? Method((m) => m
+              ..lambda = false
+              ..requiredParameters.add(Parameter((p) => p.name = 'value'))
+              ..body = Block((b) {
+                b.addExpression(InvokeExpression.newOf(refer('setState'), [
+                  Method((m) => m
+                    ..body = Block((b) {
+                      b.addExpression(refer('state = value'));
+                    })).closure,
+                ]));
+              })).closure
+            : refer('null'),
+      },
+    );
   }
 }
 

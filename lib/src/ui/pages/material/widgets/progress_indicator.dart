@@ -1,6 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:code_builder/code_builder.dart';
 import 'package:dreambook/src/ui/pages/shared/code_space/code_space.dart';
-import 'package:dreambook/src/ui/pages/shared/code_space/code_span.dart';
 import 'package:dreambook/src/ui/pages/shared/shared_code_view.dart';
 import 'package:dreambook/src/ui/pages/shared/tiles/menu_tile.dart';
 import 'package:dreambook/src/ui/pages/shared/tiles/slidable_tile.dart';
@@ -80,23 +80,27 @@ class TheCode extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final config = ref.watch(configProvider);
-    return CodeSpace([
-      StaticCodes.material,
-      '',
-      '${config.type.code} (',
-      if (!config.loading) '  value: ${config.value.toStringAsFixed(2)},',
-      ...switch (config.type) {
-        IndicatorType.circular => [
-          '  strokeWidth: ${config.strokeWidth.toStringAsFixed(0)}',
-          '  strokeCap: StrokeCap.${config.strokeCap.name},',
-        ],
-        IndicatorType.linear => [
-            '  minHeight: ${config.minHeight.toStringAsFixed(0)},',
-            '  borderRadius: BorderRadius.circular(${config.borderRadius.toStringAsFixed(0)}),',
-          ],
+
+    final strokeWidth = config.strokeWidth.toStringAsFixed(0);
+    final minHeight = config.minHeight.toStringAsFixed(0);
+    final borderRadius = config.borderRadius.toStringAsFixed(0);
+    return AutoCode(
+      config.type.code,
+      named: {
+        if (!config.loading) 'value': refer(config.value.toStringAsFixed(2)),
+        ...switch (config.type) {
+          IndicatorType.circular => {
+              if (strokeWidth != '4')
+                'strokeWidth': refer(config.strokeWidth.toStringAsFixed(0)),
+              'strokeCap': refer('StrokeCap.${config.strokeCap.name}'),
+            },
+          IndicatorType.linear => {
+              if (minHeight != '4') 'minHeight': refer(minHeight),
+              if (borderRadius != '0') 'borderRadius': refer(borderRadius),
+            },
+        },
       },
-      ')',
-    ]);
+    );
   }
 }
 

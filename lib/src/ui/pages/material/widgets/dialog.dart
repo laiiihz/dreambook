@@ -1,12 +1,11 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:code_builder/code_builder.dart';
+import 'package:dreambook/src/ui/pages/shared/code_space/code_space.dart';
+import 'package:dreambook/src/ui/pages/shared/shared_code_view.dart';
+import 'package:dreambook/src/ui/pages/shared/tiles/menu_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-
-import 'package:dreambook/src/ui/pages/shared/code_space/code_space.dart';
-import 'package:dreambook/src/ui/pages/shared/code_space/code_span.dart';
-import 'package:dreambook/src/ui/pages/shared/shared_code_view.dart';
-import 'package:dreambook/src/ui/pages/shared/tiles/menu_tile.dart';
 
 part 'dialog.g.dart';
 
@@ -79,29 +78,53 @@ class TheCode extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final config = ref.watch(configProvider);
-    return CodeSpace([
-      StaticCodes.material,
-      '',
-      'final dialog = ${config.type.code}(',
-      if (config.hasTitle) "  title: const Text('Title'),",
-      if (config.isAlert) ...[
-        if (config.hasIcon) '  icon: const Icon(Icons.account_circle),',
-        if (config.hasContent) "  content: const Text('Content'),",
-        if (config.hasActions) ...[
-          '  actions: [',
-          "    TextButton(onPressed: () {}, child: const Text('CANCEL')),",
-          "    TextButton(onPressed: () {}, child: const Text('OK')),",
-          '  ],',
-        ],
-      ] else if (config.hasChildren)
-        "  const [Center(child: Text('children'))]",
-      ');',
-      '',
-      'showDialog(',
-      '  context: context,',
-      '  builder: (context) => dialog,',
-      ');',
-    ]);
+    return AutoCode(
+      config.type.code,
+      custom: [
+        //  showDialog<T>(
+        //   context: context,
+        //   builder: (context) => SomeWidget());
+        if (ref.watch(showFullContentProvider))
+          Method((f) => f
+            ..name = 'showSomeDialog'
+            ..modifier = MethodModifier.async
+            ..returns = refer('Future<T?>')
+            ..types.add(refer('T'))
+            ..body = Block((b) {
+              b.addExpression(InvokeExpression.newOf(
+                refer('showDialog<T>'),
+                [],
+                {
+                  'context': refer('context'),
+                  'builder': Method(
+                    (m) => m
+                      ..requiredParameters
+                          .add(Parameter((p) => p..name = 'context'))
+                      ..lambda = true
+                      ..body =
+                          InvokeExpression.newOf(refer('SomeWidget'), []).code,
+                  ).closure,
+                },
+              ).awaited.returned);
+            })),
+      ],
+      named: {
+        if (config.hasTitle) 'title': refer("const Text('Title')"),
+        if (config.isAlert) ...{
+          if (config.hasIcon) 'icon': refer("const Icon(Icons.account_circle)"),
+          if (config.hasContent) 'content': refer("const Text('Content')"),
+          if (config.hasActions) ...{
+            'actions': literalList([
+              refer(
+                  "TextButton(onPressed: () {}, child: const Text('CANCEL'))"),
+              refer("TextButton(onPressed: () {}, child: const Text('OK'))"),
+            ]),
+          }
+        } else if (config.hasChildren) ...{
+          'children': refer("const Center(child: Text('children'))"),
+        }
+      },
+    );
   }
 }
 

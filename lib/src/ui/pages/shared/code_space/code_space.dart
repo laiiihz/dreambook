@@ -28,6 +28,8 @@ class AutoCode extends ConsumerWidget {
     this.positional = const [],
     this.initState = const [],
     this.dispose = const [],
+    this.fields = const [],
+    this.custom = const [],
   });
   final Imports import;
   final List<Code> initState;
@@ -36,6 +38,8 @@ class AutoCode extends ConsumerWidget {
   final List<Expression> positional;
   final Map<String, Expression> named;
   final List<Reference> typed;
+  final List<Field> fields;
+  final List<Spec> custom;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -47,6 +51,8 @@ class AutoCode extends ConsumerWidget {
       positionalArguments: positional,
       initState: initState,
       dispose: dispose,
+      middle: fields,
+      custom: custom,
       fullContent: ref.watch(showFullContentProvider),
     ).toCode());
   }
@@ -58,33 +64,15 @@ class CodeSpace extends ConsumerWidget {
 
   final String code;
 
-  factory CodeSpace.wrapper(
-    String name, {
-    List<Code> initState = const [],
-    List<Code> dispose = const [],
-    Imports import = Imports.material,
-    List<Expression> positioned = const [],
-    Map<String, Expression> named = const <String, Expression>{},
-    List<Reference> typed = const [],
-  }) {
-    return CodeSpace.from(CodeWrapper(
-      name: name,
-      import: import,
-      namedArguments: named,
-      typeArguments: typed,
-      positionalArguments: positioned,
-      initState: initState,
-      dispose: dispose,
-    ).toCode());
-  }
-
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Stack(
+      fit: StackFit.expand,
       children: [
-        Center(
+        SizedBox.expand(
+          key: ValueKey(code),
           child: SingleChildScrollView(
-            padding: const EdgeInsets.all(16),
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 64),
             child: SelectableText.rich(
               CodeHighlight(context).highlight(code),
             ),

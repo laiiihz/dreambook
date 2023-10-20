@@ -1,12 +1,11 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:code_builder/code_builder.dart';
+import 'package:dreambook/src/ui/pages/shared/code_space/code_space.dart';
+import 'package:dreambook/src/ui/pages/shared/shared_code_view.dart';
+import 'package:dreambook/src/ui/pages/shared/tiles/menu_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-
-import 'package:dreambook/src/ui/pages/shared/code_space/code_space.dart';
-import 'package:dreambook/src/ui/pages/shared/code_space/code_span.dart';
-import 'package:dreambook/src/ui/pages/shared/shared_code_view.dart';
-import 'package:dreambook/src/ui/pages/shared/tiles/menu_tile.dart';
 
 part 'fab.g.dart';
 
@@ -58,11 +57,11 @@ enum MaterialShapeDefined {
   unset('null'),
   circle('const CircleBorder()'),
   stadium('const StadiumBorder()'),
-  rectangle('RoundedRectangleBorder(borderRadius: BorderRadius.circular(16))'),
+  rectangle('RoundedRectangleBorder(borderRadius: BorderRadius.circular(16),)'),
   continuous(
-      'ContinuousRectangleBorder(borderRadius: BorderRadius.circular(48))'),
+      'ContinuousRectangleBorder(borderRadius: BorderRadius.circular(48),)'),
   star(
-      'const StarBorder(points: 8,innerRadiusRatio: 0.8,pointRounding: 0.4,valleyRounding: 0.4)'),
+      'const StarBorder(points: 8,innerRadiusRatio: 0.8,pointRounding: 0.4,valleyRounding: 0.4,)'),
   ;
 
   const MaterialShapeDefined(this.code);
@@ -139,23 +138,27 @@ class TheCode extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final config = ref.watch(configProvider);
-    return CodeSpace([
-      StaticCodes.material,
-      '',
-      'Scaffold(',
-      if (config.location != FabLocation.endFloat)
-        '  floatingActionButtonLocation: FloatingActionButtonLocation.${config.location.name},',
-      '  floatingActionButton: ${config.type.contentName}(',
-      config.enabled ? '    onPressed: () {},' : '  onPressed: null,',
-      config.type == FabType.extended
-          ? '    icon: const Icon(Icons.add),'
-          : '    child: const Icon(Icons.add),',
-      if (config.type == FabType.extended) "    label: const Text('Extended')",
-      if (config.shape != MaterialShapeDefined.unset)
-        '    shape: ${config.shape.code},',
-      '  ),',
-      ')',
-    ]);
+    return AutoCode(
+      'Scaffold',
+      named: {
+        if (config.location != FabLocation.endFloat)
+          'floatingActionButtonLocation':
+              refer('FloatingActionButtonLocation.${config.location.name}'),
+        'floatingActionButton': InvokeExpression.newOf(
+          refer(config.type.contentName),
+          [],
+          {
+            'onPressed': config.enabled ? refer('() {}') : refer('null'),
+            config.type == FabType.extended ? 'icon' : 'child':
+                refer('const Icon(Icons.add)'),
+            if (config.type == FabType.extended)
+              'label': refer('const Text(\'Extended\')'),
+            if (config.shape != MaterialShapeDefined.unset)
+              'shape': refer(config.shape.code),
+          },
+        ),
+      },
+    );
   }
 }
 

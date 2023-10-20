@@ -1,5 +1,4 @@
 import 'package:dreambook/src/ui/pages/shared/code_space/code_space.dart';
-import 'package:dreambook/src/ui/pages/shared/code_space/code_span.dart';
 import 'package:dreambook/src/ui/pages/shared/shared_code_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -15,7 +14,7 @@ class TheCode extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return CodeSpace(const [StaticCodes.material, '', 'BottomAppBar()']);
+    return const AutoCode('BottomAppBar');
   }
 }
 

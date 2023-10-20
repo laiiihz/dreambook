@@ -1,11 +1,10 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:code_builder/code_builder.dart';
+import 'package:dreambook/src/ui/pages/shared/code_space/code_space.dart';
+import 'package:dreambook/src/ui/pages/shared/shared_code_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-
-import 'package:dreambook/src/ui/pages/shared/code_space/code_space.dart';
-import 'package:dreambook/src/ui/pages/shared/code_space/code_span.dart';
-import 'package:dreambook/src/ui/pages/shared/shared_code_view.dart';
 
 part 'list_tile.g.dart';
 
@@ -74,24 +73,22 @@ class TheCode extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final config = ref.watch(tileConfigProvider);
-    return CodeSpace([
-      StaticCodes.material,
-      '',
-      'ListTile(',
-      if (config.hasTitle) "  title: Text('title'),",
-      if (config.hasSubtitle)
-        if (config.isThreeLine) ...[
-          "  subtitle: Text('subtitle\\nthird line'),",
-          "  isThreeLine: true,",
-        ] else
-          "  subtitle: Text('subtitle'),",
-      if (config.selected) "  selected: true,",
-      if (!config.enabled) "  enabled: false,",
-      if (config.canTap) "  onTap: () {},",
-      if (config.hasLeading) "  leading: Icon(Icons.tag_faces),",
-      if (config.hasTrailing) "  trailing: Icon(Icons.arrow_forward),",
-      ')',
-    ]);
+    return AutoCode(
+      'ListTile',
+      named: {
+        if (config.hasTitle) 'title': refer("const Text('title')"),
+        if (config.hasSubtitle)
+          if (config.isThreeLine)
+            'subtitle': refer("const Text('subtitle\\nthird line')")
+          else
+            'subtitle': refer("const Text('subtitle')"),
+        if (config.selected) 'selected': refer('true'),
+        if (!config.enabled) 'enabled': refer('false'),
+        if (config.canTap) 'onTap': refer('() {}'),
+        if (config.hasLeading) 'leading': refer('Icon(Icons.tag_faces)'),
+        if (config.hasTrailing) 'trailing': refer('Icon(Icons.arrow_forward)'),
+      },
+    );
   }
 }
 
