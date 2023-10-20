@@ -29,7 +29,7 @@ class AutoCode extends ConsumerWidget {
     this.initState = const [],
     this.dispose = const [],
     this.fields = const [],
-    this.custom = const [],
+    this.prefix = const [],
   });
   final Imports import;
   final List<Code> initState;
@@ -39,7 +39,7 @@ class AutoCode extends ConsumerWidget {
   final Map<String, Expression> named;
   final List<Reference> typed;
   final List<Field> fields;
-  final List<Spec> custom;
+  final List<Spec> prefix;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -52,29 +52,41 @@ class AutoCode extends ConsumerWidget {
       initState: initState,
       dispose: dispose,
       middle: fields,
-      custom: custom,
+      custom: prefix,
       fullContent: ref.watch(showFullContentProvider),
     ).toCode());
   }
 }
 
-class CodeSpace extends ConsumerWidget {
+class CodeSpace extends ConsumerStatefulWidget {
   CodeSpace(List<String> codes, {super.key}) : code = codes.join('\n');
   const CodeSpace.from(this.code, {super.key});
 
   final String code;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<ConsumerStatefulWidget> createState() => _CodeSpaceState();
+}
+
+class _CodeSpaceState extends ConsumerState<CodeSpace> {
+  final _controller = ScrollController();
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Stack(
       fit: StackFit.expand,
       children: [
         SizedBox.expand(
-          key: ValueKey(code),
           child: SingleChildScrollView(
+            controller: _controller,
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 64),
             child: SelectableText.rich(
-              CodeHighlight(context).highlight(code),
+              CodeHighlight(context).highlight(widget.code),
             ),
           ),
         ),
@@ -93,7 +105,7 @@ class CodeSpace extends ConsumerWidget {
               const SizedBox(width: 16),
               IconButton(
                 onPressed: () {
-                  Clipboard.setData(ClipboardData(text: code));
+                  Clipboard.setData(ClipboardData(text: widget.code));
                 },
                 icon: const Icon(
                   Icons.copy_rounded,

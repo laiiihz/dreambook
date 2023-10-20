@@ -1,12 +1,11 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:code_builder/code_builder.dart';
+import 'package:dreambook/src/ui/pages/shared/code_space/code_space.dart';
+import 'package:dreambook/src/ui/pages/shared/shared_code_view.dart';
 import 'package:dreambook/src/ui/pages/shared/tiles/menu_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-
-import 'package:dreambook/src/ui/pages/shared/code_space/code_space.dart';
-import 'package:dreambook/src/ui/pages/shared/code_space/code_span.dart';
-import 'package:dreambook/src/ui/pages/shared/shared_code_view.dart';
 
 part 'slider.g.dart';
 
@@ -50,17 +49,23 @@ class TheCode extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final config = ref.watch(configProvider);
-    return CodeSpace([
-      StaticCodes.material,
-      '',
-      'double state = 0;',
-      'Slider(',
-      '  value: state,',
-      if (config.hasDivision) '  divisions: 8,',
-      '  allowedInteraction: SliderInteraction。${config.interaction.name},',
-      '  onChanged: (value) => SetState(() => state = value),',
-      ')',
-    ]);
+    return AutoCode(
+      'Slider',
+      fields: [
+        Field((f) => f
+          ..name = 'state'
+          ..type = refer('double')
+          ..assignment = const Code('0')),
+      ],
+      named: {
+        'value': refer('state'),
+        if (config.hasDivision) 'divisions': refer('8'),
+        if (config.interaction != SliderInteraction.tapAndSlide)
+          'allowedInteraction':
+              refer('SliderInteraction.${config.interaction.name}'),
+        'onChanged': refer('SetState(() => state = value)'),
+      },
+    );
   }
 }
 

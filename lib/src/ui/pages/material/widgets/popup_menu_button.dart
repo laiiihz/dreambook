@@ -1,11 +1,11 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:code_builder/code_builder.dart';
+import 'package:dreambook/src/ui/pages/shared/code_space/code_builder_helper.dart';
+import 'package:dreambook/src/ui/pages/shared/code_space/code_space.dart';
+import 'package:dreambook/src/ui/pages/shared/shared_code_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-
-import 'package:dreambook/src/ui/pages/shared/code_space/code_space.dart';
-import 'package:dreambook/src/ui/pages/shared/code_space/code_span.dart';
-import 'package:dreambook/src/ui/pages/shared/shared_code_view.dart';
 
 part 'popup_menu_button.g.dart';
 
@@ -44,21 +44,39 @@ class TheCode extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final config = ref.watch(configProvider);
-    return CodeSpace([
-      StaticCodes.material,
-      '',
-      'int currentItem = 0;',
-      '',
-      'PopupMenuButton<int>(',
-      if (config.hasInitial) '  initialValue: currentItem,',
-      '''  itemBuilder: (context) {
-    return List.generate(
-      4,
-      (index) => PopupMenuItem(value: index, child: Text('item \$index')),
+    return AutoCode(
+      'PopupMenuButton<int>',
+      fields: [
+        Field((f) => f
+          ..name = 'currentItem'
+          ..type = refer('int?')),
+      ],
+      named: {
+        if (config.hasInitial) 'initialValue': refer('currentItem'),
+        'itemBuilder': Method((m) => m
+          ..requiredParameters.add(Parameter((p) => p..name = 'context'))
+          ..body = Block((b) => b.addExpression(InvokeExpression.newOf(
+              refer('List'),
+              [
+                refer('4'),
+                Method((m) => m
+                  ..lambda = true
+                  ..requiredParameters.add(Parameter((p) => p.name = 'index'))
+                  ..body = InvokeExpression.newOf(refer('PopupMenuItem'), [], {
+                    'value': refer('index'),
+                    'child': refer(r"Text('item $index')")
+                  }).code).closure,
+              ],
+              {},
+              [],
+              'generate')))).closure,
+        'onSelected': Method((m) => m
+          ..body = Block((b) {
+            b.addExpression(CodeHelper.setState('currentItem = value'));
+          })
+          ..requiredParameters.add(Parameter((p) => p.name = 'value'))).closure,
+      },
     );
-  },''',
-      ')',
-    ]);
   }
 }
 

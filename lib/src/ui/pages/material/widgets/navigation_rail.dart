@@ -1,14 +1,12 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:code_builder/code_builder.dart';
 import 'package:dreambook/src/ui/pages/shared/code_space/code_builder_helper.dart';
+import 'package:dreambook/src/ui/pages/shared/code_space/code_space.dart';
+import 'package:dreambook/src/ui/pages/shared/shared_code_view.dart';
+import 'package:dreambook/src/ui/pages/shared/tiles/menu_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-
-import 'package:dreambook/src/ui/pages/shared/code_space/code_space.dart';
-import 'package:dreambook/src/ui/pages/shared/code_space/code_span.dart';
-import 'package:dreambook/src/ui/pages/shared/shared_code_view.dart';
-import 'package:dreambook/src/ui/pages/shared/tiles/menu_tile.dart';
 
 part 'navigation_rail.g.dart';
 
@@ -66,12 +64,30 @@ class Config extends _$Config {
 class TheCode extends ConsumerWidget {
   const TheCode({super.key});
 
+  InvokeExpression genNaviItem({
+    required bool disabled,
+    required String icon,
+    required String selectedIcon,
+    required String label,
+  }) {
+    return InvokeExpression.newOf(
+      refer('NavigationRailDestination'),
+      [],
+      {
+        'icon': refer('const Icon(Icons.$icon)'),
+        'selectedIcon': refer('const Icon(Icons.$selectedIcon)'),
+        if (disabled) 'disabled': refer('true'),
+        'label': refer('const Text(\'$label\')'),
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final config = ref.watch(configProvider);
     return AutoCode(
       'NavigationRail',
-      custom: [
+      prefix: [
         Field((f) => f
           ..name = 'currentIndex'
           ..assignment = const Code('0')
@@ -89,38 +105,28 @@ class TheCode extends ConsumerWidget {
         'onDestinationSelected': Method((m) => m.body = Block((b) =>
                 b.addExpression(CodeHelper.setState('currentIndex = value'))))
             .closure,
+        'destinations': literalConstList([
+          genNaviItem(
+            disabled: config.disabled,
+            icon: 'home',
+            selectedIcon: 'home_outlined',
+            label: 'Home',
+          ),
+          genNaviItem(
+            disabled: config.disabled,
+            icon: 'favorite',
+            selectedIcon: 'favorite_outline',
+            label: 'Favorite',
+          ),
+          genNaviItem(
+            disabled: config.disabled,
+            icon: 'person',
+            selectedIcon: 'person_outlined',
+            label: 'Profile',
+          ),
+        ]),
       },
     );
-    return CodeSpace([
-      StaticCodes.material,
-      '',
-      'int currentIndex = 0;',
-      '',
-      'NavigationRail(',
-      if (config.labelType != NavigationRailLabelType.none)
-        '  labelType: NavigationRailLabelType.${config.labelType.name},',
-      if (config.extended) '  extended: true,',
-      if (config.leading) '  leading: const Icon(Icons.menu),',
-      if (config.trailing) '  trailing: const Icon(Icons.settings),',
-      if (config.hideIndicator) '  useIndicator: false,',
-      '  selectedIndex: currentIndex,',
-      '  onDestinationSelected: (value) => setState(() => currentIndex = value),',
-      '''  destinations: [
-    NavigationRailDestination(
-      icon: const Icon(Icons.home_outlined),
-      selectedIcon: const Icon(Icons.home),
-      label: const Text('Home'),''',
-      if (config.disabled) '      disabled: config.disabled,',
-      '''    ),
-    NavigationRailDestination(
-      icon: const Icon(Icons.favorite_outline),
-      selectedIcon: const Icon(Icons.favorite),
-      label: const Text('Favorite'),''',
-      if (config.disabled) '      disabled: config.disabled,',
-      '    ),',
-      '  ],',
-      '),',
-    ]);
   }
 }
 

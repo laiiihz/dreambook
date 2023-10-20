@@ -1,12 +1,11 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:code_builder/code_builder.dart';
+import 'package:dreambook/src/ui/pages/shared/code_space/code_space.dart';
+import 'package:dreambook/src/ui/pages/shared/shared_code_view.dart';
 import 'package:dreambook/src/ui/pages/shared/tiles/menu_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-
-import 'package:dreambook/src/ui/pages/shared/code_space/code_space.dart';
-import 'package:dreambook/src/ui/pages/shared/code_space/code_span.dart';
-import 'package:dreambook/src/ui/pages/shared/shared_code_view.dart';
 
 part 'snack_bar.g.dart';
 
@@ -56,22 +55,37 @@ class TheCode extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final config = ref.watch(configProvider);
-    return CodeSpace([
-      StaticCodes.material,
-      '',
-      'FilledButton(',
-      '  onPressed: () {',
-      '    ScaffoldMessenger.of(context).showSnackBar(SnackBar(',
-      "      content: const Text('content'),",
-      '      showCloseIcon: config.showClose,',
-      '      dismissDirection: config.dismissDirection,',
-      if (config.showAction)
-        "      action: SnackBarAction(label: 'Action',onPressed: () {}),",
-      '    ));',
-      '  },',
-      "  child: const Text('Open SnackBar'),",
-      ')',
-    ]);
+    return AutoCode(
+      'FilledButton',
+      named: {
+        'onPressed': Method((m) => m
+          ..body = Block((b) => b.addExpression(
+                InvokeExpression.newOf(
+                  refer('ScaffoldMessager.of(context)'),
+                  [
+                    InvokeExpression.newOf(
+                      refer('SnackBar'),
+                      [],
+                      {
+                        'content': refer("const Text('content')"),
+                        if (config.showClose) 'showCloseIcon': refer('true'),
+                        if (config.dismissDirection != DismissDirection.down)
+                          'dismissDirection': refer(
+                              'DismissDirection.${config.dismissDirection.name}'),
+                        if (config.showAction)
+                          'actions': refer(
+                              "SnackBarAction(label: 'Action',onPressed: () {})"),
+                      },
+                    ),
+                  ],
+                  {},
+                  [],
+                  'showSnackBar',
+                ),
+              ))).closure,
+        'child': refer("const Text('Open SnackBar')"),
+      },
+    );
   }
 }
 

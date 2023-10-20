@@ -10,4 +10,15 @@ class CodeHelper {
       ).closure
     ]);
   }
+
+  static Expression defineFinal(String name, String valueName,
+      {String? subname}) {
+    return declareFinal(name).assign(InvokeExpression.newOf(
+      refer(valueName),
+      [],
+      {},
+      [],
+      subname,
+    ));
+  }
 }

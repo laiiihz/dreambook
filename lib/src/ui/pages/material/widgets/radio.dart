@@ -1,11 +1,11 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:code_builder/code_builder.dart';
+import 'package:dreambook/src/ui/pages/shared/code_space/code_builder_helper.dart';
+import 'package:dreambook/src/ui/pages/shared/code_space/code_space.dart';
+import 'package:dreambook/src/ui/pages/shared/shared_code_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-
-import 'package:dreambook/src/ui/pages/shared/code_space/code_space.dart';
-import 'package:dreambook/src/ui/pages/shared/code_space/code_span.dart';
-import 'package:dreambook/src/ui/pages/shared/shared_code_view.dart';
 
 part 'radio.g.dart';
 
@@ -44,25 +44,45 @@ class TheCode extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final config = ref.watch(configProvider);
-    return CodeSpace([
-      StaticCodes.material,
-      '',
-      '''ListView(
-  children: List.generate(
-    3,
-    (index) => ListTile(
-      leading: Radio<int>(${config.toggleable ? '\n        toggleable: true,' : ''}
-        value: index,
-        groupValue: ref.watch(currentItemProvider),
-        onChanged: (t) {
-          ref.read(currentItemProvider.notifier).change(t);
-        },
-      ),
-      title: Text('Item \$index'),
-    ),
-  ),
-)''',
-    ]);
+    return AutoCode(
+      'ListView',
+      fields: [
+        Field((f) => f
+          ..name = 'value'
+          ..type = refer('int?'))
+      ],
+      named: {
+        'children': InvokeExpression.newOf(
+          refer('List'),
+          [
+            refer('3'),
+            Method((m) => m
+              ..requiredParameters.add(Parameter((p) => p.name = 'index'))
+              ..lambda = true
+              ..body = InvokeExpression.newOf(
+                refer('ListTile'),
+                [],
+                {
+                  'leading': InvokeExpression.newOf(refer('Radio<int>'), [], {
+                    if (config.toggleable) 'toggleable': refer('true'),
+                    'value': refer('index'),
+                    'groupValue': refer('value'),
+                    'onChanged': Method((m) => m
+                          ..requiredParameters
+                              .add(Parameter((p) => p..name = 'item'))
+                          ..body = CodeHelper.setState('value = item').code)
+                        .closure,
+                  }),
+                  'title': refer(r"Text('Item $index')"),
+                },
+              ).code).closure,
+          ],
+          {},
+          [],
+          'generate',
+        ),
+      },
+    );
   }
 }
 

@@ -80,7 +80,7 @@ class TheCode extends ConsumerWidget {
     final config = ref.watch(configProvider);
     return AutoCode(
       config.type.code,
-      custom: [
+      prefix: [
         //  showDialog<T>(
         //   context: context,
         //   builder: (context) => SomeWidget());

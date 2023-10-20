@@ -1,12 +1,11 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:code_builder/code_builder.dart';
+import 'package:dreambook/src/ui/pages/shared/code_space/code_space.dart';
+import 'package:dreambook/src/ui/pages/shared/shared_code_view.dart';
+import 'package:dreambook/src/ui/pages/shared/tiles/menu_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-
-import 'package:dreambook/src/ui/pages/shared/code_space/code_space.dart';
-import 'package:dreambook/src/ui/pages/shared/code_space/code_span.dart';
-import 'package:dreambook/src/ui/pages/shared/shared_code_view.dart';
-import 'package:dreambook/src/ui/pages/shared/tiles/menu_tile.dart';
 
 part 'chip.g.dart';
 
@@ -79,29 +78,27 @@ class TheCode extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final config = ref.watch(configProvider);
-    return CodeSpace(<String?>[
-      StaticCodes.material,
-      '',
-      '${config.type.code}(',
-      "  label: const Text('${config.type.name}'),",
-      if (config.showAvatar) '  avatar: const CircleAvatar(),',
-      if (config.showDelete) '  onDeleted: () {},',
-      if (config.enabled)
-        switch (config.type) {
-          ChipType.input => '  isEnabled: true,',
-          ChipType.action => '  onPressed: () {},',
-          _ => null,
-        },
-      if (config.showOnSelected)
-        switch (config.type) {
-          ChipType.filter ||
-          ChipType.choice ||
-          ChipType.input =>
-            '  onSelected: (value) {},',
-          _ => null,
-        },
-      ')',
-    ].nonNulls.toList());
+    return AutoCode(
+      config.type.code,
+      named: {
+        'label': refer("const Text('${config.type.name}')"),
+        if (config.showAvatar) 'avatar': refer('const CircleAvatar()'),
+        if (config.showDelete) 'onDeleted': refer('() {}'),
+        if (config.enabled)
+          ...switch (config.type) {
+            ChipType.input => {'isEnabled': refer('true')},
+            ChipType.action => {'onPressed': refer('() {}')},
+            _ => {},
+          },
+        if (config.showOnSelected)
+          ...switch (config.type) {
+            ChipType.filter || ChipType.choice || ChipType.input => {
+                'onSelected': refer('() {}')
+              },
+            _ => {},
+          }
+      },
+    );
   }
 }
 

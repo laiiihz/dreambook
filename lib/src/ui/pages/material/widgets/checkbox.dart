@@ -1,11 +1,11 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:code_builder/code_builder.dart';
+import 'package:dreambook/src/ui/pages/shared/code_space/code_builder_helper.dart';
+import 'package:dreambook/src/ui/pages/shared/code_space/code_space.dart';
+import 'package:dreambook/src/ui/pages/shared/shared_code_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-
-import 'package:dreambook/src/ui/pages/shared/code_space/code_space.dart';
-import 'package:dreambook/src/ui/pages/shared/code_space/code_span.dart';
-import 'package:dreambook/src/ui/pages/shared/shared_code_view.dart';
 
 part 'checkbox.g.dart';
 
@@ -52,17 +52,26 @@ class TheCode extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final config = ref.watch(configProvider);
-    return CodeSpace([
-      StaticCodes.material,
-      '',
-      'bool? state = false;',
-      '',
-      'Checkbox(',
-      if (config.tristate) '  tristate: config.tristate,',
-      '  value: state,',
-      '  onChanged: (t) => SetState(() => state = t),',
-      ')',
-    ]);
+    return AutoCode(
+      'Checkbox',
+      prefix: [
+        Field((f) => f
+          ..name = 'state'
+          ..type = refer('bool?')
+          ..assignment = const Code('false')),
+      ],
+      named: {
+        'value': refer('state'),
+        if (config.tristate) 'tristate': refer('true'),
+        'onChanged': Method((m) => m
+              ..requiredParameters.add(Parameter((p) => p
+                ..name = 'value'
+                ..type = refer('bool?')))
+              ..body = Block(
+                  (b) => b.addExpression(CodeHelper.setState('state = value'))))
+            .closure,
+      },
+    );
   }
 }
 

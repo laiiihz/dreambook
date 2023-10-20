@@ -1,12 +1,12 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:code_builder/code_builder.dart';
+import 'package:dreambook/src/ui/pages/shared/code_space/code_builder_helper.dart';
+import 'package:dreambook/src/ui/pages/shared/code_space/code_space.dart';
+import 'package:dreambook/src/ui/pages/shared/shared_code_view.dart';
+import 'package:dreambook/src/ui/pages/shared/tiles/menu_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-
-import 'package:dreambook/src/ui/pages/shared/code_space/code_space.dart';
-import 'package:dreambook/src/ui/pages/shared/code_space/code_span.dart';
-import 'package:dreambook/src/ui/pages/shared/shared_code_view.dart';
-import 'package:dreambook/src/ui/pages/shared/tiles/menu_tile.dart';
 
 part 'date_picker.g.dart';
 
@@ -70,44 +70,103 @@ class TheCode extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final config = ref.watch(configProvider);
-    return CodeSpace([
-      StaticCodes.material,
-      '',
-      if (config.type != DatePickerType.time) ...[
-        'final now = DateTime.now();',
-        'DateTime start = now.subtract(const Duration(days: 720));',
-        'DateTime end = now.add(const Duration(days: 720));',
-      ],
-      ...switch (config.type) {
-        DatePickerType.range => ['DateTimeRange? range = null;'],
-        DatePickerType.date => ['DateTime current = now;'],
-        DatePickerType.time => ['TimeOfDay current = TimeOfDay.now();'],
+    return AutoCode(
+      'FilledButton.icon',
+      fields: switch (config.type) {
+        DatePickerType.date => [
+            Field((f) => f
+              ..name = 'current'
+              ..type = refer('DateTime?'))
+          ],
+        DatePickerType.time => [
+            Field((f) => f
+              ..name = 'current'
+              ..type = refer('TimeOfDay?'))
+          ],
+        DatePickerType.range => [
+            Field((f) => f
+              ..name = 'current'
+              ..type = refer('DateTimeRange?'))
+          ],
       },
-      '',
-      'showPicker() async {',
-      '  context: context,',
-      '  final result = await ${config.type.code}(',
-      if (config.type == DatePickerType.range) '  initialDateRange: range,',
-      switch (config.type) {
-        DatePickerType.date => '  initialDate: current,',
-        DatePickerType.time => '  initialTime: current,',
-        DatePickerType.range => '  initialDateRange: range,',
+      named: {
+        'onPressed': Method((m) => m
+          ..modifier = MethodModifier.async
+          ..body = Block((b) {
+            b.addExpression(
+                CodeHelper.defineFinal('current', 'DateTime', subname: 'now'));
+            b.addExpression(declareFinal('start').assign(InvokeExpression.newOf(
+                refer('current'),
+                [refer('const Duration(days: 720)')],
+                {},
+                [],
+                'subtract')));
+            b.addExpression(declareFinal('end').assign(InvokeExpression.newOf(
+                refer('current'),
+                [refer('const Duration(days: 720)')],
+                {},
+                [],
+                'add')));
+
+            switch (config.type) {
+              case DatePickerType.date:
+                b.addExpression(
+                    declareFinal('date').assign(InvokeExpression.newOf(
+                  refer('showPicker'),
+                  [],
+                  {
+                    'context': refer('ccontext'),
+                    'initialDate': refer('current'),
+                    'firstDate': refer('start'),
+                    'lastDate': refer('end'),
+                    if (config.dateMode != DatePickerMode.day)
+                      'initialDatePickerMode':
+                          refer('DatePickerMode.${config.dateMode.name}'),
+                    if (config.dateEntryMode != DatePickerEntryMode.calendar)
+                      'initialEntryMode': refer(
+                          'DatePickerEntryMode.${config.dateEntryMode.name}'),
+                  },
+                ).awaited));
+                b.addExpression(
+                    refer('if(date != null){setState(() {current = date;});}'));
+              case DatePickerType.time:
+                b.addExpression(
+                    declareFinal('time').assign(InvokeExpression.newOf(
+                  refer('showPicker'),
+                  [],
+                  {
+                    'context': refer('context'),
+                    'initialTime': refer('current'),
+                    if (config.timeEntryMode != TimePickerEntryMode.dial)
+                      'initialEntryMode':
+                          refer('TimePickerEntryMode.${config.timeEntryMode}'),
+                  },
+                ).awaited));
+                b.addExpression(
+                    refer('if(time != null){setState(() {current = time;});}'));
+              case DatePickerType.range:
+                b.addExpression(
+                    declareFinal('range').assign(InvokeExpression.newOf(
+                  refer('showPicker'),
+                  [],
+                  {
+                    'context': refer('context'),
+                    'initialDateRange': refer('current'),
+                    'firstDate': refer('start'),
+                    'lastDate': refer('end'),
+                    if (config.dateEntryMode != DatePickerEntryMode.calendar)
+                      'initialEntryMode': refer(
+                          'DatePickerEntryMode.${config.dateEntryMode.name}'),
+                  },
+                ).awaited));
+                b.addExpression(refer(
+                    'if(range != null){setState(() {current = range;});}'));
+            }
+          })).closure,
+        'icon': refer('const Icon(Icons.date_range)'),
+        'label': refer("const Text('show ${config.type.name} Picker')"),
       },
-      if (config.type == DatePickerType.date &&
-          config.dateMode != DatePickerMode.day)
-        '  initialDatePickerMode: DatePickerMode.${config.dateMode},',
-      if (config.type != DatePickerType.time) ...[
-        '  first: start,',
-        '  last: end,',
-        if (config.dateEntryMode != DatePickerEntryMode.calendar)
-          '  initialEntryMode: DatePickerEntryMode.${config.dateEntryMode.name},',
-      ],
-      if (config.type == DatePickerType.time &&
-          config.timeEntryMode != TimePickerEntryMode.dial)
-        '  initialEntryMode: TimePickerEntryMode.${config.timeEntryMode.name},',
-      '  );',
-      '}',
-    ]);
+    );
   }
 }
 

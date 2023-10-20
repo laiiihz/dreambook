@@ -52,7 +52,7 @@ class TheCode extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return AutoCode(
       'NavigationBar',
-      custom: [
+      fields: [
         Field((f) => f
           ..name = 'currentIndex'
           ..assignment = const Code('0')),
