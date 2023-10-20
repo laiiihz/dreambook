@@ -1,11 +1,10 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:code_builder/code_builder.dart';
+import 'package:dreambook/src/ui/pages/shared/code_space/code_space.dart';
+import 'package:dreambook/src/ui/pages/shared/shared_code_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-
-import 'package:dreambook/src/ui/pages/shared/code_space/code_space.dart';
-import 'package:dreambook/src/ui/pages/shared/code_space/code_span.dart';
-import 'package:dreambook/src/ui/pages/shared/shared_code_view.dart';
 
 part 'bottom_sheet.g.dart';
 
@@ -44,22 +43,31 @@ class TheCode extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final config = ref.watch(configProvider);
-    return CodeSpace([
-      StaticCodes.material,
-      '',
-      'FilledButton(',
-      '  onPressed: () {',
-      '    showModalBottomSheet(',
-      '      context: context,',
-      if (config.showDragHandle) '      showDragHandle: config.showDragHandle,',
-      '''      builder: (context) {
-                return const SizedBox(height: 300, width: double.infinity);
-      },''',
-      '    );',
-      '  },',
-      "  child: const Text('Open Bottom Sheet'),",
-      ')',
-    ]);
+    return AutoCode(
+      'FilledButton',
+      named: {
+        'onPressed': Method((m) => m
+          ..body = Block((b) => b.addExpression(InvokeExpression.newOf(
+                refer('showModalBottomSheet'),
+                [],
+                {
+                  'context': refer('context'),
+                  if (config.showDragHandle) 'showDragHandle': refer('true'),
+                  'builder': Method((m) => m
+                    ..requiredParameters
+                        .add(Parameter((p) => p.name = 'context'))
+                    ..body = Block(
+                      (b) => b.addExpression(
+                          InvokeExpression.constOf(refer('SizedBox'), [], {
+                        'height': refer('300'),
+                        'width': refer('double.infinity'),
+                      })),
+                    )).closure,
+                },
+              )))).closure,
+        'child': refer("const Text('Open Bottom Sheet')"),
+      },
+    );
   }
 }
 
