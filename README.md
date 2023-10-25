@@ -1,6 +1,6 @@
-# dreambook
+# dreambook 🌌
 
-Flutter Widgets Book with dreams🌌
+Flutter Widgets Book with dreams.
 
 ## PROGRESS
 - [x] Material Widgets

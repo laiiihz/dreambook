@@ -1,10 +1,12 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:code_builder/code_builder.dart';
-import 'package:dreambook/src/ui/pages/shared/code_space/code_space.dart';
-import 'package:dreambook/src/ui/pages/shared/shared_code_view.dart';
-import 'package:dreambook/src/ui/pages/shared/tiles/menu_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+
+import 'package:dreambook/src/ui/pages/shared/code_space/code_space.dart';
+import 'package:dreambook/src/ui/pages/shared/shared_code_view.dart';
+import 'package:dreambook/src/ui/pages/shared/tiles/menu_tile.dart';
 
 part 'decorated_box.g.dart';
 
@@ -33,6 +35,7 @@ class DecoratedBoxConfig {
     this.hasColor = true,
     this.hasBoxShadow = false,
     this.gradientType = GradientType.none,
+    this.backgroundBlendMode,
   });
 
   final DecorationPosition position;
@@ -41,6 +44,7 @@ class DecoratedBoxConfig {
   final bool hasColor;
   final bool hasBoxShadow;
   final GradientType gradientType;
+  final BlendMode? backgroundBlendMode;
 
   DecoratedBoxConfig copyWith({
     DecorationPosition? position,
@@ -49,6 +53,7 @@ class DecoratedBoxConfig {
     bool? hasColor,
     bool? hasBoxShadow,
     GradientType? gradientType,
+    BlendMode? backgroundBlendMode,
   }) {
     return DecoratedBoxConfig(
       position: position ?? this.position,
@@ -57,6 +62,7 @@ class DecoratedBoxConfig {
       hasColor: hasColor ?? this.hasColor,
       hasBoxShadow: hasBoxShadow ?? this.hasBoxShadow,
       gradientType: gradientType ?? this.gradientType,
+      backgroundBlendMode: backgroundBlendMode ?? this.backgroundBlendMode,
     );
   }
 }
@@ -95,6 +101,9 @@ class TheCode extends ConsumerWidget {
                   [refer('BoxShadow(color: Colors.blue, blurRadius: 12)')]),
             if (config.position != DecorationPosition.background)
               'position': refer('DecorationPosition.${config.position.name}'),
+            if (config.backgroundBlendMode != null)
+              'backgroundBlendMode':
+                  refer('BlendMode.${config.backgroundBlendMode!.name}'),
             if (config.gradientType != GradientType.none)
               'gradient': switch (config.gradientType) {
                 GradientType.linear ||
@@ -134,6 +143,7 @@ class TheWidget extends ConsumerWidget {
           boxShadow: config.hasBoxShadow
               ? const [BoxShadow(color: Colors.blue, blurRadius: 12)]
               : null,
+          backgroundBlendMode: config.backgroundBlendMode,
           gradient: switch (config.gradientType) {
             GradientType.none => null,
             GradientType.linear => LinearGradient(colors: colors),
@@ -203,6 +213,17 @@ class TheWidget extends ConsumerWidget {
                 .change(config.copyWith(gradientType: t));
           },
           contentBuilder: (t) => t.name,
+        ),
+        MenuTile(
+          title: 'Background Blend Mode',
+          items: BlendMode.values,
+          current: config.backgroundBlendMode,
+          onTap: (t) {
+            ref
+                .read(configProvider.notifier)
+                .change(config.copyWith(backgroundBlendMode: t));
+          },
+          contentBuilder: (t) => t?.name ?? 'unset',
         ),
       ],
     );
