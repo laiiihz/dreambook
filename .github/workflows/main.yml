@@ -34,7 +34,7 @@ jobs:
         run: flutter pub get
         
       - name: build web app
-        run: flutter build web
+        run: flutter build web --base-href "/dreambook"
 
       - name: Upload site artifact
         uses: actions/upload-pages-artifact@v1
