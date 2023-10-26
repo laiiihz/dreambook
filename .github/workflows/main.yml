@@ -6,14 +6,43 @@ on:
   pull_request:
     branches: [ main ]
 
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
 jobs:
-  check_version:
+  build_webapp:
     name: check flutter version
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: subosito/flutter-action@v2
+      
+      - name: setup-flutter
+        uses: subosito/flutter-action@v2
         with:
           flutter-version: '3.13.8'
           channel: 'stable'
-      - run: flutter --version
+      - name: check-flutter-version
+        run: flutter --version
+        
+      - name: get-packages
+        run: flutter pub get
+        
+      - name: build web app
+        run: flutter build web
+
+      - name: Upload site artifact
+        uses: actions/upload-pages-artifact@v1
+        with:
+          path: "build/web"
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v1
+        
+      
+          
