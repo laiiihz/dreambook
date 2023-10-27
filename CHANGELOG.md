@@ -4,6 +4,10 @@
 - add cupertino switch
 - material slider add enabled
 - add cupertino slider
+- add cupertino list tile
+
+### Fixed
+- fix cupertino theme
 
 ## 1.0.1+2 - 2023-10-27
 ### Added
