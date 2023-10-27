@@ -1,6 +1,4 @@
-import 'package:dreambook/src/ui/pages/cupertino/cupertino_page_view.dart';
-import 'package:dreambook/src/ui/pages/material/material_page_view.dart';
-import 'package:dreambook/src/ui/pages/painting/painting_page_view.dart';
+import 'package:dreambook/src/ui/pages/shared/code_routes.dart';
 import 'package:dreambook/src/ui/root.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';

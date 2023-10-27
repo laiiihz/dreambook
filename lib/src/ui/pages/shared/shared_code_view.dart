@@ -1,6 +1,30 @@
 import 'package:animations/animations.dart';
 import 'package:devtools_app_shared/ui.dart';
+import 'package:dreambook/src/ui/widgets/github_button.dart';
+import 'package:dreambook/src/ui/widgets/theme_mode_button.dart';
 import 'package:flutter/material.dart';
+
+class NamedCodeScaffold extends StatelessWidget {
+  const NamedCodeScaffold(
+      {super.key, required this.title, required this.items});
+  final String title;
+  final List<CodeItem> items;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        centerTitle: false,
+        title: Text(title),
+        actions: const [
+          GithubButton(),
+          ThemeModeButton(),
+        ],
+      ),
+      body: SharedCodeView(items),
+    );
+  }
+}
 
 class SharedCodeView extends StatefulWidget {
   const SharedCodeView(this.items, {super.key});

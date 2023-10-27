@@ -1,9 +1,10 @@
 import 'package:dreambook/src/routes/routes.dart';
-import 'package:dreambook/src/ui/pages/cupertino/cupertino_page_view.dart';
-import 'package:dreambook/src/ui/pages/material/material_page_view.dart';
-import 'package:dreambook/src/ui/pages/painting/painting_page_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+import 'pages/shared/code_routes.dart';
+import 'widgets/github_button.dart';
+import 'widgets/theme_mode_button.dart';
 
 class RootPage extends StatelessWidget {
   const RootPage({super.key});
@@ -18,6 +19,10 @@ class RootPage extends StatelessWidget {
             slivers: [
               const SliverAppBar.large(
                 title: Text('Dreambook'),
+                actions: [
+                  GithubButton(),
+                  ThemeModeButton(),
+                ],
               ),
               SliverPadding(
                 padding: const EdgeInsets.all(16),
