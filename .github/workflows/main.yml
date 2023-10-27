@@ -1,0 +1,48 @@
+name: dreambook_deploy
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+jobs:
+  build_webapp:
+    name: check flutter version
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: setup-flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.13.8'
+          channel: 'stable'
+      - name: check-flutter-version
+        run: flutter --version
+        
+      - name: get-packages
+        run: flutter pub get
+        
+      - name: build web app
+        run: flutter build web --base-href "/dreambook/"
+
+      - name: Upload site artifact
+        uses: actions/upload-pages-artifact@v1
+        with:
+          path: "build/web"
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v1
+        
+      
+          
