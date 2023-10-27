@@ -1,4 +1,4 @@
-## Unreleased
+## 1.0.2+3 - 2023-10-27
 ### Added
 - add transform,rotatedBox,clip,opacity widgets
 - add cupertino switch
