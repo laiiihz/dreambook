@@ -5,6 +5,7 @@
 - material slider add enabled
 - add cupertino slider
 - add cupertino list tile
+- add cupertino's ListSection
 
 ### Fixed
 - fix cupertino theme
