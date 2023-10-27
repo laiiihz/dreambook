@@ -1,6 +1,9 @@
 ## Unreleased
 ### Added
 - add transform,rotatedBox,clip,opacity widgets
+- add cupertino switch
+- material slider add enabled
+- add cupertino slider
 
 ## 1.0.1+2 - 2023-10-27
 ### Added

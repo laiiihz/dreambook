@@ -1,6 +1,7 @@
 import 'package:code_builder/code_builder.dart';
 import 'package:dreambook/src/utils/code_wrapper.dart';
 import 'package:dreambook/src/utils/highlighter.dart';
+import 'package:dreambook/src/utils/kv.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -11,10 +12,11 @@ part 'code_space.g.dart';
 @Riverpod(keepAlive: true)
 class ShowFullContent extends _$ShowFullContent {
   @override
-  bool build() => false;
+  bool build() => KV.showAllCode;
 
   void change(bool value) {
     state = value;
+    KV.showAllCode = value;
   }
 }
 

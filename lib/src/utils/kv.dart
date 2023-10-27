@@ -9,4 +9,7 @@ class KV {
   static bool get darkMode => _instance.getBool('darkMode') ?? false;
 
   static set darkMode(bool state) => _instance.setBool('darkMode', state);
+
+  static bool get showAllCode => _instance.getBool('showAllCode') ?? false;
+  static set showAllCode(bool state) => _instance.setBool('showAllCode', state);
 }

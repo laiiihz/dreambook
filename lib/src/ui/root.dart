@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'pages/shared/code_routes.dart';
+import 'widgets/about_button.dart';
 import 'widgets/github_button.dart';
 import 'widgets/theme_mode_button.dart';
 
@@ -21,6 +22,7 @@ class RootPage extends StatelessWidget {
                 title: Text('Dreambook'),
                 actions: [
                   GithubButton(),
+                  AboutButton(),
                   ThemeModeButton(),
                 ],
               ),

@@ -1,3 +1,4 @@
+import 'package:dreambook/src/ui/pages/cupertino/widgets.dart';
 import 'package:dreambook/src/ui/pages/material/widgets.dart';
 import 'package:dreambook/src/ui/pages/painting/widgets.dart';
 import 'package:dreambook/src/ui/pages/shared/shared_code_view.dart';
@@ -15,7 +16,7 @@ class MaterialRoute extends GoRouteData {
 class CupertinoRoute extends GoRouteData {
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return const NamedCodeScaffold(title: 'Cupertino', items: []);
+    return NamedCodeScaffold(title: 'Cupertino', items: cupertinoItems);
   }
 }
 

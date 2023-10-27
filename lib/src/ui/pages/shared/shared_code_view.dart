@@ -1,5 +1,6 @@
 import 'package:animations/animations.dart';
 import 'package:devtools_app_shared/ui.dart';
+import 'package:dreambook/src/ui/widgets/about_button.dart';
 import 'package:dreambook/src/ui/widgets/github_button.dart';
 import 'package:dreambook/src/ui/widgets/theme_mode_button.dart';
 import 'package:flutter/material.dart';
@@ -18,6 +19,7 @@ class NamedCodeScaffold extends StatelessWidget {
         title: Text(title),
         actions: const [
           GithubButton(),
+          AboutButton(),
           ThemeModeButton(),
         ],
       ),

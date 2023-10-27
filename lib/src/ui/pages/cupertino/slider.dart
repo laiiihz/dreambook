@@ -1,12 +1,11 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:code_builder/code_builder.dart';
+import 'package:dreambook/src/ui/pages/shared/code_space/code_space.dart';
+import 'package:dreambook/src/ui/pages/shared/shared_code_view.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-
-import 'package:dreambook/src/ui/pages/shared/code_space/code_space.dart';
-import 'package:dreambook/src/ui/pages/shared/shared_code_view.dart';
-import 'package:dreambook/src/ui/pages/shared/tiles/menu_tile.dart';
 
 part 'slider.g.dart';
 
@@ -19,11 +18,9 @@ final sliderItem = CodeItem(
 class SliderConfig {
   SliderConfig({
     this.hasDivision = false,
-    this.interaction = SliderInteraction.tapAndSlide,
     this.enabled = true,
   });
   final bool hasDivision;
-  final SliderInteraction interaction;
   final bool enabled;
 
   SliderConfig copyWith({
@@ -33,7 +30,6 @@ class SliderConfig {
   }) {
     return SliderConfig(
       hasDivision: hasDivision ?? this.hasDivision,
-      interaction: interaction ?? this.interaction,
       enabled: enabled ?? this.enabled,
     );
   }
@@ -55,7 +51,7 @@ class TheCode extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final config = ref.watch(configProvider);
     return AutoCode(
-      'Slider',
+      'CupertinoSlider',
       fields: [
         Field((f) => f
           ..name = 'state'
@@ -65,9 +61,6 @@ class TheCode extends ConsumerWidget {
       named: {
         'value': refer('state'),
         if (config.hasDivision) 'divisions': refer('8'),
-        if (config.interaction != SliderInteraction.tapAndSlide)
-          'allowedInteraction':
-              refer('SliderInteraction.${config.interaction.name}'),
         'onChanged': config.enabled
             ? Method((m) => m.body = Block((b) =>
                     b.addExpression(refer('SetState(() => state = value)'))))
@@ -95,10 +88,9 @@ class TheWidget extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final config = ref.watch(configProvider);
     return WidgetWithConfiguration(
-      content: Slider(
+      content: CupertinoSlider(
         value: ref.watch(theValueProvider),
         divisions: config.hasDivision ? 8 : null,
-        allowedInteraction: config.interaction,
         onChanged: config.enabled
             ? (t) {
                 ref.read(theValueProvider.notifier).change(t);
@@ -114,17 +106,6 @@ class TheWidget extends ConsumerWidget {
                 .read(configProvider.notifier)
                 .change(config.copyWith(hasDivision: t));
           },
-        ),
-        MenuTile(
-          title: 'Interaction',
-          items: SliderInteraction.values,
-          current: config.interaction,
-          onTap: (t) {
-            ref
-                .read(configProvider.notifier)
-                .change(config.copyWith(interaction: t));
-          },
-          contentBuilder: (t) => t.name,
         ),
         SwitchListTile(
           title: const Text('Enabled'),
