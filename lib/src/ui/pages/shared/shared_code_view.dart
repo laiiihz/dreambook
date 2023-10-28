@@ -162,18 +162,41 @@ class WidgetWithConfiguration extends StatelessWidget {
     required this.configs,
     this.initialFractions = const <double>[0.2, 0.8],
     this.axis = Axis.vertical,
+    this.background = false,
   });
   final Widget content;
   final List<Widget> configs;
   final List<double> initialFractions;
   final Axis axis;
+  final bool background;
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
     return Split(
       axis: axis,
       initialFractions: initialFractions,
       children: [
-        Center(child: content),
+        Stack(
+          children: [
+            if (background) ...[
+              Positioned.fill(
+                child: DecoratedBox(
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      fit: BoxFit.cover,
+                      // https://unsplash.com/photos/ocean-view-during-daytime-XJfHMPJ0e-g?utm_content=creditShareLink&utm_medium=referral&utm_source=unsplash
+                      // https://unsplash.com/photos/blue-starry-night-sky-NORa8-4ohA0?utm_content=creditShareLink&utm_medium=referral&utm_source=unsplash
+                      image: isDark
+                          ? const AssetImage('assets/images/night.webp')
+                          : const AssetImage('assets/images/seascape.webp'),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+            Center(child: content),
+          ],
+        ),
         ListView(children: configs),
       ],
     );
