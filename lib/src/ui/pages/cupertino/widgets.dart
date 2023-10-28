@@ -4,6 +4,8 @@ import 'action_sheet.dart';
 import 'activity_indicator.dart';
 import 'alert_dialog.dart';
 import 'button.dart';
+import 'context_menu.dart';
+import 'date_picker.dart';
 import 'list_section.dart';
 import 'list_tile.dart';
 import 'slider.dart';
@@ -14,6 +16,8 @@ final cupertinoItems = <CodeItem>[
   activityIndicatorItem,
   alertDialogItem,
   buttonItem,
+  contextMenuItem,
+  datePickerItem,
   switchItem,
   sliderItem,
   listTileItem,

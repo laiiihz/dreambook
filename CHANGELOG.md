@@ -4,6 +4,7 @@
 - add cupertino indicator
 - add cupertino action sheet
 - add cupertino alert dialog
+- add context menu
 
 ## 1.0.2+3 - 2023-10-27
 ### Added
