@@ -14,6 +14,7 @@ class NamedCodeScaffold extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: Drawer(),
       appBar: AppBar(
         centerTitle: false,
         title: Text(title),
@@ -37,19 +38,15 @@ class SharedCodeView extends StatefulWidget {
   State<SharedCodeView> createState() => _SharedCodeViewState();
 }
 
-class _SharedCodeViewState extends State<SharedCodeView>
-    with SingleTickerProviderStateMixin {
-  late final TabController _tabController;
+class _SharedCodeViewState extends State<SharedCodeView> {
   final _index = ValueNotifier<int>(0);
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: widget.items.length, vsync: this);
   }
 
   @override
   void dispose() {
-    _tabController.dispose();
     super.dispose();
   }
 
@@ -64,7 +61,6 @@ class _SharedCodeViewState extends State<SharedCodeView>
           index: _index,
           onTap: (value) {
             _index.value = value;
-            _tabController.animateTo(value);
           },
         ),
         ValueListenableBuilder<int>(

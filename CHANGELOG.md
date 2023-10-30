@@ -1,3 +1,8 @@
+## 1.0.4+5 - 2023-10-30
+### Added
+- add en & zh lang
+- add api reference button
+
 ## 1.0.3+4 - 2023-10-28
 ### Added
 - add ccupertino button

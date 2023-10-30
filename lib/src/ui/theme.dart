@@ -1,24 +1,33 @@
 import 'package:dreambook/src/utils/kv.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'theme.g.dart';
 
 ThemeData appTheme([Brightness brightness = Brightness.light]) {
   const primary = Colors.cyan;
-  const cupertinoPrimary = CupertinoColors.systemTeal;
+  final colorScheme =
+      ColorScheme.fromSeed(seedColor: primary, brightness: brightness);
   return ThemeData(
-    colorScheme:
-        ColorScheme.fromSeed(seedColor: primary, brightness: brightness),
-    splashFactory: InkSparkle.splashFactory,
+    colorScheme: colorScheme,
+    splashFactory: _platformFactory,
     cupertinoOverrideTheme: CupertinoThemeData(
       brightness: brightness,
-      primaryColor: cupertinoPrimary,
+      primaryColor: colorScheme.primary,
       applyThemeToAll: true,
-      textTheme: const CupertinoTextThemeData(primaryColor: cupertinoPrimary),
+      textTheme: CupertinoTextThemeData(primaryColor: colorScheme.primary),
     ),
     useMaterial3: true,
   );
+}
+
+InteractiveInkFeatureFactory get _platformFactory {
+  if (kIsWeb) {
+    return InkRipple.splashFactory;
+  } else {
+    return InkSparkle.splashFactory;
+  }
 }
 
 @riverpod
