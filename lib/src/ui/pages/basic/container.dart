@@ -2,27 +2,27 @@
 import 'package:dreambook/src/l10n/l10n_helper.dart';
 import 'package:dreambook/src/ui/pages/shared/code_space/code_space.dart';
 import 'package:dreambook/src/ui/pages/shared/shared_code_view.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-part 'date_picker.g.dart';
+part 'container.g.dart';
 
-final datePickerItem = CodeItem(
-  title: (context) => context.tr.datePicker,
+final containerItem = CodeItem(
+  title: (context) => context.tr.container,
   code: const TheCode(),
   widget: const TheWidget(),
 );
 
-class DatePickerConfig {
-  DatePickerConfig();
+class ContainerConfig {
+  ContainerConfig();
 }
 
 @riverpod
 class Config extends _$Config {
   @override
-  DatePickerConfig build() => DatePickerConfig();
-  void change(DatePickerConfig config) {
+  ContainerConfig build() => ContainerConfig();
+  void change(ContainerConfig config) {
     state = config;
   }
 }
@@ -33,7 +33,7 @@ class TheCode extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final config = ref.watch(configProvider);
-    return const AutoCode('');
+    return const AutoCode('Container');
   }
 }
 
@@ -44,9 +44,7 @@ class TheWidget extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final config = ref.watch(configProvider);
     return WidgetWithConfiguration(
-      content: CupertinoDatePicker(
-        onDateTimeChanged: (date) {},
-      ),
+      content: Container(),
       configs: const [],
     );
   }

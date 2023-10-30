@@ -29,6 +29,11 @@ RouteBase get $rootRoute => GoRouteData.$route(
           name: 'painting',
           factory: $PaintingRouteExtension._fromState,
         ),
+        GoRouteData.$route(
+          path: 'basic',
+          name: 'basic',
+          factory: $BasicRouteExtension._fromState,
+        ),
       ],
     );
 
@@ -88,6 +93,23 @@ extension $PaintingRouteExtension on PaintingRoute {
 
   String get location => GoRouteData.$location(
         '/painting',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+extension $BasicRouteExtension on BasicRoute {
+  static BasicRoute _fromState(GoRouterState state) => BasicRoute();
+
+  String get location => GoRouteData.$location(
+        '/basic',
       );
 
   void go(BuildContext context) => context.go(location);

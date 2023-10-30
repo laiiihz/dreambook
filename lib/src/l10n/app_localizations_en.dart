@@ -35,6 +35,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get chip => 'Chip';
 
   @override
+  String get container => 'Container';
+
+  @override
   String get darkMode => 'Dark Mode';
 
   @override
@@ -93,4 +96,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get tabBar => 'Tab Bar';
+
+  @override
+  String get theType => 'Type';
 }

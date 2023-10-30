@@ -7,6 +7,7 @@
   "button": "按钮",
   "card": "卡片",
   "checkBox": "多选框",
+  "container": "容器",
   "darkMode": "深色模式",
   "datePicker": "日期选择器",
   "dialog": "对话框",
@@ -24,5 +25,6 @@
   "showAll": "展示所有",
   "slider": "滑动输入条",
   "switchItem": "开关",
-  "tabBar": "标签栏"
+  "tabBar": "标签栏",
+  "theType": "类型"
 }

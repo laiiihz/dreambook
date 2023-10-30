@@ -129,7 +129,7 @@ class TheWidget extends ConsumerWidget {
       },
       configs: [
         MenuTile<IndicatorType>(
-          title: 'type',
+          title: context.tr.theType,
           items: IndicatorType.values,
           current: config.type,
           onTap: (t) {

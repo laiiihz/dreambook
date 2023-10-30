@@ -114,7 +114,7 @@ class TheWidget extends ConsumerWidget {
       content: const TheChip(),
       configs: [
         MenuTile(
-          title: 'Type',
+          title: context.tr.theType,
           items: ChipType.values,
           current: config.type,
           onTap: (t) {

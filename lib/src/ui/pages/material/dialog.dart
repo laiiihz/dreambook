@@ -169,7 +169,7 @@ class TheWidget extends ConsumerWidget {
       ),
       configs: [
         MenuTile<DialogType>(
-          title: 'type',
+          title: context.tr.theType,
           items: DialogType.values,
           current: config.type,
           onTap: (t) {

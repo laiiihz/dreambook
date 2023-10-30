@@ -174,7 +174,7 @@ class TheWidget extends ConsumerWidget {
       content: const TheFab(),
       configs: [
         MenuTile<FabType>(
-          title: 'Type',
+          title: context.tr.theType,
           items: FabType.values,
           current: config.type,
           onTap: (t) {

@@ -259,7 +259,7 @@ class TheWidget extends ConsumerWidget {
       ),
       configs: [
         MenuTile(
-          title: 'type',
+          title: context.tr.theType,
           items: DatePickerType.values,
           current: config.type,
           onTap: (t) {

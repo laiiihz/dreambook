@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first, unused_local_variable
 import 'package:code_builder/code_builder.dart';
+import 'package:dreambook/src/l10n/l10n_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -109,7 +110,7 @@ class TheWidget extends ConsumerWidget {
       },
       configs: [
         MenuTile<ClipType>(
-          title: 'Type',
+          title: context.tr.theType,
           items: ClipType.values,
           current: config.type,
           onTap: (t) {

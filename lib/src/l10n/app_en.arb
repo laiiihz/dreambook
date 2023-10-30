@@ -9,6 +9,7 @@
   "card": "Card",
   "checkBox": "Check Box",
   "chip": "Chip",
+  "container": "Container",
   "darkMode": "Dark Mode",
   "datePicker": "Date Picker",
   "dialog": "Dialog",
@@ -28,5 +29,6 @@
   "slider": "Slider",
   "snackBar": "Snack Bar",
   "switchItem": "Switch",
-  "tabBar": "Tab Bar"
+  "tabBar": "Tab Bar",
+  "theType": "Type"
 }

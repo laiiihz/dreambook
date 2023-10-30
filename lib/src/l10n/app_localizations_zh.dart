@@ -35,6 +35,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get chip => 'Chip';
 
   @override
+  String get container => '容器';
+
+  @override
   String get darkMode => '深色模式';
 
   @override
@@ -93,4 +96,7 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get tabBar => '标签栏';
+
+  @override
+  String get theType => '类型';
 }

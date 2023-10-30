@@ -1,3 +1,4 @@
+import 'package:dreambook/src/ui/pages/basic/widgets.dart';
 import 'package:dreambook/src/ui/pages/cupertino/widgets.dart';
 import 'package:dreambook/src/ui/pages/material/widgets.dart';
 import 'package:dreambook/src/ui/pages/painting/widgets.dart';
@@ -25,5 +26,12 @@ class PaintingRoute extends GoRouteData {
   Widget build(BuildContext context, GoRouterState state) {
     return NamedCodeScaffold(
         title: 'Painting Widgets', items: paintingCodeItems);
+  }
+}
+
+class BasicRoute extends GoRouteData {
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return NamedCodeScaffold(title: 'Basic Widgets', items: basicCodeItems);
   }
 }

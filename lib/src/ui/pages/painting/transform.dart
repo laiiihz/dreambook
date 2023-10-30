@@ -2,6 +2,7 @@
 import 'dart:math';
 
 import 'package:code_builder/code_builder.dart';
+import 'package:dreambook/src/l10n/l10n_helper.dart';
 import 'package:dreambook/src/ui/pages/shared/tiles/menu_tile.dart';
 import 'package:dreambook/src/ui/pages/shared/tiles/slidable_tile.dart';
 import 'package:flutter/material.dart';
@@ -141,7 +142,7 @@ class TheWidget extends ConsumerWidget {
       },
       configs: [
         MenuTile(
-          title: 'Type',
+          title: context.tr.theType,
           items: TransformType.values,
           current: config.type,
           onTap: (t) {

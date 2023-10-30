@@ -153,6 +153,12 @@ abstract class AppLocalizations {
   /// **'Chip'**
   String get chip;
 
+  /// No description provided for @container.
+  ///
+  /// In en, this message translates to:
+  /// **'Container'**
+  String get container;
+
   /// No description provided for @darkMode.
   ///
   /// In en, this message translates to:
@@ -272,6 +278,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Tab Bar'**
   String get tabBar;
+
+  /// No description provided for @theType.
+  ///
+  /// In en, this message translates to:
+  /// **'Type'**
+  String get theType;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

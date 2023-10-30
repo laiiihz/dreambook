@@ -17,6 +17,7 @@ GoRouter appRoutes(AppRoutesRef ref) {
     TypedGoRoute<MaterialRoute>(path: 'material', name: 'material'),
     TypedGoRoute<CupertinoRoute>(path: 'cupertino', name: 'cupertino'),
     TypedGoRoute<PaintingRoute>(path: 'painting', name: 'painting'),
+    TypedGoRoute<BasicRoute>(path: 'basic', name: 'basic'),
   ],
 )
 class RootRoute extends GoRouteData {
