@@ -1,3 +1,4 @@
+import 'package:dreambook/src/l10n/l10n_helper.dart';
 import 'package:dreambook/src/ui/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -9,6 +10,9 @@ class ThemeModeButton extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final themeMode = ref.watch(themeModeDataProvider);
     return IconButton(
+      tooltip: themeMode == ThemeMode.dark
+          ? context.tr.darkMode
+          : context.tr.lightMode,
       onPressed: () {
         ref.read(themeModeDataProvider.notifier).change(
               themeMode == ThemeMode.dark ? ThemeMode.light : ThemeMode.dark,

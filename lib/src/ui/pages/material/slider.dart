@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:code_builder/code_builder.dart';
+import 'package:dreambook/src/l10n/l10n_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -11,7 +12,7 @@ import 'package:dreambook/src/ui/pages/shared/tiles/menu_tile.dart';
 part 'slider.g.dart';
 
 final sliderItem = CodeItem(
-  title: 'Slider',
+  title: (context) => context.tr.slider,
   code: const TheCode(),
   widget: const TheWidget(),
 );
@@ -127,7 +128,7 @@ class TheWidget extends ConsumerWidget {
           contentBuilder: (t) => t.name,
         ),
         SwitchListTile(
-          title: const Text('Enabled'),
+          title: Text(context.tr.enabled),
           value: config.enabled,
           onChanged: (t) {
             ref

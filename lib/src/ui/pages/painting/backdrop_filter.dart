@@ -13,7 +13,7 @@ import 'package:dreambook/src/ui/pages/shared/shared_code_view.dart';
 part 'backdrop_filter.g.dart';
 
 final backdropFilterBoxItem = CodeItem(
-  title: 'Backdrop Filter',
+  title: (context) => 'Backdrop Filter',
   code: const TheCode(),
   widget: const TheWidget(),
 );

@@ -11,7 +11,7 @@ import 'package:dreambook/src/ui/pages/shared/shared_code_view.dart';
 part 'list_section.g.dart';
 
 final listSectionItem = CodeItem(
-  title: 'List Section',
+  title: (context) => 'List Section',
   code: const TheCode(),
   widget: const TheWidget(),
 );

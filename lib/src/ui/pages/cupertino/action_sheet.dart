@@ -11,7 +11,7 @@ import 'package:dreambook/src/ui/pages/shared/shared_code_view.dart';
 part 'action_sheet.g.dart';
 
 final actionSheetItem = CodeItem(
-  title: 'Action Sheet',
+  title: (context) => 'Action Sheet',
   code: const TheCode(),
   widget: const TheWidget(),
 );

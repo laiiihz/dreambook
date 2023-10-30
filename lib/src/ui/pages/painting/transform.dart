@@ -14,7 +14,7 @@ import 'package:dreambook/src/ui/pages/shared/shared_code_view.dart';
 part 'transform.g.dart';
 
 final transformItem = CodeItem(
-  title: 'Transform',
+  title: (context) => 'Transform',
   code: const TheCode(),
   widget: const TheWidget(),
 );

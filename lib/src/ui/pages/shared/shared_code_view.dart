@@ -133,7 +133,7 @@ class _WidgetListState extends State<WidgetList> {
       itemBuilder: (context, index) {
         final item = widget.items.elementAt(index);
         return ListTile(
-          title: Text(item.title),
+          title: Text(item.title(context)),
           selected: widget.index.value == index,
           onTap: () => widget.onTap(index),
         );
@@ -144,7 +144,7 @@ class _WidgetListState extends State<WidgetList> {
 }
 
 class CodeItem {
-  final String title;
+  final String Function(BuildContext context) title;
   final Widget code;
   final Widget widget;
 

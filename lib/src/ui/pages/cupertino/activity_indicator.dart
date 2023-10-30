@@ -12,7 +12,7 @@ import 'package:dreambook/src/ui/pages/shared/shared_code_view.dart';
 part 'activity_indicator.g.dart';
 
 final activityIndicatorItem = CodeItem(
-  title: 'Activity Indicator',
+  title: (context) => 'Activity Indicator',
   code: const TheCode(),
   widget: const TheWidget(),
 );

@@ -11,7 +11,7 @@ import 'package:dreambook/src/ui/pages/shared/tiles/slidable_tile.dart';
 part 'rotated_box.g.dart';
 
 final rotatedBoxItem = CodeItem(
-  title: 'Rotated Box',
+  title: (context) => 'Rotated Box',
   code: const TheCode(),
   widget: const TheWidget(),
 );

@@ -11,7 +11,7 @@ import 'package:dreambook/src/ui/pages/shared/tiles/menu_tile.dart';
 part 'decorated_box.g.dart';
 
 final decoratedBoxItem = CodeItem(
-  title: 'Decorated Box',
+  title: (context) => 'Decorated Box',
   code: const TheCode(),
   widget: const TheWidget(),
 );

@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:code_builder/code_builder.dart';
+import 'package:dreambook/src/l10n/l10n_helper.dart';
 import 'package:dreambook/src/ui/pages/shared/code_space/code_builder_helper.dart';
 import 'package:dreambook/src/ui/pages/shared/code_space/code_space.dart';
 import 'package:dreambook/src/ui/pages/shared/shared_code_view.dart';
@@ -11,7 +12,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'date_picker.g.dart';
 
 final datePickerItem = CodeItem(
-  title: 'Date Picker',
+  title: (context) => context.tr.datePicker,
   code: const TheCode(),
   widget: const TheWidget(),
 );

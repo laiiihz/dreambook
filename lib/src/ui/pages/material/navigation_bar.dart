@@ -1,4 +1,5 @@
 import 'package:code_builder/code_builder.dart';
+import 'package:dreambook/src/l10n/l10n_helper.dart';
 import 'package:dreambook/src/ui/pages/shared/code_space/code_builder_helper.dart';
 import 'package:dreambook/src/ui/pages/shared/code_space/code_space.dart';
 import 'package:dreambook/src/ui/pages/shared/shared_code_view.dart';
@@ -9,7 +10,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'navigation_bar.g.dart';
 
 final navigationBarItem = CodeItem(
-  title: 'Navigation Bar',
+  title: (context) => context.tr.navigationBar,
   code: const TheCode(),
   widget: const TheWidget(),
 );

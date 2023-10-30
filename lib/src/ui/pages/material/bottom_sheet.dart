@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:code_builder/code_builder.dart';
+import 'package:dreambook/src/l10n/l10n_helper.dart';
 import 'package:dreambook/src/ui/pages/shared/code_space/code_space.dart';
 import 'package:dreambook/src/ui/pages/shared/shared_code_view.dart';
 import 'package:flutter/material.dart';
@@ -9,7 +10,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'bottom_sheet.g.dart';
 
 final bottomSheetItem = CodeItem(
-  title: 'Bottom Sheet',
+  title: (context) => context.tr.bottomSheet,
   code: const TheCode(),
   widget: const TheWidget(),
 );

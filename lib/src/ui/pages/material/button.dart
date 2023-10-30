@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:code_builder/code_builder.dart';
+import 'package:dreambook/src/l10n/l10n_helper.dart';
 import 'package:dreambook/src/ui/pages/shared/code_space/code_space.dart';
 import 'package:dreambook/src/ui/pages/shared/shared_code_view.dart';
 import 'package:dreambook/src/ui/pages/shared/tiles/menu_tile.dart';
@@ -88,7 +89,7 @@ class Config extends _$Config {
 }
 
 final buttonItem = CodeItem(
-  title: 'Button',
+  title: (context) => context.tr.button,
   code: const TheCode(),
   widget: const TheWidget(),
 );
@@ -133,7 +134,7 @@ class TheWidget extends ConsumerWidget {
           contentBuilder: (t) => t.contentName,
         ),
         SwitchListTile(
-          title: const Text('Enabled'),
+          title: Text(context.tr.enabled),
           value: config.enabled,
           onChanged: (state) {
             ref

@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first, unused_local_variable
 import 'package:code_builder/code_builder.dart';
+import 'package:dreambook/src/l10n/l10n_helper.dart';
 import 'package:dreambook/src/ui/pages/shared/code_space/code_builder_helper.dart';
 import 'package:dreambook/src/utils/code_wrapper.dart';
 import 'package:flutter/cupertino.dart';
@@ -13,7 +14,7 @@ import 'package:dreambook/src/ui/pages/shared/shared_code_view.dart';
 part 'switch.g.dart';
 
 final switchItem = CodeItem(
-  title: 'Switch',
+  title: (context) => context.tr.switchItem,
   code: const TheCode(),
   widget: const TheWidget(),
 );
@@ -96,7 +97,7 @@ class _TheWidgetState extends ConsumerState<TheWidget> {
       ),
       configs: [
         SwitchListTile(
-          title: const Text('Enabled'),
+          title: Text(context.tr.enabled),
           value: config.enabled,
           onChanged: (t) {
             ref

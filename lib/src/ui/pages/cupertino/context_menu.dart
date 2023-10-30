@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final contextMenuItem = CodeItem(
-  title: 'Context Menu',
+  title: (context) => 'Context Menu',
   code: const TheCode(),
   widget: const TheWidget(),
 );

@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:code_builder/code_builder.dart';
+import 'package:dreambook/src/l10n/l10n_helper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -11,7 +12,7 @@ import 'package:dreambook/src/ui/pages/shared/shared_code_view.dart';
 part 'list_tile.g.dart';
 
 final listTileItem = CodeItem(
-  title: 'ListTile',
+  title: (context) => context.tr.listTile,
   code: const TheCode(),
   widget: const TheWidget(),
 );

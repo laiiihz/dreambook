@@ -1,3 +1,4 @@
+import 'package:dreambook/src/l10n/l10n_helper.dart';
 import 'package:dreambook/src/routes/routes.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -18,9 +19,9 @@ class RootPage extends StatelessWidget {
           constraints: const BoxConstraints(maxWidth: 800),
           child: CustomScrollView(
             slivers: [
-              const SliverAppBar.large(
-                title: Text('Dreambook'),
-                actions: [
+              SliverAppBar.large(
+                title: Text(context.tr.appName),
+                actions: const [
                   GithubButton(),
                   AboutButton(),
                   ThemeModeButton(),

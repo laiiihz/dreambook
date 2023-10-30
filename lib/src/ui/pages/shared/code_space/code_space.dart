@@ -1,4 +1,5 @@
 import 'package:code_builder/code_builder.dart';
+import 'package:dreambook/src/l10n/l10n_helper.dart';
 import 'package:dreambook/src/utils/code_wrapper.dart';
 import 'package:dreambook/src/utils/highlighter.dart';
 import 'package:dreambook/src/utils/kv.dart';
@@ -97,21 +98,22 @@ class _CodeSpaceState extends ConsumerState<CodeSpace> {
           right: 8,
           child: Row(
             children: [
-              Switch(
-                value: ref.watch(showFullContentProvider),
-                onChanged: (t) {
-                  ref.read(showFullContentProvider.notifier).change(t);
-                },
+              Tooltip(
+                message: context.tr.showAll,
+                child: Switch(
+                  value: ref.watch(showFullContentProvider),
+                  onChanged: (t) {
+                    ref.read(showFullContentProvider.notifier).change(t);
+                  },
+                ),
               ),
-              const Text('show all'),
               const SizedBox(width: 16),
               IconButton(
                 onPressed: () {
                   Clipboard.setData(ClipboardData(text: widget.code));
                 },
-                icon: const Icon(
-                  Icons.copy_rounded,
-                ),
+                tooltip: context.mtr.copyButtonLabel,
+                icon: const Icon(Icons.copy_rounded),
               ),
             ],
           ),

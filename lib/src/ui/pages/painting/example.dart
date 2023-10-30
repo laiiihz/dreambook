@@ -8,7 +8,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'example.g.dart';
 
 final exampleBoxItem = CodeItem(
-  title: '',
+  title: (context) => '',
   code: const TheCode(),
   widget: const TheWidget(),
 );

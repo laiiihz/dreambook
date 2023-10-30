@@ -10,7 +10,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'opacity.g.dart';
 
 final opacityItem = CodeItem(
-  title: 'Opacity',
+  title: (context) => 'Opacity',
   code: const TheCode(),
   widget: const TheWidget(),
 );
