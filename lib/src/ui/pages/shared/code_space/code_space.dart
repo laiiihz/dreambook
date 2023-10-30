@@ -7,6 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 part 'code_space.g.dart';
 
@@ -33,6 +35,7 @@ class AutoCode extends ConsumerWidget {
     this.dispose = const [],
     this.fields = const [],
     this.prefix = const [],
+    this.apiUrl,
   });
   final Imports import;
   final List<Code> initState;
@@ -43,29 +46,35 @@ class AutoCode extends ConsumerWidget {
   final List<Reference> typed;
   final List<Field> fields;
   final List<Spec> prefix;
+  final String? apiUrl;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return CodeSpace.from(CodeWrapper(
-      name: name,
-      import: import,
-      namedArguments: named,
-      typeArguments: typed,
-      positionalArguments: positional,
-      initState: initState,
-      dispose: dispose,
-      middle: fields,
-      custom: prefix,
-      fullContent: ref.watch(showFullContentProvider),
-    ).toCode());
+    return CodeSpace.from(
+      CodeWrapper(
+        name: name,
+        import: import,
+        namedArguments: named,
+        typeArguments: typed,
+        positionalArguments: positional,
+        initState: initState,
+        dispose: dispose,
+        middle: fields,
+        custom: prefix,
+        fullContent: ref.watch(showFullContentProvider),
+      ).toCode(),
+      apiUrl: apiUrl,
+    );
   }
 }
 
 class CodeSpace extends ConsumerStatefulWidget {
-  CodeSpace(List<String> codes, {super.key}) : code = codes.join('\n');
-  const CodeSpace.from(this.code, {super.key});
+  CodeSpace(List<String> codes, {super.key, this.apiUrl})
+      : code = codes.join('\n');
+  const CodeSpace.from(this.code, {super.key, this.apiUrl});
 
   final String code;
+  final String? apiUrl;
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() => _CodeSpaceState();
@@ -115,6 +124,18 @@ class _CodeSpaceState extends ConsumerState<CodeSpace> {
                 tooltip: context.mtr.copyButtonLabel,
                 icon: const Icon(Icons.copy_rounded),
               ),
+              if (widget.apiUrl != null)
+                IconButton(
+                  tooltip: context.tr.apiReference,
+                  onPressed: () {
+                    launchUrl(Uri(
+                      scheme: 'https',
+                      host: 'api.flutter.dev',
+                      path: widget.apiUrl,
+                    ));
+                  },
+                  icon: const Icon(Icons.code),
+                ),
             ],
           ),
         ),

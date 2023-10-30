@@ -93,6 +93,12 @@ abstract class AppLocalizations {
     Locale('zh')
   ];
 
+  /// No description provided for @apiReference.
+  ///
+  /// In en, this message translates to:
+  /// **'API Reference'**
+  String get apiReference;
+
   /// No description provided for @appBar.
   ///
   /// In en, this message translates to:

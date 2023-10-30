@@ -5,6 +5,9 @@ class AppLocalizationsZh extends AppLocalizations {
   AppLocalizationsZh([String locale = 'zh']) : super(locale);
 
   @override
+  String get apiReference => 'API参考';
+
+  @override
   String get appBar => '导航栏';
 
   @override

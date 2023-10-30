@@ -117,8 +117,9 @@ class TheCode extends ConsumerWidget {
           if (config.hasActions) ...{
             'actions': literalList([
               refer(
-                  "TextButton(onPressed: () {}, child: const Text('CANCEL'))"),
-              refer("TextButton(onPressed: () {}, child: const Text('OK'))"),
+                  "TextButton(onPressed: () {}, child: const Text('${context.mtr.cancelButtonLabel}'))"),
+              refer(
+                  "TextButton(onPressed: () {}, child: const Text('${context.mtr.okButtonLabel}'))"),
             ]),
           }
         } else if (config.hasChildren) ...{
@@ -145,8 +146,12 @@ class TheWidget extends ConsumerWidget {
               content: config.hasContent ? const Text('Content') : null,
               actions: config.hasActions
                   ? [
-                      TextButton(onPressed: () {}, child: const Text('CANCEL')),
-                      TextButton(onPressed: () {}, child: const Text('OK')),
+                      TextButton(
+                          onPressed: () {},
+                          child: Text(context.mtr.cancelButtonLabel)),
+                      TextButton(
+                          onPressed: () {},
+                          child: Text(context.mtr.okButtonLabel)),
                     ]
                   : null,
               icon: config.hasIcon ? const Icon(Icons.account_circle) : null,

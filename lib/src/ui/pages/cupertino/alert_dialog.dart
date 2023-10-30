@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first, unused_local_variable
 import 'package:code_builder/code_builder.dart';
+import 'package:dreambook/src/l10n/l10n_helper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -63,7 +64,8 @@ class TheCode extends ConsumerWidget {
               [],
               {
                 'onPressed': refer('() {}'),
-                'child': refer("const Text('CANCEL')"),
+                'child':
+                    refer("const Text('${context.mtr.cancelButtonLabel}')"),
               },
             ),
             InvokeExpression.newOf(
@@ -71,7 +73,7 @@ class TheCode extends ConsumerWidget {
               [],
               {
                 'onPressed': refer('() {}'),
-                'child': refer("const Text('OK')"),
+                'child': refer("const Text('${context.mtr.okButtonLabel}')"),
               },
             ),
           ])
@@ -88,15 +90,18 @@ class TheWidget extends ConsumerWidget {
     final config = ref.watch(configProvider);
     return WidgetWithConfiguration(
       background: true,
+      initialFractions: const [0.5, 0.5],
       content: CupertinoAlertDialog(
         title: const Text('data'),
         content: config.showContent ? const Text('Content') : null,
         actions: config.showActions
             ? [
                 CupertinoDialogAction(
-                    child: const Text('CANCEL'), onPressed: () {}),
+                  child: Text(context.mtr.cancelButtonLabel),
+                  onPressed: () {},
+                ),
                 CupertinoDialogAction(
-                    child: const Text('OK'), onPressed: () {}),
+                    child: Text(context.mtr.okButtonLabel), onPressed: () {}),
               ]
             : [],
       ),

@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first, unused_local_variable
 import 'package:code_builder/code_builder.dart';
+import 'package:dreambook/src/l10n/l10n_helper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -71,7 +72,9 @@ class TheCode extends ConsumerWidget {
               }),
             ),
           ),
-        if (config.showCancel) 'cancelButton': refer("const Text('Cancel')"),
+        if (config.showCancel)
+          'cancelButton':
+              refer("const Text('${context.mtr.cancelButtonLabel}')"),
       },
     );
   }
@@ -100,7 +103,7 @@ class TheWidget extends ConsumerWidget {
             : null,
         cancelButton: config.showCancel
             ? CupertinoActionSheetAction(
-                onPressed: () {}, child: const Text('Cancel'))
+                onPressed: () {}, child: Text(context.mtr.cancelButtonLabel))
             : null,
       ),
       configs: [

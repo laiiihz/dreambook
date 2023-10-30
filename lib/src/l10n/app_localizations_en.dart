@@ -5,6 +5,9 @@ class AppLocalizationsEn extends AppLocalizations {
   AppLocalizationsEn([String locale = 'en']) : super(locale);
 
   @override
+  String get apiReference => 'API Reference';
+
+  @override
   String get appBar => 'App Bar';
 
   @override

@@ -11,24 +11,29 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'button.g.dart';
 
 enum ButtonType {
-  text('TextButton'),
-  textIcon('TextButton.icon'),
-  filled('FilledButton'),
-  filledIcon('FilledButton.icon'),
-  filledTonal('FilledButton.tonal'),
-  filledTonalIcon('FilledButton.tonalIcon'),
-  elevated('ElevatedButton'),
-  elevatedIcon('ElevatedButton.icon'),
-  outlined('OutlinedButton'),
-  outlinedIcon('OutlinedButton.icon'),
-  icon('IconButton'),
-  iconFilled('IconButton.filled'),
-  iconFilledTonal('OutlinedButton.filledTonal'),
-  iconOutlined('IconButton.outlined'),
+  text('TextButton', 'flutter/material/TextButton-class.html'),
+  textIcon('TextButton.icon', 'flutter/material/TextButton-class.html'),
+  filled('FilledButton', 'flutter/material/FilledButton-class.html'),
+  filledIcon('FilledButton.icon', 'flutter/material/FilledButton-class.html'),
+  filledTonal('FilledButton.tonal', 'flutter/material/FilledButton-class.html'),
+  filledTonalIcon(
+      'FilledButton.tonalIcon', 'flutter/material/FilledButton-class.html'),
+  elevated('ElevatedButton', 'flutter/material/ElevatedButton-class.html'),
+  elevatedIcon(
+      'ElevatedButton.icon', 'flutter/material/ElevatedButton-class.html'),
+  outlined('OutlinedButton', 'flutter/material/OutlinedButton-class.html'),
+  outlinedIcon(
+      'OutlinedButton.icon', 'flutter/material/OutlinedButton-class.html'),
+  icon('IconButton', 'flutter/material/IconButton-class.html'),
+  iconFilled('IconButton.filled', 'flutter/material/IconButton-class.html'),
+  iconFilledTonal(
+      'OutlinedButton.filledTonal', 'flutter/material/IconButton-class.html'),
+  iconOutlined('IconButton.outlined', 'flutter/material/IconButton-class.html'),
   ;
 
-  const ButtonType(this.contentName);
+  const ButtonType(this.contentName, this.url);
   final String contentName;
+  final String url;
 
   bool get hasIcon {
     return switch (this) {
@@ -111,6 +116,7 @@ class TheCode extends ConsumerWidget {
           else
             'child': refer('Text(\'${config.type.contentName}\')'),
       },
+      apiUrl: config.type.url,
     );
   }
 }
