@@ -1,3 +1,4 @@
+import 'package:adaptive_breakpoints/adaptive_breakpoints.dart';
 import 'package:animations/animations.dart';
 import 'package:devtools_app_shared/ui.dart';
 import 'package:dreambook/src/ui/widgets/about_button.dart';
@@ -5,26 +6,64 @@ import 'package:dreambook/src/ui/widgets/github_button.dart';
 import 'package:dreambook/src/ui/widgets/theme_mode_button.dart';
 import 'package:flutter/material.dart';
 
-class NamedCodeScaffold extends StatelessWidget {
+class NamedCodeScaffold extends StatefulWidget {
   const NamedCodeScaffold(
       {super.key, required this.title, required this.items});
   final String title;
   final List<CodeItem> items;
 
   @override
+  State<NamedCodeScaffold> createState() => NamedCodeScaffoldState();
+
+  static NamedCodeScaffoldState of(BuildContext context) {
+    return context.findAncestorStateOfType<NamedCodeScaffoldState>()!;
+  }
+}
+
+class NamedCodeScaffoldState extends State<NamedCodeScaffold> {
+  final index = ValueNotifier<int>(0);
+  final scaffold = GlobalKey<ScaffoldState>();
+
+  @override
+  void dispose() {
+    index.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final windowType = getBreakpointEntry(context).adaptiveWindowType;
+    final bool hasDrawer = windowType < AdaptiveWindowType.medium;
     return Scaffold(
-      drawer: Drawer(),
+      key: scaffold,
+      endDrawer: hasDrawer
+          ? Drawer(
+              child: WidgetList(
+                widget.items,
+                index: index,
+                onTap: (value) {
+                  index.value = value;
+                },
+              ),
+            )
+          : null,
       appBar: AppBar(
         centerTitle: false,
-        title: Text(title),
-        actions: const [
-          GithubButton(),
-          AboutButton(),
-          ThemeModeButton(),
+        title: Text(widget.title),
+        actions: [
+          const GithubButton(),
+          const AboutButton(),
+          const ThemeModeButton(),
+          if (hasDrawer)
+            IconButton(
+              onPressed: () {
+                scaffold.currentState!.openEndDrawer();
+              },
+              icon: const Icon(Icons.menu),
+            ),
         ],
       ),
-      body: SharedCodeView(items),
+      body: SharedCodeView(widget.items),
     );
   }
 }
@@ -39,7 +78,6 @@ class SharedCodeView extends StatefulWidget {
 }
 
 class _SharedCodeViewState extends State<SharedCodeView> {
-  final _index = ValueNotifier<int>(0);
   @override
   void initState() {
     super.initState();
@@ -50,48 +88,112 @@ class _SharedCodeViewState extends State<SharedCodeView> {
     super.dispose();
   }
 
+  NamedCodeScaffoldState get parent => NamedCodeScaffold.of(context);
+
   @override
   Widget build(BuildContext context) {
-    return Split(
-      axis: Axis.horizontal,
-      initialFractions: const [0.2, 0.8],
-      children: [
-        WidgetList(
-          widget.items,
-          index: _index,
-          onTap: (value) {
-            _index.value = value;
-          },
-        ),
-        ValueListenableBuilder<int>(
-          valueListenable: _index,
-          builder: (context, index, child) {
-            final e = widget.items.elementAt(index);
-            final child = Split(
-              key: ValueKey(e),
-              axis: Axis.horizontal,
-              initialFractions: const [0.4, 0.6],
-              children: [
-                e.widget,
-                e.code,
-              ],
-            );
+    final windowType = getBreakpointEntry(context).adaptiveWindowType;
+    final bool hasDrawer = windowType < AdaptiveWindowType.medium;
 
-            return PageTransitionSwitcher(
-              transitionBuilder: (child, primaryAnimation, secondaryAnimation) {
-                return SharedAxisTransition(
-                  animation: primaryAnimation,
-                  secondaryAnimation: secondaryAnimation,
-                  transitionType: SharedAxisTransitionType.vertical,
-                  child: child,
-                );
-              },
+    final widgetList = WidgetList(
+      widget.items,
+      index: parent.index,
+      onTap: (value) {
+        parent.index.value = value;
+      },
+    );
+
+    Widget content = ValueListenableBuilder<int>(
+      valueListenable: parent.index,
+      builder: (context, index, child) {
+        final e = widget.items.elementAt(index);
+
+        return PageTransitionSwitcher(
+          transitionBuilder: (child, primaryAnimation, secondaryAnimation) {
+            return SharedAxisTransition(
+              animation: primaryAnimation,
+              secondaryAnimation: secondaryAnimation,
+              transitionType: SharedAxisTransitionType.vertical,
               child: child,
             );
           },
-        ),
-      ],
+          child: AdaptiveSplitCodeView(
+            code: e.code,
+            widget: e.widget,
+            key: ValueKey(e),
+          ),
+        );
+      },
     );
+    if (hasDrawer) {
+      return content;
+    } else {
+      return Split(
+        axis: Axis.horizontal,
+        initialFractions: const [0.2, 0.8],
+        children: [
+          widgetList,
+          content,
+        ],
+      );
+    }
+  }
+}
+
+class AdaptiveSplitCodeView extends StatefulWidget {
+  const AdaptiveSplitCodeView(
+      {super.key, required this.code, required this.widget});
+  final Widget code;
+  final Widget widget;
+
+  @override
+  State<AdaptiveSplitCodeView> createState() => _AdaptiveSplitCodeViewState();
+}
+
+class _AdaptiveSplitCodeViewState extends State<AdaptiveSplitCodeView> {
+  bool showCode = false;
+  @override
+  Widget build(BuildContext context) {
+    final windowType = getBreakpointEntry(context).adaptiveWindowType;
+    final bool isSmall = windowType < AdaptiveWindowType.small;
+    return isSmall
+        ? Stack(
+            children: [
+              PageTransitionSwitcher(
+                reverse: showCode,
+                transitionBuilder:
+                    (child, primaryAnimation, secondaryAnimation) {
+                  return SharedAxisTransition(
+                    animation: primaryAnimation,
+                    secondaryAnimation: secondaryAnimation,
+                    transitionType: SharedAxisTransitionType.horizontal,
+                    child: child,
+                  );
+                },
+                child: showCode ? widget.code : widget.widget,
+              ),
+              Positioned(
+                right: 8,
+                bottom: 8,
+                child: FloatingActionButton.small(
+                  onPressed: () {
+                    setState(() {
+                      showCode = !showCode;
+                    });
+                  },
+                  child: const Icon(Icons.code_rounded),
+                ),
+              ),
+            ],
+          )
+        : Split(
+            axis: Axis.horizontal,
+            initialFractions: const [0.4, 0.6],
+            children: [
+              widget.widget,
+              widget.code,
+            ],
+          );
   }
 }
 

@@ -9,6 +9,14 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "64.0.0"
+  adaptive_breakpoints:
+    dependency: "direct main"
+    description:
+      name: adaptive_breakpoints
+      sha256: "3aa6ef09074fe7824dfdc9a6d9f955c8a3bae0fb71c495cbd72f471a87699b4f"
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.1.6"
   analyzer:
     dependency: transitive
     description:

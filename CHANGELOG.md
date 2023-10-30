@@ -1,3 +1,7 @@
+## 1.0.5+6 - 2023-10-30
+### Added
+- adaptive small devices
+
 ## 1.0.4+5 - 2023-10-30
 ### Added
 - add en & zh lang
