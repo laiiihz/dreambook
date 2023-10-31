@@ -12,7 +12,7 @@ import 'package:dreambook/src/ui/pages/shared/shared_code_view.dart';
 part 'alert_dialog.g.dart';
 
 final alertDialogItem = CodeItem(
-  title: (context) => 'Alert Dialog',
+  title: (context) => context.alertDialog,
   code: const TheCode(),
   widget: const TheWidget(),
 );

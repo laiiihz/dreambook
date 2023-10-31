@@ -2,6 +2,7 @@
 import 'dart:ui';
 
 import 'package:code_builder/code_builder.dart';
+import 'package:dreambook/src/l10n/l10n_helper.dart';
 import 'package:dreambook/src/ui/pages/shared/tiles/menu_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -13,7 +14,7 @@ import 'package:dreambook/src/ui/pages/shared/shared_code_view.dart';
 part 'backdrop_filter.g.dart';
 
 final backdropFilterBoxItem = CodeItem(
-  title: (context) => 'Backdrop Filter',
+  title: (context) => context.tr.backdropFilter,
   code: const TheCode(),
   widget: const TheWidget(),
 );

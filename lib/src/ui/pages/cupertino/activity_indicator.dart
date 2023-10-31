@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first, unused_local_variable
 import 'package:code_builder/code_builder.dart';
+import 'package:dreambook/src/l10n/l10n_helper.dart';
 import 'package:dreambook/src/ui/pages/shared/tiles/slidable_tile.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -12,7 +13,7 @@ import 'package:dreambook/src/ui/pages/shared/shared_code_view.dart';
 part 'activity_indicator.g.dart';
 
 final activityIndicatorItem = CodeItem(
-  title: (context) => 'Activity Indicator',
+  title: (context) => context.tr.activityIndicator,
   code: const TheCode(),
   widget: const TheWidget(),
 );

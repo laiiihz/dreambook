@@ -10,4 +10,6 @@ extension L10nHelperExt on BuildContext {
 
   /// about
   String get aboutLabel => mtr.aboutListTileTitle(tr.appName);
+
+  String get alertDialog => tr.alertWith(tr.dialog);
 }

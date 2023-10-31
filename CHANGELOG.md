@@ -1,3 +1,7 @@
+## Unreleased
+### Changed
+- update l10n
+
 ## 1.0.5+6 - 2023-10-30
 ### Added
 - adaptive small devices

@@ -5,6 +5,17 @@ class AppLocalizationsEn extends AppLocalizations {
   AppLocalizationsEn([String locale = 'en']) : super(locale);
 
   @override
+  String get actionSheet => 'Action Sheet';
+
+  @override
+  String get activityIndicator => 'Activity Indicator';
+
+  @override
+  String alertWith(Object extra) {
+    return 'Alert $extra';
+  }
+
+  @override
   String get apiReference => 'API Reference';
 
   @override
@@ -12,6 +23,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get appName => 'Dreambook';
+
+  @override
+  String get backdropFilter => 'Backdrop Filter';
 
   @override
   String get badge => 'Badge';
@@ -35,13 +49,22 @@ class AppLocalizationsEn extends AppLocalizations {
   String get chip => 'Chip';
 
   @override
+  String get clip => 'Clip';
+
+  @override
   String get container => 'Container';
+
+  @override
+  String get contextMenu => 'Context Menu';
 
   @override
   String get darkMode => 'Dark Mode';
 
   @override
   String get datePicker => 'Date Picker';
+
+  @override
+  String get decoratedBox => 'Decorated Box';
 
   @override
   String get dialog => 'Dialog';
@@ -65,6 +88,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get lightMode => 'Light Mode';
 
   @override
+  String get listSection => 'List Section';
+
+  @override
   String get listTile => 'List Tile';
 
   @override
@@ -74,6 +100,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get navigationRail => 'Navigation Rail';
 
   @override
+  String get opacity => 'Opacity';
+
+  @override
   String get popupMenuButton => 'Popup Menu Button';
 
   @override
@@ -81,6 +110,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get radio => 'Radio';
+
+  @override
+  String get rotatedBox => 'Rotated Box';
 
   @override
   String get showAll => 'Show All';
@@ -99,4 +131,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get theType => 'Type';
+
+  @override
+  String get transform => 'Transform';
 }

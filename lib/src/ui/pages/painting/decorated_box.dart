@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:code_builder/code_builder.dart';
+import 'package:dreambook/src/l10n/l10n_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -11,7 +12,7 @@ import 'package:dreambook/src/ui/pages/shared/tiles/menu_tile.dart';
 part 'decorated_box.g.dart';
 
 final decoratedBoxItem = CodeItem(
-  title: (context) => 'Decorated Box',
+  title: (context) => context.tr.decoratedBox,
   code: const TheCode(),
   widget: const TheWidget(),
 );

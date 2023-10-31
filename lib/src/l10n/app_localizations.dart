@@ -93,6 +93,24 @@ abstract class AppLocalizations {
     Locale('zh')
   ];
 
+  /// No description provided for @actionSheet.
+  ///
+  /// In en, this message translates to:
+  /// **'Action Sheet'**
+  String get actionSheet;
+
+  /// No description provided for @activityIndicator.
+  ///
+  /// In en, this message translates to:
+  /// **'Activity Indicator'**
+  String get activityIndicator;
+
+  /// No description provided for @alertWith.
+  ///
+  /// In en, this message translates to:
+  /// **'Alert {extra}'**
+  String alertWith(Object extra);
+
   /// No description provided for @apiReference.
   ///
   /// In en, this message translates to:
@@ -110,6 +128,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Dreambook'**
   String get appName;
+
+  /// No description provided for @backdropFilter.
+  ///
+  /// In en, this message translates to:
+  /// **'Backdrop Filter'**
+  String get backdropFilter;
 
   /// No description provided for @badge.
   ///
@@ -153,11 +177,23 @@ abstract class AppLocalizations {
   /// **'Chip'**
   String get chip;
 
+  /// No description provided for @clip.
+  ///
+  /// In en, this message translates to:
+  /// **'Clip'**
+  String get clip;
+
   /// No description provided for @container.
   ///
   /// In en, this message translates to:
   /// **'Container'**
   String get container;
+
+  /// No description provided for @contextMenu.
+  ///
+  /// In en, this message translates to:
+  /// **'Context Menu'**
+  String get contextMenu;
 
   /// No description provided for @darkMode.
   ///
@@ -170,6 +206,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Date Picker'**
   String get datePicker;
+
+  /// No description provided for @decoratedBox.
+  ///
+  /// In en, this message translates to:
+  /// **'Decorated Box'**
+  String get decoratedBox;
 
   /// No description provided for @dialog.
   ///
@@ -213,6 +255,12 @@ abstract class AppLocalizations {
   /// **'Light Mode'**
   String get lightMode;
 
+  /// No description provided for @listSection.
+  ///
+  /// In en, this message translates to:
+  /// **'List Section'**
+  String get listSection;
+
   /// No description provided for @listTile.
   ///
   /// In en, this message translates to:
@@ -231,6 +279,12 @@ abstract class AppLocalizations {
   /// **'Navigation Rail'**
   String get navigationRail;
 
+  /// No description provided for @opacity.
+  ///
+  /// In en, this message translates to:
+  /// **'Opacity'**
+  String get opacity;
+
   /// No description provided for @popupMenuButton.
   ///
   /// In en, this message translates to:
@@ -248,6 +302,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Radio'**
   String get radio;
+
+  /// No description provided for @rotatedBox.
+  ///
+  /// In en, this message translates to:
+  /// **'Rotated Box'**
+  String get rotatedBox;
 
   /// No description provided for @showAll.
   ///
@@ -284,6 +344,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Type'**
   String get theType;
+
+  /// No description provided for @transform.
+  ///
+  /// In en, this message translates to:
+  /// **'Transform'**
+  String get transform;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

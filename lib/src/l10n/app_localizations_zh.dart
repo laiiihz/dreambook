@@ -5,6 +5,17 @@ class AppLocalizationsZh extends AppLocalizations {
   AppLocalizationsZh([String locale = 'zh']) : super(locale);
 
   @override
+  String get actionSheet => 'Action Sheet';
+
+  @override
+  String get activityIndicator => '活动指示器';
+
+  @override
+  String alertWith(Object extra) {
+    return '警告$extra';
+  }
+
+  @override
   String get apiReference => 'API参考';
 
   @override
@@ -12,6 +23,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get appName => 'Dreambook';
+
+  @override
+  String get backdropFilter => '背景滤镜';
 
   @override
   String get badge => '徽标数';
@@ -35,13 +49,22 @@ class AppLocalizationsZh extends AppLocalizations {
   String get chip => 'Chip';
 
   @override
+  String get clip => '裁剪';
+
+  @override
   String get container => '容器';
+
+  @override
+  String get contextMenu => '上下文菜单';
 
   @override
   String get darkMode => '深色模式';
 
   @override
   String get datePicker => '日期选择器';
+
+  @override
+  String get decoratedBox => '装饰盒子';
 
   @override
   String get dialog => '对话框';
@@ -65,6 +88,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get lightMode => '浅色模式';
 
   @override
+  String get listSection => '列表组';
+
+  @override
   String get listTile => '列表项';
 
   @override
@@ -74,6 +100,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get navigationRail => 'Navigation Rail';
 
   @override
+  String get opacity => '透明度';
+
+  @override
   String get popupMenuButton => '弹出菜单按钮';
 
   @override
@@ -81,6 +110,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get radio => '单选框';
+
+  @override
+  String get rotatedBox => '旋转盒子';
 
   @override
   String get showAll => '展示所有';
@@ -99,4 +131,7 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get theType => '类型';
+
+  @override
+  String get transform => '变形';
 }

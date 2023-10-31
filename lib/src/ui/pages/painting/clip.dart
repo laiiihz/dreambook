@@ -12,7 +12,7 @@ import 'package:dreambook/src/ui/pages/shared/tiles/menu_tile.dart';
 part 'clip.g.dart';
 
 final clipItem = CodeItem(
-  title: (context) => 'Clip',
+  title: (context) => context.tr.clip,
   code: const TheCode(),
   widget: const TheWidget(),
 );
