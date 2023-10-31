@@ -141,6 +141,12 @@ abstract class AppLocalizations {
   /// **'Badge'**
   String get badge;
 
+  /// No description provided for @basics.
+  ///
+  /// In en, this message translates to:
+  /// **'Basics'**
+  String get basics;
+
   /// No description provided for @bottomAppBar.
   ///
   /// In en, this message translates to:
@@ -309,6 +315,12 @@ abstract class AppLocalizations {
   /// **'Rotated Box'**
   String get rotatedBox;
 
+  /// No description provided for @settings.
+  ///
+  /// In en, this message translates to:
+  /// **'Settings'**
+  String get settings;
+
   /// No description provided for @showAll.
   ///
   /// In en, this message translates to:
@@ -338,6 +350,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Tab Bar'**
   String get tabBar;
+
+  /// No description provided for @text.
+  ///
+  /// In en, this message translates to:
+  /// **'Text'**
+  String get text;
 
   /// No description provided for @theType.
   ///

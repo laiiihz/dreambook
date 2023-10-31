@@ -6,6 +6,7 @@
   "appName": "Dreambook",
   "backdropFilter": "背景滤镜",
   "badge": "徽标数",
+  "basics": "基础",
   "bottomAppBar": "底部导航栏",
   "button": "按钮",
   "card": "卡片",
@@ -31,10 +32,12 @@
   "progressIndicator": "加载指示器",
   "radio": "单选框",
   "rotatedBox": "旋转盒子",
+  "settings": "设置",
   "showAll": "展示所有",
   "slider": "滑动输入条",
   "switchItem": "开关",
   "tabBar": "标签栏",
+  "text": "文本",
   "theType": "类型",
   "transform": "变形"
 }

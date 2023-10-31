@@ -227,12 +227,19 @@ class _WidgetListState extends State<WidgetList> {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
     return ListView.builder(
       itemBuilder: (context, index) {
         final item = widget.items.elementAt(index);
         return ListTile(
           title: Text(item.title(context)),
           selected: widget.index.value == index,
+          selectedTileColor: colorScheme.primaryContainer,
+          selectedColor: colorScheme.onPrimaryContainer,
+          shape: const ContinuousRectangleBorder(
+              borderRadius: BorderRadius.horizontal(
+            right: Radius.circular(16),
+          )),
           onTap: () => widget.onTap(index),
         );
       },

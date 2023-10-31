@@ -7,6 +7,7 @@
   "appName": "Dreambook",
   "backdropFilter": "Backdrop Filter",
   "badge": "Badge",
+  "basics": "Basics",
   "bottomAppBar": "Bottom App Bar",
   "bottomSheet": "Bottom Sheet",
   "button": "Button",
@@ -35,11 +36,13 @@
   "progressIndicator": "Progress Indicator",
   "radio": "Radio",
   "rotatedBox": "Rotated Box",
+  "settings": "Settings",
   "showAll": "Show All",
   "slider": "Slider",
   "snackBar": "Snack Bar",
   "switchItem": "Switch",
   "tabBar": "Tab Bar",
+  "text": "Text",
   "theType": "Type",
   "transform": "Transform"
 }

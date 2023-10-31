@@ -31,6 +31,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get badge => '徽标数';
 
   @override
+  String get basics => '基础';
+
+  @override
   String get bottomAppBar => '底部导航栏';
 
   @override
@@ -115,6 +118,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get rotatedBox => '旋转盒子';
 
   @override
+  String get settings => '设置';
+
+  @override
   String get showAll => '展示所有';
 
   @override
@@ -128,6 +134,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get tabBar => '标签栏';
+
+  @override
+  String get text => '文本';
 
   @override
   String get theType => '类型';

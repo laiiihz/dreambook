@@ -31,6 +31,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get badge => 'Badge';
 
   @override
+  String get basics => 'Basics';
+
+  @override
   String get bottomAppBar => 'Bottom App Bar';
 
   @override
@@ -115,6 +118,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get rotatedBox => 'Rotated Box';
 
   @override
+  String get settings => 'Settings';
+
+  @override
   String get showAll => 'Show All';
 
   @override
@@ -128,6 +134,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get tabBar => 'Tab Bar';
+
+  @override
+  String get text => 'Text';
 
   @override
   String get theType => 'Type';

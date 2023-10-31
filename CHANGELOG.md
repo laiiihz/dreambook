@@ -1,6 +1,11 @@
-## Unreleased
+## 1.0.6+7 - 2023-10-31
+### Added
+- add website footer
+- add text widget(WIP)
+
 ### Changed
 - update l10n
+- change homepage spacing
 
 ## 1.0.5+6 - 2023-10-30
 ### Added
