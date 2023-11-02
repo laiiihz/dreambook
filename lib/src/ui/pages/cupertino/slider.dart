@@ -53,6 +53,7 @@ class TheCode extends ConsumerWidget {
     final config = ref.watch(configProvider);
     return AutoCode(
       'CupertinoSlider',
+      apiUrl: '/flutter/cupertino/CupertinoSlider-class.html',
       fields: [
         Field((f) => f
           ..name = 'state'

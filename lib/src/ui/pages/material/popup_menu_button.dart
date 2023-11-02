@@ -47,6 +47,7 @@ class TheCode extends ConsumerWidget {
     final config = ref.watch(configProvider);
     return AutoCode(
       'PopupMenuButton<int>',
+      apiUrl: '/flutter/material/PopupMenuButton-class.html',
       fields: [
         Field((f) => f
           ..name = 'currentItem'

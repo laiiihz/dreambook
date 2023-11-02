@@ -54,7 +54,8 @@ class TheCode extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final config = ref.watch(configProvider);
     return AutoCode(
-      'ListSection',
+      'CupertinoListSection',
+      apiUrl: '/flutter/cupertino/CupertinoListSection-class.html',
       named: {
         'header': refer("const Text('Header')"),
         if (config.hasChildren)

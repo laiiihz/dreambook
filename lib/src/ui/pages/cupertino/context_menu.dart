@@ -20,6 +20,7 @@ class TheCode extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return AutoCode(
       'CupertinoContextMenu.builder',
+      apiUrl: '/flutter/cupertino/CupertinoContextMenu-class.html',
       named: {
         'actions': refer('''[
           CupertinoContextMenuAction(

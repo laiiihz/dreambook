@@ -6,10 +6,15 @@ class AboutButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final year = DateTime.now().year;
     return IconButton(
       tooltip: context.aboutLabel,
       onPressed: () {
-        showAboutDialog(context: context, applicationName: context.tr.appName);
+        showAboutDialog(
+          context: context,
+          applicationName: context.tr.appName,
+          applicationLegalese: context.tr.copyright(year),
+        );
       },
       icon: const Icon(Icons.info_outline_rounded),
     );

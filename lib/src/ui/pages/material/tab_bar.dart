@@ -53,6 +53,7 @@ class TheCode extends ConsumerWidget {
     final config = ref.watch(configProvider);
     return AutoCode(
       'DefaultTabController',
+      apiUrl: '/flutter/material/TabBar-class.html',
       named: {
         'length': refer('2'),
         'child': InvokeExpression.newOf(refer('TabBar'), [], {

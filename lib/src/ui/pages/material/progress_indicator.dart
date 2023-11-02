@@ -5,6 +5,7 @@ import 'package:dreambook/src/ui/pages/shared/code_space/code_space.dart';
 import 'package:dreambook/src/ui/pages/shared/shared_code_view.dart';
 import 'package:dreambook/src/ui/pages/shared/tiles/menu_tile.dart';
 import 'package:dreambook/src/ui/pages/shared/tiles/slidable_tile.dart';
+import 'package:dreambook/src/utils/extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -82,17 +83,23 @@ class TheCode extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final config = ref.watch(configProvider);
 
-    final strokeWidth = config.strokeWidth.toStringAsFixed(0);
-    final minHeight = config.minHeight.toStringAsFixed(0);
-    final borderRadius = config.borderRadius.toStringAsFixed(0);
+    final strokeWidth = config.strokeWidth.readableStr();
+    final minHeight = config.minHeight.readableStr();
+    final borderRadius = config.borderRadius.readableStr();
+    final progress = config.value.readableStr();
     return AutoCode(
       config.type.code,
+      apiUrl: switch (config.type) {
+        IndicatorType.circular =>
+          '/flutter/material/CircularProgressIndicator-class.html',
+        IndicatorType.linear =>
+          '/flutter/material/LinearProgressIndicator-class.html',
+      },
       named: {
-        if (!config.loading) 'value': refer(config.value.toStringAsFixed(2)),
+        if (!config.loading) 'value': refer(progress),
         ...switch (config.type) {
           IndicatorType.circular => {
-              if (strokeWidth != '4')
-                'strokeWidth': refer(config.strokeWidth.toStringAsFixed(0)),
+              if (strokeWidth != '4') 'strokeWidth': refer(strokeWidth),
               'strokeCap': refer('StrokeCap.${config.strokeCap.name}'),
             },
           IndicatorType.linear => {

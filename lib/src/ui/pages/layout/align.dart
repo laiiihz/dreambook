@@ -65,7 +65,8 @@ class TheCode extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final config = ref.watch(configProvider);
     return AutoCode(
-      'Alignment',
+      'Align',
+      apiUrl: '/flutter/widgets/Align-class.html',
       named: {
         'alignment': refer('Alignment.${config.alignment.name}'),
         'child': refer('FlutterLogo(size: 64)'),

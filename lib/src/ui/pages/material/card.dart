@@ -15,7 +15,10 @@ class TheCode extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return const AutoCode('Card');
+    return const AutoCode(
+      'Card',
+      apiUrl: '/flutter/material/Card-class.html',
+    );
   }
 }
 

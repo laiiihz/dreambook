@@ -1,3 +1,11 @@
+## 1.1.1+9 - 2023-11-02
+### Changed
+- new readable number extension
+- code add api urls
+
+### Fixed
+- fix flex widgets code error
+
 ## 1.1.0+8 - 2023-11-02
 ### Added
 - add column widget

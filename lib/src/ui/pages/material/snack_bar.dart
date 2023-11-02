@@ -58,6 +58,7 @@ class TheCode extends ConsumerWidget {
     final config = ref.watch(configProvider);
     return AutoCode(
       'FilledButton',
+      apiUrl: '/flutter/material/SnackBar-class.html',
       named: {
         'onPressed': Method((m) => m
           ..body = Block((b) => b.addExpression(

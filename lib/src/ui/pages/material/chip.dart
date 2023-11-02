@@ -26,6 +26,7 @@ enum ChipType {
 
   const ChipType(this.code);
   final String code;
+  String get apiUrl => '/flutter/material/$code-class.html';
 }
 
 class ChipConfig {
@@ -81,6 +82,7 @@ class TheCode extends ConsumerWidget {
     final config = ref.watch(configProvider);
     return AutoCode(
       config.type.code,
+      apiUrl: config.type.apiUrl,
       named: {
         'label': refer("const Text('${config.type.name}')"),
         if (config.showAvatar) 'avatar': refer('const CircleAvatar()'),

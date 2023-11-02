@@ -55,6 +55,7 @@ class TheCode extends ConsumerWidget {
     final config = ref.watch(configProvider);
     return AutoCode(
       'Checkbox',
+      apiUrl: '/flutter/material/Checkbox-class.html',
       prefix: [
         Field((f) => f
           ..name = 'state'

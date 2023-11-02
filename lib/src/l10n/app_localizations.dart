@@ -219,6 +219,12 @@ abstract class AppLocalizations {
   /// **'Context Menu'**
   String get contextMenu;
 
+  /// No description provided for @copyright.
+  ///
+  /// In en, this message translates to:
+  /// **'Copyright © {year} laihz.dev'**
+  String copyright(Object year);
+
   /// No description provided for @darkMode.
   ///
   /// In en, this message translates to:
@@ -266,6 +272,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Floating Action Button'**
   String get fab;
+
+  /// No description provided for @flex.
+  ///
+  /// In en, this message translates to:
+  /// **'Flex'**
+  String get flex;
 
   /// No description provided for @goGithub.
   ///
@@ -356,6 +368,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Radio'**
   String get radio;
+
+  /// No description provided for @releasedMIT.
+  ///
+  /// In en, this message translates to:
+  /// **'Released under the MIT License.'**
+  String get releasedMIT;
 
   /// No description provided for @rotatedBox.
   ///

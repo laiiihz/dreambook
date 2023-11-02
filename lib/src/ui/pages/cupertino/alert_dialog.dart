@@ -54,6 +54,7 @@ class TheCode extends ConsumerWidget {
     final config = ref.watch(configProvider);
     return AutoCode(
       'CupertinoAlertDialog',
+      apiUrl: '/flutter/cupertino/CupertinoAlertDialog-class.html',
       named: {
         'title': refer("const Text('Title')"),
         if (config.showContent) 'content': refer("const Text('Content')"),

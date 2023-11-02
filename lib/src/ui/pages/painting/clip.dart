@@ -66,6 +66,7 @@ class TheCode extends ConsumerWidget {
     final config = ref.watch(configProvider);
     return AutoCode(
       config.type.code,
+      apiUrl: '/flutter/widgets/${config.type.code}-class.html',
       named: {
         if (config.clipBehavior != Clip.antiAlias)
           'clipBehavior': refer(config.clipBehavior.name),

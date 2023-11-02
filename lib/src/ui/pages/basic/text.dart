@@ -83,6 +83,7 @@ class TheCode extends ConsumerWidget {
     final config = ref.watch(configProvider);
     return AutoCode(
       'Text',
+      apiUrl: '/flutter/widgets/Text-class.html',
       named: {
         'style': InvokeExpression.newOf(
           refer('TextStyle'),

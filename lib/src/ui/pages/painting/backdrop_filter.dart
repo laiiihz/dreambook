@@ -56,6 +56,7 @@ class TheCode extends ConsumerWidget {
     final config = ref.watch(configProvider);
     return AutoCode(
       'Stack',
+      apiUrl: '/flutter/widgets/BackdropFilter-class.html',
       named: {
         'children': literalList([
           InvokeExpression.constOf(

@@ -3,7 +3,7 @@
     "actionSheet",
     "bottomSheet",
     "chip",
-    "navigationRail",
-    "snackBar"
+    "flex",
+    "navigationRail"
   ]
 }

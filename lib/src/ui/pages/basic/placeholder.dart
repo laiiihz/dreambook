@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first, unused_local_variable
 import 'package:code_builder/code_builder.dart';
 import 'package:dreambook/src/ui/pages/shared/tiles/slidable_tile.dart';
+import 'package:dreambook/src/utils/extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -48,10 +49,12 @@ class TheCode extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final config = ref.watch(configProvider);
+    final width = config.width.readableStr();
     return AutoCode(
       'Placeholder',
+      apiUrl: '/flutter/widgets/Placeholder-class.html',
       named: {
-        'width': refer(config.width.toStringAsFixed(2)),
+        if (width != '2') 'width': refer(width),
       },
     );
   }

@@ -52,6 +52,7 @@ class TheCode extends ConsumerWidget {
     final config = ref.watch(configProvider);
     return AutoCode(
       'CupertinoSwitch',
+      apiUrl: '/flutter/cupertino/CupertinoSwitch-class.html',
       import: Imports.cupertino,
       fields: [
         Field(

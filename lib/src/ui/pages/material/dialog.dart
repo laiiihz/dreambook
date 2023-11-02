@@ -81,6 +81,10 @@ class TheCode extends ConsumerWidget {
     final config = ref.watch(configProvider);
     return AutoCode(
       config.type.code,
+      apiUrl: switch (config.type) {
+        DialogType.alert => '/flutter/material/AlertDialog-class.html',
+        DialogType.simple => '/flutter/material/SimpleDialog-class.html',
+      },
       prefix: [
         //  showDialog<T>(
         //   context: context,

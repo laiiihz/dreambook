@@ -40,7 +40,10 @@ class TheCode extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final config = ref.watch(configProvider);
-    return const AutoCode('Container');
+    return const AutoCode(
+      'Container',
+      apiUrl: '/flutter/widgets/Container-class.html',
+    );
   }
 }
 

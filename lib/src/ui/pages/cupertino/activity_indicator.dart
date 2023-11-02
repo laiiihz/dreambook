@@ -2,6 +2,7 @@
 import 'package:code_builder/code_builder.dart';
 import 'package:dreambook/src/l10n/l10n_helper.dart';
 import 'package:dreambook/src/ui/pages/shared/tiles/slidable_tile.dart';
+import 'package:dreambook/src/utils/extensions.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -61,17 +62,19 @@ class TheCode extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final config = ref.watch(configProvider);
+    final radius = config.radius.readableStr();
+    final progress = config.value.readableStr();
     return AutoCode(
       config.partiallyRevealed
           ? 'CupertinoActivityIndicator'
           : 'CupertinoActivityIndicator.partiallyRevealed',
+      apiUrl: '/flutter/cupertino/CupertinoActivityIndicator-class.html',
       named: {
-        if (config.radius != 10)
-          'radius': refer(config.radius.toStringAsFixed(2)),
+        if (radius != '10') 'radius': refer(radius),
         if (config.partiallyRevealed) ...{
-          'progress': refer(config.value.toStringAsFixed(2)),
+          if (progress != '1') 'progress': refer(progress),
         } else ...{
-          'animating': refer(config.animated.toString()),
+          'animating': literal(config.animated),
         }
       },
     );

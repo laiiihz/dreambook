@@ -70,6 +70,11 @@ class AppLocalizationsZh extends AppLocalizations {
   String get contextMenu => '上下文菜单';
 
   @override
+  String copyright(Object year) {
+    return 'Copyright © $year laihz.dev';
+  }
+
+  @override
   String get darkMode => '深色模式';
 
   @override
@@ -92,6 +97,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get fab => '悬浮按钮';
+
+  @override
+  String get flex => 'Flex';
 
   @override
   String get goGithub => '前往Github';
@@ -139,6 +147,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get radio => '单选框';
 
   @override
+  String get releasedMIT => '根据 MIT 许可证发布';
+
+  @override
   String get rotatedBox => '旋转盒子';
 
   @override
@@ -154,7 +165,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get slider => '滑动输入条';
 
   @override
-  String get snackBar => 'Snack Bar';
+  String get snackBar => '悬浮消息';
 
   @override
   String get switchItem => '开关';

@@ -53,6 +53,7 @@ class TheCode extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return AutoCode(
       'NavigationBar',
+      apiUrl: '/flutter/material/NavigationBar-class.html',
       fields: [
         Field((f) => f
           ..name = 'currentIndex'

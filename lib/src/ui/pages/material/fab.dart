@@ -141,6 +141,7 @@ class TheCode extends ConsumerWidget {
     final config = ref.watch(configProvider);
     return AutoCode(
       'Scaffold',
+      apiUrl: '/flutter/material/FloatingActionButton-class.html',
       named: {
         if (config.location != FabLocation.endFloat)
           'floatingActionButtonLocation':

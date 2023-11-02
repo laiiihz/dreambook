@@ -5,6 +5,7 @@ import 'package:dreambook/src/ui/pages/shared/code_space/code_space.dart';
 import 'package:dreambook/src/ui/pages/shared/shared_code_view.dart';
 import 'package:dreambook/src/ui/pages/shared/tiles/menu_tile.dart';
 import 'package:dreambook/src/ui/pages/shared/tiles/slidable_tile.dart';
+import 'package:dreambook/src/utils/extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -63,24 +64,29 @@ class TheCode extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final config = ref.watch(configProvider);
-    final sizeStr = config.size.toStringAsFixed(0);
+    final size = config.size.readableStr();
+    final thickness = config.thickness.readableStr();
+    final indent = config.indent.readableStr();
+    final endIndent = config.endIndent.readableStr();
+
     return AutoCode(
       switch (config.axis) {
         Axis.horizontal => 'Divider',
         Axis.vertical => 'VerticalDivider',
       },
+      apiUrl: switch (config.axis) {
+        Axis.horizontal => '/flutter/material/Divider-class.html',
+        Axis.vertical => '/flutter/material/VerticalDivider-class.html',
+      },
       named: {
-        if (sizeStr != '8')
+        if (size != '8')
           ...switch (config.axis) {
-            Axis.horizontal => {'height': refer(sizeStr)},
-            Axis.vertical => {'width': refer(sizeStr)},
+            Axis.horizontal => {'height': refer(size)},
+            Axis.vertical => {'width': refer(size)},
           },
-        if (config.thickness > 1)
-          'thickness': refer(config.thickness.toStringAsFixed(1)),
-        if (config.indent != 0)
-          'indent': refer(config.indent.toStringAsFixed(1)),
-        if (config.endIndent != 0)
-          'endIndent': refer(config.endIndent.toStringAsFixed(1)),
+        if (thickness != '1') 'thickness': refer(thickness),
+        if (indent != '0') 'indent': refer(indent),
+        if (endIndent != '0') 'endIndent': refer(endIndent),
       },
     );
   }

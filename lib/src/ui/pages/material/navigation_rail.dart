@@ -88,6 +88,7 @@ class TheCode extends ConsumerWidget {
     final config = ref.watch(configProvider);
     return AutoCode(
       'NavigationRail',
+      apiUrl: '/flutter/material/NavigationRail-class.html',
       prefix: [
         Field((f) => f
           ..name = 'currentIndex'

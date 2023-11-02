@@ -1,4 +1,5 @@
 import 'package:dreambook/src/l10n/app_localizations.dart';
+import 'package:dreambook/src/l10n/l10n_helper.dart';
 import 'package:dreambook/src/routes/routes.dart';
 import 'package:dreambook/src/ui/theme.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +11,7 @@ class App extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return MaterialApp.router(
+      onGenerateTitle: (context) => context.tr.appName,
       theme: appTheme(),
       darkTheme: appTheme(Brightness.dark),
       themeMode: ref.watch(themeModeDataProvider),

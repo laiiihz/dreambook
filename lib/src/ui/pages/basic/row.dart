@@ -62,6 +62,7 @@ class TheCode extends ConsumerWidget {
     final config = ref.watch(configProvider);
     return AutoCode(
       'Row',
+      apiUrl: '/flutter/widgets/Row-class.html',
       named: {
         if (config.mainAxisAlignment != MainAxisAlignment.start)
           'mainAxisAlignment':
@@ -74,6 +75,11 @@ class TheCode extends ConsumerWidget {
         if (config.verticalDirection != VerticalDirection.down)
           'verticalDirection':
               refer('VerticalDirection.${config.verticalDirection.name}'),
+        'children': refer('''[
+            Container(height: 32, width: 16, color: Colors.green),
+            Container(height: 64, width: 32, color: Colors.teal),
+            Container(height: 128, width: 48, color: Colors.amber),
+          ]'''),
       },
     );
   }

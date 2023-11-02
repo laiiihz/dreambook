@@ -50,6 +50,7 @@ class TheCode extends ConsumerWidget {
     final config = ref.watch(configProvider);
     return AutoCode(
       'RotatedBox',
+      apiUrl: '/flutter/widgets/RotatedBox-class.html',
       named: {
         'quarterTurns': refer(config.quarterTurns.toString()),
         'child': refer('const FlutterLogo(size: 128)'),

@@ -70,6 +70,11 @@ class AppLocalizationsEn extends AppLocalizations {
   String get contextMenu => 'Context Menu';
 
   @override
+  String copyright(Object year) {
+    return 'Copyright © $year laihz.dev';
+  }
+
+  @override
   String get darkMode => 'Dark Mode';
 
   @override
@@ -92,6 +97,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get fab => 'Floating Action Button';
+
+  @override
+  String get flex => 'Flex';
 
   @override
   String get goGithub => 'Go to Github';
@@ -137,6 +145,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get radio => 'Radio';
+
+  @override
+  String get releasedMIT => 'Released under the MIT License.';
 
   @override
   String get rotatedBox => 'Rotated Box';

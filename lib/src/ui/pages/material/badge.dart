@@ -4,6 +4,7 @@ import 'package:dreambook/src/l10n/l10n_helper.dart';
 import 'package:dreambook/src/ui/pages/shared/code_space/code_space.dart';
 import 'package:dreambook/src/ui/pages/shared/shared_code_view.dart';
 import 'package:dreambook/src/ui/pages/shared/tiles/slidable_tile.dart';
+import 'package:dreambook/src/utils/extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -58,15 +59,14 @@ class TheCode extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final config = ref.watch(configProvider);
-    final small = config.smallSize.toStringAsFixed(0);
-    final large = config.largeSize.toStringAsFixed(0);
+    final small = config.smallSize.readableStr(0);
+    final large = config.largeSize.readableStr(0);
     return AutoCode(
       'Badge',
+      apiUrl: '/flutter/material/Badge-class.html',
       named: {
-        if (small != '6')
-          'smallSize': refer(config.smallSize.toStringAsFixed(0)),
-        if (large != '16')
-          'largeSize': refer(config.largeSize.toStringAsFixed(0)),
+        if (small != '6') 'smallSize': refer(small),
+        if (large != '16') 'largeSize': refer(large),
         if (config.hasLabel) 'hasLabel': refer('const Text(\'99+\')'),
         if (!config.visible) 'isLabelVisible': refer('false'),
         'child': refer('const SomeWidget()'),

@@ -25,6 +25,8 @@ enum DatePickerType {
 
   const DatePickerType(this.code);
   final String code;
+
+  String get apiUrl => '/flutter/material/$code.html';
 }
 
 class DatePickerConfig {
@@ -73,6 +75,7 @@ class TheCode extends ConsumerWidget {
     final config = ref.watch(configProvider);
     return AutoCode(
       'FilledButton.icon',
+      apiUrl: config.type.apiUrl,
       fields: switch (config.type) {
         DatePickerType.date => [
             Field((f) => f

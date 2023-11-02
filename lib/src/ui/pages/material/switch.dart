@@ -46,6 +46,7 @@ class TheCode extends ConsumerWidget {
     final config = ref.watch(configProvider);
     return AutoCode(
       'Switch',
+      apiUrl: '/flutter/material/Switch-class.html',
       fields: [
         Field((f) => f
           ..name = 'state'

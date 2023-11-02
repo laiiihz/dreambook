@@ -69,7 +69,8 @@ class TheCode extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final config = ref.watch(tileConfigProvider);
     return AutoCode(
-      'ListTile',
+      'CupertinoListTile',
+      apiUrl: '/flutter/cupertino/CupertinoListTile-class.html',
       named: {
         'title': refer("const Text('title')"),
         if (config.hasSubtitle) 'subtitle': refer("const Text('subtitle')"),

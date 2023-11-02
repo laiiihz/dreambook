@@ -67,6 +67,7 @@ class TheCode extends ConsumerWidget {
     final config = ref.watch(configProvider);
     return AutoCode(
       'AppBar',
+      apiUrl: '/flutter/material/AppBar-class.html',
       named: {
         if (config.showTitle) 'showTitle': refer("const Text('Title')"),
         if (config.centerTitle) 'centerTitle': refer('true'),

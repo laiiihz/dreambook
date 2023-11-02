@@ -57,6 +57,7 @@ class TheCode extends ConsumerWidget {
     final config = ref.watch(configProvider);
     return AutoCode(
       'Slider',
+      apiUrl: '/flutter/material/Slider-class.html',
       fields: [
         Field((f) => f
           ..name = 'state'

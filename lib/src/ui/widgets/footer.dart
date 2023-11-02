@@ -1,3 +1,4 @@
+import 'package:dreambook/src/l10n/l10n_helper.dart';
 import 'package:flutter/material.dart';
 
 class Footer extends StatelessWidget {
@@ -13,14 +14,14 @@ class Footer extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Text(
-            'Released under the MIT License.',
+            context.tr.releasedMIT,
             style: TextStyle(
               fontSize: 12,
               color: colorScheme.onBackground.withOpacity(0.8),
             ),
           ),
           Text(
-            'Copyright © $year laihz.dev',
+            context.tr.copyright(year),
             style: TextStyle(
               fontSize: 12,
               color: colorScheme.onBackground.withOpacity(0.8),

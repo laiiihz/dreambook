@@ -64,6 +64,7 @@ class TheCode extends ConsumerWidget {
     final config = ref.watch(configProvider);
     return AutoCode(
       config.type.code,
+      apiUrl: '/flutter/cupertino/CupertinoButton-class.html',
       named: {
         'onPressed': config.canTap ? refer('() {}') : refer('null'),
         'child': refer("Text('${config.type.code}')"),

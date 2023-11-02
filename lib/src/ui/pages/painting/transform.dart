@@ -5,6 +5,7 @@ import 'package:code_builder/code_builder.dart';
 import 'package:dreambook/src/l10n/l10n_helper.dart';
 import 'package:dreambook/src/ui/pages/shared/tiles/menu_tile.dart';
 import 'package:dreambook/src/ui/pages/shared/tiles/slidable_tile.dart';
+import 'package:dreambook/src/utils/extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -86,8 +87,15 @@ class TheCode extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final config = ref.watch(configProvider);
+    final angle = config.angle.readableStr();
+    final scaleX = config.scaleX.readableStr();
+    final scaleY = config.scaleY.readableStr();
+    final offsetX = config.offsetX.readableStr();
+    final offsetY = config.offsetY.readableStr();
+
     return AutoCode(
       'Transform.${config.type.name}',
+      apiUrl: '/flutter/widgets/Transform-class.html',
       named: {
         ...switch (config.type) {
           TransformType.flip => {
@@ -95,15 +103,15 @@ class TheCode extends ConsumerWidget {
               'flipY': refer(config.flipY.toString()),
             },
           TransformType.rotate => {
-              'angle': refer(config.angle.toStringAsFixed(2)),
+              if (angle != '0') 'angle': refer(angle),
             },
           TransformType.scale => {
-              'scaleX': refer(config.scaleX.toStringAsFixed(2)),
-              'scaleY': refer(config.scaleY.toStringAsFixed(2)),
+              'scaleX': refer(scaleX),
+              'scaleY': refer(scaleY),
             },
           TransformType.translate => {
-              'offsetX': refer(config.offsetX.toStringAsFixed(2)),
-              'offsetY': refer(config.offsetY.toStringAsFixed(2)),
+              'offsetX': refer(offsetX),
+              'offsetY': refer(offsetY),
             },
         },
         'child': refer('const FlutterLogo(size: 128)'),

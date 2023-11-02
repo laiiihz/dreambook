@@ -28,7 +28,10 @@ class TheCode extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return const AutoCode('Drawer');
+    return const AutoCode(
+      'Drawer',
+      apiUrl: '/flutter/material/Drawer-class.html',
+    );
   }
 }
 

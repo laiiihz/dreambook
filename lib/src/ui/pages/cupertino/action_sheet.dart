@@ -57,7 +57,8 @@ class TheCode extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final config = ref.watch(configProvider);
     return AutoCode(
-      'ActionSheet',
+      'CupertinoActionSheet',
+      apiUrl: '/flutter/cupertino/CupertinoActionSheet-class.html',
       named: {
         'title': refer("const Text('title')"),
         if (config.showMessage) 'message': refer("const Text('a message')"),

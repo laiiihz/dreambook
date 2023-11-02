@@ -76,6 +76,7 @@ class TheCode extends ConsumerWidget {
     final config = ref.watch(tileConfigProvider);
     return AutoCode(
       'ListTile',
+      apiUrl: '/flutter/material/ListTile-class.html',
       named: {
         if (config.hasTitle) 'title': refer("const Text('title')"),
         if (config.hasSubtitle)

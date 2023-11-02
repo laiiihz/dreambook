@@ -4,6 +4,7 @@ import 'package:dreambook/src/l10n/l10n_helper.dart';
 import 'package:dreambook/src/ui/pages/shared/code_space/code_space.dart';
 import 'package:dreambook/src/ui/pages/shared/shared_code_view.dart';
 import 'package:dreambook/src/ui/pages/shared/tiles/slidable_tile.dart';
+import 'package:dreambook/src/utils/extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -54,6 +55,7 @@ class TheCode extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final config = ref.watch(configProvider);
+    final size = config.size.readableStr();
     return AutoCode(
       'Icon',
       apiUrl: 'flutter/widgets/Icon-class.html',
@@ -61,7 +63,7 @@ class TheCode extends ConsumerWidget {
         refer('Icons.favorite'),
       ],
       named: {
-        'size': refer(config.size.toStringAsFixed(2)),
+        if (size != '18') 'size': refer(size),
         if (config.hasShadow)
           'shadow': literalList(const [
             Code('''Shadow(

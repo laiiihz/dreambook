@@ -1,5 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first, unused_local_variable
+import 'package:code_builder/code_builder.dart';
 import 'package:dreambook/src/ui/pages/shared/tiles/slidable_tile.dart';
+import 'package:dreambook/src/utils/extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -47,7 +49,16 @@ class TheCode extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final config = ref.watch(configProvider);
-    return const AutoCode('');
+    final aspectRatio = config.aspectRatio.readableStr();
+    return AutoCode(
+      'AspectRatio',
+      apiUrl: '/flutter/widgets/AspectRatio-class.html',
+      named: {
+        if (aspectRatio != '1') 'aspectRatio': refer(aspectRatio),
+        'child': refer(
+            'Container(color: Theme.of(context).colorScheme.primaryContainer)'),
+      },
+    );
   }
 }
 

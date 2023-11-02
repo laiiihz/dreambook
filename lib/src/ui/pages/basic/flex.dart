@@ -9,38 +9,42 @@ import 'package:dreambook/src/ui/pages/shared/code_space/code_space.dart';
 import 'package:dreambook/src/ui/pages/shared/shared_code_view.dart';
 import 'package:dreambook/src/ui/pages/shared/tiles/menu_tile.dart';
 
-part 'column.g.dart';
+part 'flex.g.dart';
 
-final columnItem = CodeItem(
-  title: (context) => context.tr.column,
+final flexItem = CodeItem(
+  title: (context) => context.tr.flex,
   code: const TheCode(),
   widget: const TheWidget(),
 );
 
-class ColumnConfig {
-  ColumnConfig({
+class FlexConfig {
+  FlexConfig({
     this.mainAxisAlignment = MainAxisAlignment.start,
     this.mainAxisSize = MainAxisSize.max,
     this.crossAxisAlignment = CrossAxisAlignment.center,
     this.verticalDirection = VerticalDirection.down,
+    this.direction = Axis.horizontal,
   });
 
   final MainAxisAlignment mainAxisAlignment;
   final MainAxisSize mainAxisSize;
   final CrossAxisAlignment crossAxisAlignment;
   final VerticalDirection verticalDirection;
+  final Axis direction;
 
-  ColumnConfig copyWith({
+  FlexConfig copyWith({
     MainAxisAlignment? mainAxisAlignment,
     MainAxisSize? mainAxisSize,
     CrossAxisAlignment? crossAxisAlignment,
     VerticalDirection? verticalDirection,
+    Axis? direction,
   }) {
-    return ColumnConfig(
+    return FlexConfig(
       mainAxisAlignment: mainAxisAlignment ?? this.mainAxisAlignment,
       mainAxisSize: mainAxisSize ?? this.mainAxisSize,
       crossAxisAlignment: crossAxisAlignment ?? this.crossAxisAlignment,
       verticalDirection: verticalDirection ?? this.verticalDirection,
+      direction: direction ?? this.direction,
     );
   }
 }
@@ -48,8 +52,8 @@ class ColumnConfig {
 @riverpod
 class Config extends _$Config {
   @override
-  ColumnConfig build() => ColumnConfig();
-  void change(ColumnConfig config) {
+  FlexConfig build() => FlexConfig();
+  void change(FlexConfig config) {
     state = config;
   }
 }
@@ -61,9 +65,10 @@ class TheCode extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final config = ref.watch(configProvider);
     return AutoCode(
-      'Column',
-      apiUrl: '/flutter/widgets/Column-class.html',
+      'Flex',
+      apiUrl: '/flutter/widgets/Flex-class.html',
       named: {
+        'direction': refer('Axis.${config.direction.name}'),
         if (config.mainAxisAlignment != MainAxisAlignment.start)
           'mainAxisAlignment':
               refer('MainAxisAlignment.${config.mainAxisAlignment.name}'),
@@ -76,9 +81,9 @@ class TheCode extends ConsumerWidget {
           'verticalDirection':
               refer('VerticalDirection.${config.verticalDirection.name}'),
         'children': refer('''[
-            Container(width: 32, height: 16, color: Colors.green),
-            Container(width: 64, height: 32, color: Colors.teal),
-            Container(width: 128, height: 48, color: Colors.amber),
+            Container(width: 16, height: 16, color: Colors.green),
+            Container(width: 32, height: 32, color: Colors.teal),
+            Container(width: 64, height: 64, color: Colors.amber),
           ]'''),
       },
     );
@@ -98,19 +103,31 @@ class TheWidget extends ConsumerWidget {
           borderRadius: BorderRadius.circular(16),
           border: Border.all(color: Theme.of(context).colorScheme.outline),
         ),
-        child: Column(
+        child: Flex(
           mainAxisAlignment: config.mainAxisAlignment,
           mainAxisSize: config.mainAxisSize,
           crossAxisAlignment: config.crossAxisAlignment,
           verticalDirection: config.verticalDirection,
+          direction: config.direction,
           children: [
-            Container(width: 32, height: 16, color: Colors.green),
-            Container(width: 64, height: 32, color: Colors.teal),
-            Container(width: 128, height: 48, color: Colors.amber),
+            Container(width: 16, height: 16, color: Colors.green),
+            Container(width: 32, height: 32, color: Colors.teal),
+            Container(width: 64, height: 64, color: Colors.amber),
           ],
         ),
       ),
       configs: [
+        MenuTile(
+          title: 'Direction',
+          items: Axis.values,
+          current: config.direction,
+          onTap: (t) {
+            ref
+                .read(configProvider.notifier)
+                .change(config.copyWith(direction: t));
+          },
+          contentBuilder: (t) => t.name,
+        ),
         MenuTile(
           title: 'Main Axis Alignment',
           items: MainAxisAlignment.values,

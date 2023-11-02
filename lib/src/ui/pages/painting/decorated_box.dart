@@ -85,6 +85,7 @@ class TheCode extends ConsumerWidget {
     final config = ref.watch(configProvider);
     return AutoCode(
       'DecoratedBox',
+      apiUrl: '/flutter/widgets/DecoratedBox-class.html',
       named: {
         'decoration': InvokeExpression.newOf(
           refer('BoxDecoration'),
