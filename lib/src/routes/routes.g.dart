@@ -35,6 +35,11 @@ RouteBase get $rootRoute => GoRouteData.$route(
           factory: $BasicRouteExtension._fromState,
         ),
         GoRouteData.$route(
+          path: 'layout',
+          name: 'layout',
+          factory: $LayoutRouteExtension._fromState,
+        ),
+        GoRouteData.$route(
           path: 'settings',
           name: 'settings',
           factory: $SettingsRouteExtension._fromState,
@@ -115,6 +120,23 @@ extension $BasicRouteExtension on BasicRoute {
 
   String get location => GoRouteData.$location(
         '/basic',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+extension $LayoutRouteExtension on LayoutRoute {
+  static LayoutRoute _fromState(GoRouterState state) => LayoutRoute();
+
+  String get location => GoRouteData.$location(
+        '/layout',
       );
 
   void go(BuildContext context) => context.go(location);

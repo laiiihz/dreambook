@@ -178,7 +178,7 @@ packages:
     source: hosted
     version: "4.7.0"
   collection:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: collection
       sha256: f092b211a4319e98e5ff58223576de6c2803db36221657b46c82574721240687
@@ -373,6 +373,14 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "2.3.1"
+  grinder:
+    dependency: "direct dev"
+    description:
+      name: grinder
+      sha256: "48495acdb3df702c55c952c6536faf11631b8401a292eb0d182ef332fc568b56"
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.9.4"
   http_multi_server:
     dependency: transitive
     description:
@@ -557,6 +565,14 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "1.2.3"
+  recase:
+    dependency: "direct main"
+    description:
+      name: recase
+      sha256: e4eb4ec2dcdee52dcf99cb4ceabaffc631d7424ee55e56f280bc039737f89213
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "4.1.0"
   riverpod:
     dependency: transitive
     description:

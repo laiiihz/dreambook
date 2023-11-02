@@ -20,11 +20,12 @@ class MenuTile<T> extends StatelessWidget {
     return ListTile(
       title: Text(title),
       trailing: Builder(builder: (context) {
-        return ActionChip(
-          label: Text(contentBuilder(current)),
-          onPressed: () {
+        return FilterChip.elevated(
+          backgroundColor: Theme.of(context).colorScheme.secondaryContainer,
+          onSelected: (state) {
             showPopMenu(context);
           },
+          label: Text(contentBuilder(current)),
         );
       }),
     );

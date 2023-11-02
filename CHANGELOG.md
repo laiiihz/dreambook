@@ -1,3 +1,15 @@
+## 1.1.0+8 - 2023-11-02
+### Added
+- add column widget
+- add row widget
+- add placeholder widget
+- add padding widget
+- add material icons view
+- add icon widget
+- add layout widget
+- add align widget
+- add aspect ratio widget
+
 ## 1.0.6+7 - 2023-10-31
 ### Added
 - add website footer

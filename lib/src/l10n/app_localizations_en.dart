@@ -16,6 +16,9 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
+  String get alignment => 'Alignment';
+
+  @override
   String get apiReference => 'API Reference';
 
   @override
@@ -23,6 +26,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get appName => 'Dreambook';
+
+  @override
+  String get aspectRatio => 'Aspect Ratio';
 
   @override
   String get backdropFilter => 'Backdrop Filter';
@@ -53,6 +59,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get clip => 'Clip';
+
+  @override
+  String get column => 'Column';
 
   @override
   String get container => 'Container';
@@ -88,6 +97,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get goGithub => 'Go to Github';
 
   @override
+  String get icons => 'Icons';
+
+  @override
+  String get layout => 'Layout';
+
+  @override
   String get lightMode => 'Light Mode';
 
   @override
@@ -106,6 +121,15 @@ class AppLocalizationsEn extends AppLocalizations {
   String get opacity => 'Opacity';
 
   @override
+  String get padding => 'Padding';
+
+  @override
+  String get paintingEffects => 'Painting and effects';
+
+  @override
+  String get placeholder => 'Placeholder';
+
+  @override
   String get popupMenuButton => 'Popup Menu Button';
 
   @override
@@ -116,6 +140,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get rotatedBox => 'Rotated Box';
+
+  @override
+  String get row => 'Row';
 
   @override
   String get settings => 'Settings';

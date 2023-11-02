@@ -143,7 +143,7 @@ class _SharedCodeViewState extends State<SharedCodeView> {
 class AdaptiveSplitCodeView extends StatefulWidget {
   const AdaptiveSplitCodeView(
       {super.key, required this.code, required this.widget});
-  final Widget code;
+  final Widget? code;
   final Widget widget;
 
   @override
@@ -154,6 +154,7 @@ class _AdaptiveSplitCodeViewState extends State<AdaptiveSplitCodeView> {
   bool showCode = false;
   @override
   Widget build(BuildContext context) {
+    if (widget.code == null) return widget.widget;
     final windowType = getBreakpointEntry(context).adaptiveWindowType;
     final bool isSmall = windowType < AdaptiveWindowType.small;
     return isSmall
@@ -191,7 +192,7 @@ class _AdaptiveSplitCodeViewState extends State<AdaptiveSplitCodeView> {
             initialFractions: const [0.4, 0.6],
             children: [
               widget.widget,
-              widget.code,
+              widget.code!,
             ],
           );
   }
@@ -250,12 +251,12 @@ class _WidgetListState extends State<WidgetList> {
 
 class CodeItem {
   final String Function(BuildContext context) title;
-  final Widget code;
+  final Widget? code;
   final Widget widget;
 
   CodeItem({
     required this.title,
-    required this.code,
+    this.code,
     required this.widget,
   });
 }

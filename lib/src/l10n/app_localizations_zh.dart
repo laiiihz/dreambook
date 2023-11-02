@@ -16,6 +16,9 @@ class AppLocalizationsZh extends AppLocalizations {
   }
 
   @override
+  String get alignment => '对齐';
+
+  @override
   String get apiReference => 'API参考';
 
   @override
@@ -23,6 +26,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get appName => 'Dreambook';
+
+  @override
+  String get aspectRatio => '宽高比';
 
   @override
   String get backdropFilter => '背景滤镜';
@@ -53,6 +59,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get clip => '裁剪';
+
+  @override
+  String get column => '垂直布局';
 
   @override
   String get container => '容器';
@@ -88,6 +97,12 @@ class AppLocalizationsZh extends AppLocalizations {
   String get goGithub => '前往Github';
 
   @override
+  String get icons => '图标';
+
+  @override
+  String get layout => '布局';
+
+  @override
   String get lightMode => '浅色模式';
 
   @override
@@ -106,6 +121,15 @@ class AppLocalizationsZh extends AppLocalizations {
   String get opacity => '透明度';
 
   @override
+  String get padding => '间距';
+
+  @override
+  String get paintingEffects => '绘画和效果';
+
+  @override
+  String get placeholder => '占位符';
+
+  @override
   String get popupMenuButton => '弹出菜单按钮';
 
   @override
@@ -116,6 +140,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get rotatedBox => '旋转盒子';
+
+  @override
+  String get row => '水平布局';
 
   @override
   String get settings => '设置';

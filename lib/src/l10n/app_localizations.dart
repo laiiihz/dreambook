@@ -111,6 +111,12 @@ abstract class AppLocalizations {
   /// **'Alert {extra}'**
   String alertWith(Object extra);
 
+  /// No description provided for @alignment.
+  ///
+  /// In en, this message translates to:
+  /// **'Alignment'**
+  String get alignment;
+
   /// No description provided for @apiReference.
   ///
   /// In en, this message translates to:
@@ -128,6 +134,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Dreambook'**
   String get appName;
+
+  /// No description provided for @aspectRatio.
+  ///
+  /// In en, this message translates to:
+  /// **'Aspect Ratio'**
+  String get aspectRatio;
 
   /// No description provided for @backdropFilter.
   ///
@@ -188,6 +200,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Clip'**
   String get clip;
+
+  /// No description provided for @column.
+  ///
+  /// In en, this message translates to:
+  /// **'Column'**
+  String get column;
 
   /// No description provided for @container.
   ///
@@ -255,6 +273,18 @@ abstract class AppLocalizations {
   /// **'Go to Github'**
   String get goGithub;
 
+  /// No description provided for @icons.
+  ///
+  /// In en, this message translates to:
+  /// **'Icons'**
+  String get icons;
+
+  /// No description provided for @layout.
+  ///
+  /// In en, this message translates to:
+  /// **'Layout'**
+  String get layout;
+
   /// No description provided for @lightMode.
   ///
   /// In en, this message translates to:
@@ -291,6 +321,24 @@ abstract class AppLocalizations {
   /// **'Opacity'**
   String get opacity;
 
+  /// No description provided for @padding.
+  ///
+  /// In en, this message translates to:
+  /// **'Padding'**
+  String get padding;
+
+  /// No description provided for @paintingEffects.
+  ///
+  /// In en, this message translates to:
+  /// **'Painting and effects'**
+  String get paintingEffects;
+
+  /// No description provided for @placeholder.
+  ///
+  /// In en, this message translates to:
+  /// **'Placeholder'**
+  String get placeholder;
+
   /// No description provided for @popupMenuButton.
   ///
   /// In en, this message translates to:
@@ -314,6 +362,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Rotated Box'**
   String get rotatedBox;
+
+  /// No description provided for @row.
+  ///
+  /// In en, this message translates to:
+  /// **'Row'**
+  String get row;
 
   /// No description provided for @settings.
   ///

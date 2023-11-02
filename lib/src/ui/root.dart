@@ -65,7 +65,7 @@ class RootPage extends StatelessWidget {
                   PaintingRoute().go(context);
                 },
                 icon: const Icon(Icons.format_paint),
-                label: const Text('Painting'),
+                label: Text(context.tr.paintingEffects),
               ),
               const SizedBox(height: 16),
               FilledButton.icon(
@@ -77,6 +77,17 @@ class RootPage extends StatelessWidget {
                 },
                 icon: const Icon(Icons.widgets),
                 label: Text(context.tr.basics),
+              ),
+              const SizedBox(height: 16),
+              FilledButton.icon(
+                style: FilledButton.styleFrom(
+                  minimumSize: const Size.fromHeight(56),
+                ),
+                onPressed: () {
+                  LayoutRoute().go(context);
+                },
+                icon: const Icon(Icons.layers_outlined),
+                label: Text(context.tr.layout),
               ),
             ]),
           ),

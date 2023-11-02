@@ -19,6 +19,7 @@ GoRouter appRoutes(AppRoutesRef ref) {
     TypedGoRoute<CupertinoRoute>(path: 'cupertino', name: 'cupertino'),
     TypedGoRoute<PaintingRoute>(path: 'painting', name: 'painting'),
     TypedGoRoute<BasicRoute>(path: 'basic', name: 'basic'),
+    TypedGoRoute<LayoutRoute>(path: 'layout', name: 'layout'),
     TypedGoRoute<SettingsRoute>(path: 'settings', name: 'settings'),
   ],
 )

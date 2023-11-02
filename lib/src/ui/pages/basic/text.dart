@@ -1,4 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first, unused_local_variable
+import 'package:code_builder/code_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -80,7 +81,21 @@ class TheCode extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final config = ref.watch(configProvider);
-    return const AutoCode('Text');
+    return AutoCode(
+      'Text',
+      named: {
+        'style': InvokeExpression.newOf(
+          refer('TextStyle'),
+          [],
+          {
+            'fontSize': literal(config.fontSize),
+            if (config.changeColor) 'color': refer('Colors.teal'),
+            if (config.fontWeight != FontWeight.normal)
+              'fontWeight': refer('FontWeight.w${config.fontWeight.value}'),
+          },
+        ),
+      },
+    );
   }
 }
 
@@ -90,6 +105,10 @@ class TheWidget extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final config = ref.watch(configProvider);
+    Paint? foreground, background;
+    if (!config.changeColor) {
+      foreground = config.hasForeground ? (Paint()..color = Colors.red) : null;
+    }
     return WidgetWithConfiguration(
       content: Text(
         'A Message from Astral Express',
@@ -101,8 +120,7 @@ class TheWidget extends ConsumerWidget {
           letterSpacing: config.letterSpacing,
           wordSpacing: config.wordSpacing,
           height: config.height,
-          foreground:
-              config.hasForeground ? (Paint()..color = Colors.red) : null,
+          foreground: foreground,
           background:
               config.hasBackground ? (Paint()..color = Colors.green) : null,
         ),
