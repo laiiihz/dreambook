@@ -155,7 +155,7 @@ class TheWidget extends ConsumerWidget {
         ),
         if (!config.loading)
           SlidableTile(
-            title: 'Value',
+            title: context.tr.value,
             value: config.value,
             onChanged: (t) {
               ref

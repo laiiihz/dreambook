@@ -1,3 +1,11 @@
+## Unreleased
+### Added
+- add resource page
+- add license page
+
+### Removed
+- move l10n generated back to .dart\_tool
+
 ## 1.1.1+9 - 2023-11-02
 ### Changed
 - new readable number extension

@@ -1,4 +1,5 @@
 import 'package:dreambook/src/ui/pages/shared/code_routes.dart';
+import 'package:dreambook/src/ui/pages/shared/settings/project_license_page.dart';
 import 'package:dreambook/src/ui/pages/shared/settings_page.dart';
 import 'package:dreambook/src/ui/root.dart';
 import 'package:flutter/material.dart';
@@ -20,7 +21,9 @@ GoRouter appRoutes(AppRoutesRef ref) {
     TypedGoRoute<PaintingRoute>(path: 'painting', name: 'painting'),
     TypedGoRoute<BasicRoute>(path: 'basic', name: 'basic'),
     TypedGoRoute<LayoutRoute>(path: 'layout', name: 'layout'),
-    TypedGoRoute<SettingsRoute>(path: 'settings', name: 'settings'),
+    TypedGoRoute<SettingsRoute>(path: 'settings', name: 'settings', routes: [
+      TypedGoRoute<ProjectLicenseRoute>(path: 'LICENSE', name: 'license'),
+    ]),
   ],
 )
 class RootRoute extends GoRouteData {

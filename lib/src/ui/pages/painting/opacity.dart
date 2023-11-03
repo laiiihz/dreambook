@@ -73,7 +73,7 @@ class TheWidget extends ConsumerWidget {
       ),
       configs: [
         SlidableTile(
-          title: 'Value',
+          title: context.tr.value,
           value: config.value,
           onChanged: (t) {
             ref.read(configProvider.notifier).change(config.copyWith(value: t));

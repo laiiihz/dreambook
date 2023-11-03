@@ -120,7 +120,7 @@ class TheWidget extends ConsumerWidget {
         ),
         if (config.partiallyRevealed)
           SlidableTile(
-            title: 'value',
+            title: context.tr.value,
             value: config.value,
             onChanged: (t) {
               ref

@@ -7,10 +7,15 @@ import 'package:dreambook/src/ui/widgets/theme_mode_button.dart';
 import 'package:flutter/material.dart';
 
 class NamedCodeScaffold extends StatefulWidget {
-  const NamedCodeScaffold(
-      {super.key, required this.title, required this.items});
+  const NamedCodeScaffold({
+    super.key,
+    required this.title,
+    required this.items,
+    this.actions = const [],
+  });
   final String title;
   final List<CodeItem> items;
+  final List<Widget> actions;
 
   @override
   State<NamedCodeScaffold> createState() => NamedCodeScaffoldState();
@@ -51,6 +56,7 @@ class NamedCodeScaffoldState extends State<NamedCodeScaffold> {
         centerTitle: false,
         title: Text(widget.title),
         actions: [
+          ...widget.actions,
           const GithubButton(),
           const AboutButton(),
           const ThemeModeButton(),
@@ -287,8 +293,6 @@ class WidgetWithConfiguration extends StatelessWidget {
               decoration: BoxDecoration(
                 image: DecorationImage(
                   fit: BoxFit.cover,
-                  // https://unsplash.com/photos/ocean-view-during-daytime-XJfHMPJ0e-g?utm_content=creditShareLink&utm_medium=referral&utm_source=unsplash
-                  // https://unsplash.com/photos/blue-starry-night-sky-NORa8-4ohA0?utm_content=creditShareLink&utm_medium=referral&utm_source=unsplash
                   image: isDark
                       ? const AssetImage('assets/images/night.webp')
                       : const AssetImage('assets/images/seascape.webp'),

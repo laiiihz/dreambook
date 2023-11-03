@@ -8,3 +8,10 @@ Flutter Widgets Book with dreams.
 - [x] Material Widgets
 - [ ] Cupertino Widgets
 - [x] Painting Widgets
+
+## Getting Started
+
+```shell
+# install grinder
+dart pub global activate grinder
+```
