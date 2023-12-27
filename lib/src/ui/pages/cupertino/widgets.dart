@@ -8,6 +8,7 @@ import 'context_menu.dart';
 import 'date_picker.dart';
 import 'list_section.dart';
 import 'list_tile.dart';
+import 'segement_control.dart';
 import 'slider.dart';
 import 'switch.dart';
 
@@ -22,4 +23,5 @@ final cupertinoItems = <CodeItem>[
   sliderItem,
   listTileItem,
   listSectionItem,
+  segmentedControlItem,
 ];
