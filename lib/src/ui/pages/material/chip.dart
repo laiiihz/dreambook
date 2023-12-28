@@ -89,7 +89,7 @@ class TheCode extends ConsumerWidget {
         if (config.showDelete) 'onDeleted': refer('() {}'),
         if (config.enabled)
           ...switch (config.type) {
-            ChipType.input => {'isEnabled': refer('true')},
+            ChipType.input => {'isEnabled': literalTrue},
             ChipType.action => {'onPressed': refer('() {}')},
             _ => {},
           },

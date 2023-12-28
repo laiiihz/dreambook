@@ -1,0 +1,60 @@
+{
+	// Place your dreambook 工作区 snippets here. Each snippet is defined under a snippet name and has a scope, prefix, body and 
+	// description. Add comma separated ids of the languages where the snippet is applicable in the scope field. If scope 
+	// is left empty or omitted, the snippet gets applied to all languages. The prefix is what is 
+	// used to trigger the snippet and the body will be expanded and inserted. Possible variables are: 
+	// $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders. 
+	// Placeholders with the same ids are connected.
+	// Example:
+	"dreambookexample": {
+		"scope": "dart",
+		"prefix": "dreambook",
+		"body": [
+			"import 'package:dreambook/src/ui/pages/shared/code_space/code_space.dart';",
+			"import 'package:dreambook/src/ui/pages/shared/shared_code_view.dart';",
+			"import 'package:flutter/material.dart';",
+			"import 'package:flutter_riverpod/flutter_riverpod.dart';",
+			"import 'package:riverpod_annotation/riverpod_annotation.dart';",
+			"",
+			"part '${TM_FILENAME_BASE}.g.dart';",
+			"",
+			"final ${TM_FILENAME_BASE/(.*)/${1:/camelcase}/}Item = CodeItem(",
+			"  title: (context) => '${0}',",
+			"  code: const TheCode(),",
+			"  widget: const TheWidget(),",
+			"  );",
+			"",
+			"class ${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/}Config {",
+			"  ${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/}Config();",
+			"}",
+			"@riverpod",
+			"class Config extends _\\$Config {",
+			"  @override",
+			"  ${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/}Config build() => ${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/}Config();",
+			"  void change(${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/}Config config) {",
+			"    state = config;",
+			"  }",
+			"}",
+			"class TheCode extends ConsumerWidget {",
+			"  const TheCode({super.key});",
+			"  @override",
+			"  Widget build(BuildContext context, WidgetRef ref) {",
+			"    final config = ref.watch(configProvider);",
+			"    return const AutoCode('');",
+			"  }",
+			"}",
+			"class TheWidget extends ConsumerWidget {",
+			"  const TheWidget({super.key});",
+			"  @override",
+			"  Widget build(BuildContext context, WidgetRef ref) {",
+			"    final config = ref.watch(configProvider);",
+			"    return const WidgetWithConfiguration(",
+			"      content: SizedBox(),",
+			"      configs: [],",
+			"    );",
+			"  }",
+			"}",
+		],
+		"description": "Log output to console"
+	}
+}

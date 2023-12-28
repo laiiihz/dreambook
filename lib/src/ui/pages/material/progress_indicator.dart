@@ -145,7 +145,7 @@ class TheWidget extends ConsumerWidget {
           contentBuilder: (t) => t.name,
         ),
         SwitchListTile(
-          title: const Text('loading'),
+          title: Text(context.tr.loading),
           value: config.loading,
           onChanged: (t) {
             ref
@@ -165,7 +165,7 @@ class TheWidget extends ConsumerWidget {
           ),
         if (isLinear)
           SlidableTile(
-            title: 'minHeight',
+            title: context.tr.minHeight,
             value: config.minHeight,
             min: 1,
             max: 24,
@@ -177,7 +177,7 @@ class TheWidget extends ConsumerWidget {
           ),
         if (isLinear)
           SlidableTile(
-            title: 'border radius',
+            title: context.tr.borderRadius,
             value: config.borderRadius,
             min: 0,
             max: 24,
@@ -189,7 +189,7 @@ class TheWidget extends ConsumerWidget {
           ),
         if (isCircular)
           SlidableTile(
-            title: 'stroke width',
+            title: context.tr.strokeWidth,
             value: config.strokeWidth,
             min: 0,
             max: 12,
@@ -201,15 +201,16 @@ class TheWidget extends ConsumerWidget {
           ),
         if (isCircular)
           MenuTile(
-              title: 'stroke cap',
-              items: StrokeCap.values,
-              current: config.strokeCap,
-              onTap: (t) {
-                ref
-                    .read(configProvider.notifier)
-                    .change(config.copyWith(strokeCap: t));
-              },
-              contentBuilder: (t) => t.name),
+            title: context.tr.strokeCap,
+            items: StrokeCap.values,
+            current: config.strokeCap,
+            onTap: (t) {
+              ref
+                  .read(configProvider.notifier)
+                  .change(config.copyWith(strokeCap: t));
+            },
+            contentBuilder: (t) => t.name,
+          ),
       ],
     );
   }

@@ -64,7 +64,7 @@ class TheCode extends ConsumerWidget {
       ],
       named: {
         'value': refer('state'),
-        if (config.tristate) 'tristate': refer('true'),
+        if (config.tristate) 'tristate': literalTrue,
         'onChanged': Method((m) => m
               ..requiredParameters.add(Parameter((p) => p
                 ..name = 'value'

@@ -84,7 +84,7 @@ class TheCode extends ConsumerWidget {
             'subtitle': refer("const Text('subtitle\\nthird line')")
           else
             'subtitle': refer("const Text('subtitle')"),
-        if (config.selected) 'selected': refer('true'),
+        if (config.selected) 'selected': literalTrue,
         if (!config.enabled) 'enabled': refer('false'),
         if (config.canTap) 'onTap': refer('() {}'),
         if (config.hasLeading) 'leading': refer('Icon(Icons.tag_faces)'),

@@ -13,6 +13,8 @@ class CodeWrapper {
     required this.fullContent,
     required this.middle,
     required this.custom,
+    required this.mixins,
+    required this.buildExpressions,
   });
 
   final Imports import;
@@ -25,6 +27,8 @@ class CodeWrapper {
   final bool fullContent;
   final List<Field> middle;
   final List<Spec> custom;
+  final List<Reference> mixins;
+  final List<Expression> buildExpressions;
 
   static final _formatter = DartFormatter();
   static final _emitter = DartEmitter();
@@ -62,12 +66,17 @@ class CodeWrapper {
               ..type = const Reference('BuildContext'),
           ),
         )
-        ..body = Block((b) => b.addExpression(InvokeExpression.newOf(
-              refer(name),
-              positionalArguments,
-              namedArguments,
-              typeArguments,
-            ).returned)),
+        ..body = Block((b) {
+          for (var exp in buildExpressions) {
+            b.addExpression(exp);
+          }
+          b.addExpression(InvokeExpression.newOf(
+            refer(name),
+            positionalArguments,
+            namedArguments,
+            typeArguments,
+          ).returned);
+        }),
     );
 
     List<Method> methods = [
@@ -107,6 +116,7 @@ class CodeWrapper {
         ..name = '_SomeWidgetState'
         ..extend = refer('State<SomeWidget>')
         ..methods.addAll(methods)
+        ..mixins.addAll(mixins)
         ..fields.addAll(middle));
       nextSpec = <Spec>[
         clazzA,

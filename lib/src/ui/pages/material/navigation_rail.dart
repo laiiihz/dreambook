@@ -77,7 +77,7 @@ class TheCode extends ConsumerWidget {
       {
         'icon': refer('const Icon(Icons.$icon)'),
         'selectedIcon': refer('const Icon(Icons.$selectedIcon)'),
-        if (disabled) 'disabled': refer('true'),
+        if (disabled) 'disabled': literalTrue,
         'label': refer('const Text(\'$label\')'),
       },
     );
@@ -99,7 +99,7 @@ class TheCode extends ConsumerWidget {
         if (config.labelType != NavigationRailLabelType.none)
           'labelType':
               refer('NavigationRailLabelType.${config.labelType.name}'),
-        if (config.extended) 'extended': refer('true'),
+        if (config.extended) 'extended': literalTrue,
         if (config.leading) 'leading': refer('const Icon(Icons.menu)'),
         if (config.trailing) 'trailing': refer('const Icon(Icons.settings)'),
         if (config.hideIndicator) 'useIndicator': refer('false'),

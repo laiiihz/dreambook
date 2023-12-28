@@ -57,7 +57,7 @@ class TheCode extends ConsumerWidget {
       named: {
         'length': refer('2'),
         'child': InvokeExpression.newOf(refer('TabBar'), [], {
-          if (config.isScrollable) 'isScrollable': refer('true'),
+          if (config.isScrollable) 'isScrollable': literalTrue,
           if (config.tabAlignment != TabAlignment.fill)
             'tabAlignment': refer(config.tabAlignment.name),
           'tabs': refer('const [Tab(text: "FOO"), Tab(text: "BAR"),]'),

@@ -1,7 +1,18 @@
-## Unreleased
+## 1.1.5+13 - 2023-12-28
 ### Added
 - add resource page
 - add license page
+- add flutter logo widget
+- add about widgets
+- add action button widgets
+- add animated icons widgets
+- add material banner widget
+- add circle avatar widget
+- add data table widget
+- add ink response
+
+### Fixed
+- \[web\]remove some BackdropMode on web platform that not supported
 
 ### Removed
 - move l10n generated back to .dart\_tool

@@ -66,7 +66,7 @@ class TheCode extends ConsumerWidget {
                 [],
                 {
                   'leading': InvokeExpression.newOf(refer('Radio<int>'), [], {
-                    if (config.toggleable) 'toggleable': refer('true'),
+                    if (config.toggleable) 'toggleable': literalTrue,
                     'value': refer('index'),
                     'groupValue': refer('value'),
                     'onChanged': Method((m) => m

@@ -18,6 +18,7 @@ ThemeData appTheme([Brightness brightness = Brightness.light]) {
       applyThemeToAll: true,
       textTheme: CupertinoTextThemeData(primaryColor: colorScheme.primary),
     ),
+    appBarTheme: const AppBarTheme(scrolledUnderElevation: 0),
     useMaterial3: true,
   );
 }

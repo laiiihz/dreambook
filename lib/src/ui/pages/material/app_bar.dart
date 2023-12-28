@@ -70,7 +70,7 @@ class TheCode extends ConsumerWidget {
       apiUrl: '/flutter/material/AppBar-class.html',
       named: {
         if (config.showTitle) 'showTitle': refer("const Text('Title')"),
-        if (config.centerTitle) 'centerTitle': refer('true'),
+        if (config.centerTitle) 'centerTitle': literalTrue,
         if (config.showLeading)
           'leading': refer('const Icon(Icons.arrow_back)'),
         if (config.showActions)

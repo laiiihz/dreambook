@@ -1,6 +1,6 @@
 # dreambook 🌌 ⤫ 💙
 
-[DEMO](https://blog.laihz.dev/dreambook)
+[Dreambook Website](https://blog.laihz.dev/dreambook)
 -----
 
 ![Dart](https://img.shields.io/badge/dart-02569B?logo=Dart)
@@ -23,7 +23,7 @@ Flutter Widgets Book with dreams.
 - [x] Painting Widgets
 - [ ] More Widgets
 
-### L10n
+### Translations
 
 - [x] English
 - [x] simplified-Chinese 

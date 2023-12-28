@@ -4,6 +4,7 @@ import 'dart:ui';
 import 'package:code_builder/code_builder.dart';
 import 'package:dreambook/src/l10n/l10n_helper.dart';
 import 'package:dreambook/src/ui/pages/shared/tiles/menu_tile.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -116,7 +117,8 @@ class TheWidget extends ConsumerWidget {
       configs: [
         MenuTile(
           title: 'Mode',
-          items: BackdropMode.values,
+          // web platform only support blur effect
+          items: kIsWeb ? [BackdropMode.blur] : BackdropMode.values,
           current: config.mode,
           onTap: (t) {
             ref.read(configProvider.notifier).change(config.copyWith(mode: t));

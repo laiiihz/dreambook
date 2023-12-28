@@ -1,17 +1,25 @@
 import 'package:dreambook/src/ui/pages/shared/shared_code_view.dart';
 
+import 'about.dart';
+import 'action_buttons.dart';
+import 'animated_icons.dart';
 import 'app_bar.dart';
 import 'badge.dart';
+import 'banner.dart';
 import 'bottom_app_bar.dart';
 import 'bottom_sheet.dart';
 import 'button.dart';
 import 'card.dart';
 import 'checkbox.dart';
 import 'chip.dart';
+import 'circle_avatar.dart';
+import 'data_table.dart';
 import 'date_picker.dart';
 import 'dialog.dart';
 import 'divider.dart';
 import 'fab.dart';
+import 'flutter_logo.dart';
+import 'ink_response.dart';
 import 'list_tile.dart';
 import 'navigation_bar.dart';
 import 'navigation_drawer.dart';
@@ -48,4 +56,12 @@ final materialCodeItems = <CodeItem>[
   popupMenuButtonItem,
   radioItem,
   sliderItem,
+  aboutItem,
+  actionButtonsItem,
+  animatedIconsItem,
+  bannerItem,
+  circleAvatarItem,
+  dataTableItem,
+  flutterLogoItem,
+  inkResponseItem,
 ];

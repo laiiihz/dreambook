@@ -70,7 +70,7 @@ class TheCode extends ConsumerWidget {
                       [],
                       {
                         'content': refer("const Text('content')"),
-                        if (config.showClose) 'showCloseIcon': refer('true'),
+                        if (config.showClose) 'showCloseIcon': literalTrue,
                         if (config.dismissDirection != DismissDirection.down)
                           'dismissDirection': refer(
                               'DismissDirection.${config.dismissDirection.name}'),

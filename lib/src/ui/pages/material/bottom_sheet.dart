@@ -54,7 +54,7 @@ class TheCode extends ConsumerWidget {
                 [],
                 {
                   'context': refer('context'),
-                  if (config.showDragHandle) 'showDragHandle': refer('true'),
+                  if (config.showDragHandle) 'showDragHandle': literalTrue,
                   'builder': Method((m) => m
                     ..requiredParameters
                         .add(Parameter((p) => p.name = 'context'))

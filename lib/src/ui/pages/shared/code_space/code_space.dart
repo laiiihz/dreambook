@@ -34,6 +34,8 @@ class AutoCode extends ConsumerWidget {
     this.dispose = const [],
     this.fields = const [],
     this.prefix = const [],
+    this.mixins = const [],
+    this.buildExpressions = const [],
     this.apiUrl,
   });
   final Imports import;
@@ -45,7 +47,9 @@ class AutoCode extends ConsumerWidget {
   final List<Reference> typed;
   final List<Field> fields;
   final List<Spec> prefix;
+  final List<Reference> mixins;
   final String? apiUrl;
+  final List<Expression> buildExpressions;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -60,6 +64,8 @@ class AutoCode extends ConsumerWidget {
         dispose: dispose,
         middle: fields,
         custom: prefix,
+        mixins: mixins,
+        buildExpressions: buildExpressions,
         fullContent: ref.watch(showFullContentProvider),
       ).toCode(),
       apiUrl: apiUrl,

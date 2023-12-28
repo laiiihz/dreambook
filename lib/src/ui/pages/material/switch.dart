@@ -1,11 +1,12 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:code_builder/code_builder.dart';
-import 'package:dreambook/src/l10n/l10n_helper.dart';
-import 'package:dreambook/src/ui/pages/shared/code_space/code_space.dart';
-import 'package:dreambook/src/ui/pages/shared/shared_code_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+
+import 'package:dreambook/src/l10n/l10n_helper.dart';
+import 'package:dreambook/src/ui/pages/shared/code_space/code_space.dart';
+import 'package:dreambook/src/ui/pages/shared/shared_code_view.dart';
 
 part 'switch.g.dart';
 
@@ -16,14 +17,20 @@ final switchItem = CodeItem(
 );
 
 class ListTileConfig {
-  ListTileConfig({this.enabled = true});
+  ListTileConfig({
+    this.enabled = true,
+    this.showThumbIcons = false,
+  });
   final bool enabled;
+  final bool showThumbIcons;
 
   ListTileConfig copyWith({
     bool? enabled,
+    bool? showThumbIcons,
   }) {
     return ListTileConfig(
       enabled: enabled ?? this.enabled,
+      showThumbIcons: showThumbIcons ?? this.showThumbIcons,
     );
   }
 }
@@ -55,6 +62,17 @@ class TheCode extends ConsumerWidget {
       ],
       named: {
         'value': refer('state'),
+        if (config.showThumbIcons)
+          'thumbIcon': refer('''MaterialStateProperty.resolveWith<Icon?>(
+                (Set<MaterialState> states) {
+                if (states.contains(MaterialState.disabled)) {
+                  return const Icon(Icons.close_rounded);
+                }
+                if (states.contains(MaterialState.selected)) {
+                  return const Icon(Icons.circle_outlined);
+                }
+                return null;
+              })'''),
         'onChanged': config.enabled
             ? Method((m) => m
               ..lambda = false
@@ -97,6 +115,18 @@ class TheWidget extends ConsumerWidget {
                 ref.read(switchStateProvider.notifier).change(value);
               }
             : null,
+        thumbIcon: config.showThumbIcons
+            ? MaterialStateProperty.resolveWith<Icon?>(
+                (Set<MaterialState> states) {
+                if (states.contains(MaterialState.disabled)) {
+                  return const Icon(Icons.close_rounded);
+                }
+                if (states.contains(MaterialState.selected)) {
+                  return const Icon(Icons.circle_outlined);
+                }
+                return null;
+              })
+            : null,
       ),
       configs: [
         SwitchListTile(
@@ -107,7 +137,16 @@ class TheWidget extends ConsumerWidget {
                 .watch(configProvider.notifier)
                 .change(config.copyWith(enabled: value));
           },
-        )
+        ),
+        SwitchListTile(
+          title: const Text('show thumb icon'),
+          value: config.showThumbIcons,
+          onChanged: (value) {
+            ref
+                .watch(configProvider.notifier)
+                .change(config.copyWith(showThumbIcons: value));
+          },
+        ),
       ],
     );
   }
