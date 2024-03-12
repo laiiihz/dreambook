@@ -30,70 +30,86 @@ class RootPage extends StatelessWidget {
           ),
           SliverPadding(
             padding: const EdgeInsets.all(16),
-            sliver: SliverList.list(children: [
-              FilledButton.icon(
-                style: FilledButton.styleFrom(
-                  minimumSize: const Size.fromHeight(56),
-                ),
-                onPressed: () {
-                  MaterialRoute().go(context);
-                },
-                icon: const Material(
-                  shape: StarBorder(
-                    points: 8,
-                    innerRadiusRatio: 0.8,
-                    pointRounding: 0.2,
-                    valleyRounding: 0.2,
+            sliver: SliverGrid.extent(
+              maxCrossAxisExtent: 280,
+              mainAxisSpacing: 16,
+              crossAxisSpacing: 16,
+              childAspectRatio: 5,
+              children: [
+                TypeButton(
+                  title: context.tr.materialWidgets,
+                  icon: const Material(
+                    shape: StarBorder(
+                      points: 8,
+                      innerRadiusRatio: 0.8,
+                      pointRounding: 0.2,
+                      valleyRounding: 0.2,
+                    ),
+                    child: SizedBox.square(dimension: 16),
                   ),
-                  child: SizedBox.square(dimension: 16),
+                  onTap: () => MaterialRoute().go(context),
                 ),
-                label: const Text('Material Widgets'),
-              ),
-              const SizedBox(height: 16),
-              CupertinoButton.filled(
-                onPressed: () {
-                  CupertinoRoute().go(context);
-                },
-                child: const Text('Cupertino'),
-              ),
-              const SizedBox(height: 16),
-              FilledButton.icon(
-                style: FilledButton.styleFrom(
-                  minimumSize: const Size.fromHeight(56),
+                TypeButton(
+                  onTap: () => CupertinoRoute().go(context),
+                  title: context.tr.cupertinoWidgets,
+                  icon: const Icon(CupertinoIcons.square_stack_3d_up_fill),
                 ),
-                onPressed: () {
-                  PaintingRoute().go(context);
-                },
-                icon: const Icon(Icons.format_paint),
-                label: Text(context.tr.paintingEffects),
-              ),
-              const SizedBox(height: 16),
-              FilledButton.icon(
-                style: FilledButton.styleFrom(
-                  minimumSize: const Size.fromHeight(56),
+                TypeButton(
+                  onTap: () => PaintingRoute().go(context),
+                  icon: const Icon(Icons.format_paint),
+                  title: context.tr.paintingEffects,
                 ),
-                onPressed: () {
-                  BasicRoute().go(context);
-                },
-                icon: const Icon(Icons.widgets),
-                label: Text(context.tr.basics),
-              ),
-              const SizedBox(height: 16),
-              FilledButton.icon(
-                style: FilledButton.styleFrom(
-                  minimumSize: const Size.fromHeight(56),
+                TypeButton(
+                  onTap: () => BasicRoute().go(context),
+                  icon: const Icon(Icons.widgets),
+                  title: context.tr.basics,
                 ),
-                onPressed: () {
-                  LayoutRoute().go(context);
-                },
-                icon: const Icon(Icons.layers_outlined),
-                label: Text(context.tr.layout),
-              ),
-            ]),
+                TypeButton(
+                  onTap: () => ScrollingRoute().go(context),
+                  icon: const Icon(Icons.list),
+                  title: context.tr.scrolling,
+                ),
+                TypeButton(
+                  onTap: () {
+                    LayoutRoute().go(context);
+                  },
+                  icon: const Icon(Icons.layers_outlined),
+                  title: context.tr.layout,
+                ),
+              ],
+            ),
           ),
         ],
       ),
       bottomNavigationBar: const Footer(),
     );
+  }
+}
+
+class TypeButton extends StatelessWidget {
+  const TypeButton({
+    super.key,
+    required this.title,
+    this.icon,
+    required this.onTap,
+  });
+
+  final String title;
+  final Widget? icon;
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    final style = FilledButton.styleFrom(
+      minimumSize: const Size.fromHeight(56),
+    );
+    return icon == null
+        ? FilledButton(style: style, onPressed: onTap, child: Text(title))
+        : FilledButton.icon(
+            style: style,
+            onPressed: onTap,
+            icon: icon!,
+            label: Text(title),
+          );
   }
 }

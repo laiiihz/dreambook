@@ -70,3 +70,10 @@ class LayoutRoute extends GoRouteData {
     return NamedCodeScaffold(title: 'Layout', items: layoutCodeItems);
   }
 }
+
+class ScrollingRoute extends GoRouteData {
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return NamedCodeScaffold(title: 'Scrolling', items: layoutCodeItems);
+  }
+}

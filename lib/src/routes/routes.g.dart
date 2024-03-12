@@ -40,6 +40,11 @@ RouteBase get $rootRoute => GoRouteData.$route(
           factory: $LayoutRouteExtension._fromState,
         ),
         GoRouteData.$route(
+          path: 'scrolling',
+          name: 'scrolling',
+          factory: $ScrollingRouteExtension._fromState,
+        ),
+        GoRouteData.$route(
           path: 'settings',
           name: 'settings',
           factory: $SettingsRouteExtension._fromState,
@@ -144,6 +149,23 @@ extension $LayoutRouteExtension on LayoutRoute {
 
   String get location => GoRouteData.$location(
         '/layout',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+extension $ScrollingRouteExtension on ScrollingRoute {
+  static ScrollingRoute _fromState(GoRouterState state) => ScrollingRoute();
+
+  String get location => GoRouteData.$location(
+        '/scrolling',
       );
 
   void go(BuildContext context) => context.go(location);
