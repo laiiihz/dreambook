@@ -281,7 +281,7 @@ class WidgetWithConfiguration extends StatelessWidget {
   /// * [SlidableTile]
   /// * [MenuTile]
   /// * [SwitchListTile]
-  final List<Widget>? configs;
+  final List<Widget?>? configs;
   final List<double> initialFractions;
   final Axis axis;
   final bool background;
@@ -315,7 +315,7 @@ class WidgetWithConfiguration extends StatelessWidget {
         initialFractions: initialFractions,
         children: [
           top,
-          ListView(children: configs!),
+          ListView(children: configs!.nonNulls.toList()),
         ],
       );
     } else {

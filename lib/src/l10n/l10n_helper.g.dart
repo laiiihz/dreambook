@@ -20,7 +20,7 @@ final appLocaleProvider = NotifierProvider<AppLocale, Locale?>.internal(
 );
 
 typedef _$AppLocale = Notifier<Locale?>;
-String _$apiBaseUrlHash() => r'9813db38e92d2fd73d4d41fca20afab0b0efd098';
+String _$apiBaseUrlHash() => r'5fb84abfbd805c66ca4c309fcd47fbd4a39b2537';
 
 /// See also [ApiBaseUrl].
 @ProviderFor(ApiBaseUrl)
