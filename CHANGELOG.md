@@ -1,3 +1,8 @@
+## 1.1.6+15 - 2024-03-13
+### Added
+- list\_view
+- api swicher
+
 ## 1.1.5+13 - 2023-12-28
 ### Added
 - add resource page

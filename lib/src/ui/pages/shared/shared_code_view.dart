@@ -277,6 +277,10 @@ class WidgetWithConfiguration extends StatelessWidget {
     this.background = false,
   });
   final Widget content;
+
+  /// * [SlidableTile]
+  /// * [MenuTile]
+  /// * [SwitchListTile]
   final List<Widget>? configs;
   final List<double> initialFractions;
   final Axis axis;

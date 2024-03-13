@@ -29,6 +29,16 @@ class AppLocale extends _$AppLocale {
   }
 }
 
+@Riverpod(keepAlive: true)
+class ApiBaseUrl extends _$ApiBaseUrl {
+  @override
+  (String, String) build() => KV.apiBase;
+
+  void change(String name) async {
+    state = await KV.setApiBase(name);
+  }
+}
+
 extension LocaleExt on Locale? {
   String name(BuildContext context) {
     return switch (this) {

@@ -20,5 +20,20 @@ final appLocaleProvider = NotifierProvider<AppLocale, Locale?>.internal(
 );
 
 typedef _$AppLocale = Notifier<Locale?>;
+String _$apiBaseUrlHash() => r'9813db38e92d2fd73d4d41fca20afab0b0efd098';
+
+/// See also [ApiBaseUrl].
+@ProviderFor(ApiBaseUrl)
+final apiBaseUrlProvider =
+    NotifierProvider<ApiBaseUrl, (String, String)>.internal(
+  ApiBaseUrl.new,
+  name: r'apiBaseUrlProvider',
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$apiBaseUrlHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef _$ApiBaseUrl = Notifier<(String, String)>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

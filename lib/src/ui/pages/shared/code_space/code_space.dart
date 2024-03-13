@@ -135,7 +135,7 @@ class _CodeSpaceState extends ConsumerState<CodeSpace> {
                   onPressed: () {
                     launchUrl(Uri(
                       scheme: 'https',
-                      host: 'api.flutter.dev',
+                      host: ref.read(apiBaseUrlProvider).$2,
                       path: widget.apiUrl,
                     ));
                   },

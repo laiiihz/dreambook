@@ -3,6 +3,7 @@ import 'package:dreambook/src/routes/routes.dart';
 import 'package:dreambook/src/ui/theme.dart';
 import 'package:dreambook/src/ui/widgets/adaptive_scaffold.dart';
 import 'package:dreambook/src/ui/widgets/resource_license_button.dart';
+import 'package:dreambook/src/utils/kv.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -64,6 +65,30 @@ class SettingsPage extends StatelessWidget {
                         const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                     child: Text(
                       ref.read(appLocaleProvider).name(context),
+                    ),
+                  ),
+                ),
+              );
+            }),
+            Consumer(builder: (context, ref, _) {
+              return ListTile(
+                title: const Text('API Base'),
+                subtitle: Text(ref.watch(apiBaseUrlProvider).$2),
+                trailing: PopupMenuButton(
+                  itemBuilder: (context) {
+                    return apiBaseMap.entries.map((e) {
+                      return PopupMenuItem(value: e.key, child: Text(e.value));
+                    }).toList();
+                  },
+                  initialValue: ref.read(apiBaseUrlProvider).$1,
+                  onSelected: (value) {
+                    ref.read(apiBaseUrlProvider.notifier).change(value);
+                  },
+                  child: Padding(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                    child: Text(
+                      ref.watch(apiBaseUrlProvider).$1,
                     ),
                   ),
                 ),

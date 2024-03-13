@@ -32,4 +32,22 @@ class KV {
       _instance.setString('locale_country', state.countryCode!);
     }
   }
+
+  static (String, String) get apiBase {
+    String key = _instance.getString('apiBase') ?? 'Origin';
+    if (!apiBaseMap.containsKey(key)) {
+      key = 'Origin';
+    }
+    return (key, apiBaseMap[key]!);
+  }
+
+  static setApiBase(String name) async {
+    await _instance.setString('apiBase', name);
+    return KV.apiBase;
+  }
 }
+
+const apiBaseMap = {
+  'Origin': 'api.flutter.dev',
+  'China': 'api.flutter-io.cn',
+};
