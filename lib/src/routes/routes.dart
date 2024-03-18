@@ -22,6 +22,7 @@ GoRouter appRoutes(AppRoutesRef ref) {
     TypedGoRoute<BasicRoute>(path: 'basic', name: 'basic'),
     TypedGoRoute<LayoutRoute>(path: 'layout', name: 'layout'),
     TypedGoRoute<ScrollingRoute>(path: 'scrolling', name: 'scrolling'),
+    TypedGoRoute<TextRoute>(path: 'text', name: 'text'),
     TypedGoRoute<SettingsRoute>(path: 'settings', name: 'settings', routes: [
       TypedGoRoute<ProjectLicenseRoute>(path: 'LICENSE', name: 'license'),
     ]),

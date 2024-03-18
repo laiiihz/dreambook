@@ -70,11 +70,14 @@ class RootPage extends StatelessWidget {
                   title: context.tr.scrolling,
                 ),
                 TypeButton(
-                  onTap: () {
-                    LayoutRoute().go(context);
-                  },
+                  onTap: () => LayoutRoute().go(context),
                   icon: const Icon(Icons.layers_outlined),
                   title: context.tr.layout,
+                ),
+                TypeButton(
+                  onTap: () => TextRoute().go(context),
+                  icon: const Icon(Icons.text_fields_rounded),
+                  title: context.tr.text,
                 ),
               ],
             ),

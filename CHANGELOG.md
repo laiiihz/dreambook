@@ -1,3 +1,14 @@
+## Unreleased
+### Added
+- text widgets
+
+## 1.2.0+17 - 2024-03-14
+### Added
+- text widgets
+
+### Changed
+- refactor some codes
+
 ## 1.1.7+16 - 2024-03-13
 ### Changed
 - add gridview

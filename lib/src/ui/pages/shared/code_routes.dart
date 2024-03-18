@@ -6,6 +6,7 @@ import 'package:dreambook/src/ui/pages/material/widgets.dart';
 import 'package:dreambook/src/ui/pages/painting/widgets.dart';
 import 'package:dreambook/src/ui/pages/scrolling/widgets.dart';
 import 'package:dreambook/src/ui/pages/shared/shared_code_view.dart';
+import 'package:dreambook/src/ui/pages/text/widgets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart' hide MaterialPage;
 import 'package:go_router/go_router.dart';
@@ -76,5 +77,12 @@ class ScrollingRoute extends GoRouteData {
   @override
   Widget build(BuildContext context, GoRouterState state) {
     return NamedCodeScaffold(title: 'Scrolling', items: scrollingCodeItems);
+  }
+}
+
+class TextRoute extends GoRouteData {
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return NamedCodeScaffold(title: 'Text', items: textCodeItems);
   }
 }

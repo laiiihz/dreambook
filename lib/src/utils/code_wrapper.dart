@@ -17,7 +17,7 @@ class CodeWrapper {
     required this.buildExpressions,
   });
 
-  final Imports import;
+  final Directive import;
   final List<Code> initState;
   final List<Code> dispose;
   final String name;
@@ -125,23 +125,11 @@ class CodeWrapper {
     }
     return _formatter.format(
       <Spec>[
-        import.directive,
+        import,
         ...custom,
         if (!fullContent) ...middle,
         if (fullContent) ...nextSpec else ...methods,
       ].map((e) => e.accept(_emitter)).join('\n'),
     );
   }
-}
-
-enum Imports {
-  material('package:flutter/material.dart'),
-  cupertino('package:flutter/cupertino.dart'),
-  painting('package:flutter/painting.dart'),
-  ;
-
-  const Imports(this.code);
-  final String code;
-
-  Directive get directive => Directive.import(code);
 }

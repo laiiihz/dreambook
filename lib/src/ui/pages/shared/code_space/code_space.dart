@@ -1,4 +1,5 @@
 import 'package:code_builder/code_builder.dart';
+import 'package:dreambook/src/codes/imports.dart';
 import 'package:dreambook/src/l10n/l10n_helper.dart';
 import 'package:dreambook/src/utils/code_wrapper.dart';
 import 'package:dreambook/src/utils/highlighter.dart';
@@ -22,11 +23,12 @@ class ShowFullContent extends _$ShowFullContent {
   }
 }
 
+@Deprecated('use CodeArea')
 class AutoCode extends ConsumerWidget {
   const AutoCode(
     this.name, {
     super.key,
-    this.import = Imports.material,
+    this.import,
     this.named = const {},
     this.typed = const [],
     this.positional = const [],
@@ -38,7 +40,7 @@ class AutoCode extends ConsumerWidget {
     this.buildExpressions = const [],
     this.apiUrl,
   });
-  final Imports import;
+  final Directive? import;
   final List<Code> initState;
   final List<Code> dispose;
   final String name;
@@ -56,7 +58,7 @@ class AutoCode extends ConsumerWidget {
     return CodeSpace.from(
       CodeWrapper(
         name: name,
-        import: import,
+        import: import ?? Imports.material,
         namedArguments: named,
         typeArguments: typed,
         positionalArguments: positional,

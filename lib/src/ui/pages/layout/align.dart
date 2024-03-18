@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first, unused_local_variable
 import 'package:code_builder/code_builder.dart';
+import 'package:dreambook/src/codes/painting/alignment.dart';
 import 'package:dreambook/src/l10n/l10n_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -32,22 +33,7 @@ class AlignConfig {
   }
 }
 
-extension on Alignment {
-  String get name {
-    return switch (this) {
-      Alignment.topLeft => 'topLeft',
-      Alignment.topCenter => 'topCenter',
-      Alignment.topRight => 'topRight',
-      Alignment.centerLeft => 'centerLeft',
-      Alignment.center => 'center',
-      Alignment.centerRight => 'centerRight',
-      Alignment.bottomLeft => 'bottomLeft',
-      Alignment.bottomCenter => 'bottomCenter',
-      Alignment.bottomRight => 'bottomRight',
-      _ => 'Value',
-    };
-  }
-}
+
 
 @riverpod
 class Config extends _$Config {

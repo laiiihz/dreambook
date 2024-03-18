@@ -1,13 +1,14 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first, unused_local_variable
-import 'package:code_builder/code_builder.dart';
+import 'package:dreambook/src/codes/widgets/basic.dart';
+import 'package:dreambook/src/codes/widgets/container.dart';
+import 'package:dreambook/src/codes/widgets/stateful_widget.dart';
+import 'package:dreambook/src/l10n/l10n_helper.dart';
+import 'package:dreambook/src/ui/pages/shared/code_space/code_area.dart';
+import 'package:dreambook/src/ui/pages/shared/shared_code_view.dart';
+import 'package:dreambook/src/ui/pages/shared/tiles/menu_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-
-import 'package:dreambook/src/l10n/l10n_helper.dart';
-import 'package:dreambook/src/ui/pages/shared/code_space/code_space.dart';
-import 'package:dreambook/src/ui/pages/shared/shared_code_view.dart';
-import 'package:dreambook/src/ui/pages/shared/tiles/menu_tile.dart';
 
 part 'row.g.dart';
 
@@ -60,27 +61,23 @@ class TheCode extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final config = ref.watch(configProvider);
-    return AutoCode(
-      'Row',
-      apiUrl: '/flutter/widgets/Row-class.html',
-      named: {
-        if (config.mainAxisAlignment != MainAxisAlignment.start)
-          'mainAxisAlignment':
-              refer('MainAxisAlignment.${config.mainAxisAlignment.name}'),
-        if (config.mainAxisSize != MainAxisSize.max)
-          'mainAxisSize': refer('MainAxisSize.${config.mainAxisSize.name}'),
-        if (config.crossAxisAlignment != CrossAxisAlignment.center)
-          'crossAxisAlignment':
-              refer('CrossAxisAlignment.${config.crossAxisAlignment.name}'),
-        if (config.verticalDirection != VerticalDirection.down)
-          'verticalDirection':
-              refer('VerticalDirection.${config.verticalDirection.name}'),
-        'children': refer('''[
-            Container(height: 32, width: 16, color: Colors.green),
-            Container(height: 64, width: 32, color: Colors.teal),
-            Container(height: 128, width: 48, color: Colors.amber),
-          ]'''),
-      },
+    return CodeArea(
+      api: '/flutter/widgets/Row-class.html',
+      codes: [
+        StatefulWidgetX(
+          buildReturn: RowX(
+            mainAxisAlignment: config.mainAxisAlignment,
+            crossAxisAlignment: config.crossAxisAlignment,
+            mainAxisSize: config.mainAxisSize,
+            verticalDirection: config.verticalDirection,
+            children: [
+              ContainerX(height: 32, width: 16, color: Colors.green),
+              ContainerX(height: 64, width: 32, color: Colors.teal),
+              ContainerX(height: 128, width: 48, color: Colors.amber),
+            ],
+          ),
+        ),
+      ],
     );
   }
 }

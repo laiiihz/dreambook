@@ -1,5 +1,8 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:code_builder/code_builder.dart';
+import 'package:dreambook/src/codes/painting/edge_insets.dart';
+import 'package:dreambook/src/codes/painting/flutter_logo.dart';
+import 'package:dreambook/src/codes/widgets/text.dart';
 import 'package:dreambook/src/l10n/l10n_helper.dart';
 import 'package:dreambook/src/ui/pages/shared/code_gen.dart';
 import 'package:dreambook/src/ui/pages/shared/code_space/code_space.dart';
@@ -76,23 +79,13 @@ class TheCode extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final config = ref.watch(configProvider);
-    final itemParams = [
-      Parameter((p) => p..name = 'context'),
-      Parameter((p) => p..name = 'index'),
-    ];
-    final itemBuilderMethod = Method((m) => m
-      ..requiredParameters.addAll(itemParams)
-      ..lambda = true
-      ..body = InvokeExpression.newOf(
-        refer('OutlinedButton'),
-        [],
-        {
-          'color': Colors.amber.toCode,
-          'onPressed': CodeGen.voidCallback,
-          'child': const Text('')
-              .toCode(refer('index').newInstanceNamed('toString', [])),
-        },
-      ).code).closure;
+    final itemBuilderMethod = CodeGen.indexedBuilder(
+      lambda: true,
+      body: CodeGen.outlinedButton(
+        child: refer('index').toStringCode,
+        onPressed: CodeGen.voidCallback,
+      ).code,
+    );
 
     return AutoCode(
       switch (config.type) {
@@ -104,17 +97,13 @@ class TheCode extends ConsumerWidget {
         if (config.reverse) 'reverse': literalBool(true),
         if (config.scrollDirection case Axis.horizontal)
           'scrollDirection': config.scrollDirection.toCode,
-        if (config.padding != 0) 'padding': config.paddingValue.toCode,
+        if (config.padding != 0) 'padding': config.paddingValue.$exp,
         ...switch (config.type) {
           ListViewType.children => {
               'children': literalList(List.generate(6, (index) {
-                return InvokeExpression.newOf(
-                  refer('OutlinedButton'),
-                  [],
-                  {
-                    'onPressed': CodeGen.voidCallback,
-                    'child': Text('$index').toCode(),
-                  },
+                return CodeGen.outlinedButton(
+                  child: DText(refer('$index')),
+                  onPressed: CodeGen.voidCallback,
                 );
               })),
             },
@@ -125,10 +114,10 @@ class TheCode extends ConsumerWidget {
             },
           ListViewType.seperated => {
               'itemBuilder': itemBuilderMethod,
-              'separatorBuilder': Method((m) => m
-                ..requiredParameters.addAll(itemParams)
-                ..lambda = true
-                ..body = const FlutterLogo().toCode.code).closure,
+              'separatorBuilder': CodeGen.indexedBuilder(
+                lambda: true,
+                body: FlutterLogoX().code,
+              ),
               'itemCount': literalNum(config.itemCount),
             },
         }

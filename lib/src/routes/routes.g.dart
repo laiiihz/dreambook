@@ -45,6 +45,11 @@ RouteBase get $rootRoute => GoRouteData.$route(
           factory: $ScrollingRouteExtension._fromState,
         ),
         GoRouteData.$route(
+          path: 'text',
+          name: 'text',
+          factory: $TextRouteExtension._fromState,
+        ),
+        GoRouteData.$route(
           path: 'settings',
           name: 'settings',
           factory: $SettingsRouteExtension._fromState,
@@ -166,6 +171,23 @@ extension $ScrollingRouteExtension on ScrollingRoute {
 
   String get location => GoRouteData.$location(
         '/scrolling',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+extension $TextRouteExtension on TextRoute {
+  static TextRoute _fromState(GoRouterState state) => TextRoute();
+
+  String get location => GoRouteData.$location(
+        '/text',
       );
 
   void go(BuildContext context) => context.go(location);
