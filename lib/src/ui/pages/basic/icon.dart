@@ -1,10 +1,12 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first, unused_local_variable
 import 'package:code_builder/code_builder.dart';
+import 'package:dreambook/src/codes/engine/painting.dart';
+import 'package:dreambook/src/codes/widgets/icon.dart';
+import 'package:dreambook/src/codes/widgets/stateful_widget.dart';
 import 'package:dreambook/src/l10n/l10n_helper.dart';
-import 'package:dreambook/src/ui/pages/shared/code_space/code_space.dart';
+import 'package:dreambook/src/ui/pages/shared/code_space/code_area.dart';
 import 'package:dreambook/src/ui/pages/shared/shared_code_view.dart';
 import 'package:dreambook/src/ui/pages/shared/tiles/slidable_tile.dart';
-import 'package:dreambook/src/utils/extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -55,25 +57,29 @@ class TheCode extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final config = ref.watch(configProvider);
-    final size = config.size.readableStr();
-    return AutoCode(
-      'Icon',
-      apiUrl: 'flutter/widgets/Icon-class.html',
-      positional: [
-        refer('Icons.favorite'),
+    return CodeArea(
+      api: 'flutter/widgets/Icon-class.html',
+      codes: [
+        StatefulWidgetX(
+          buildReturn: IconX(
+            refer('Icons').property('favorite'),
+            color: config.hasColor ? Colors.blue : null,
+            size: config.size != 18 ? config.size : null,
+            shadows$: config.hasShadow
+                ? [
+                    ShadowX(
+                      color$: refer('Theme')
+                          .newInstanceNamed('of', [refer('context')])
+                          .property('colorScheme')
+                          .property('outline'),
+                      offset: const Offset(2, 2),
+                      blurRadius: 8,
+                    ),
+                  ]
+                : null,
+          ),
+        ),
       ],
-      named: {
-        if (size != '18') 'size': refer(size),
-        if (config.hasShadow)
-          'shadow': literalList(const [
-            Code('''Shadow(
-                  color: Theme.of(context).colorScheme.outline,
-                  offset: const Offset(2, 2),
-                  blurRadius: 8,
-                )'''),
-          ]),
-        if (config.hasColor) 'color': refer('Colors.blue'),
-      },
     );
   }
 }
@@ -113,7 +119,8 @@ class TheWidget extends ConsumerWidget {
           title: 'Size',
           value: config.size,
           min: 8,
-          max: 32,
+          max: 40,
+          divisions: 16,
           onChanged: (t) {
             ref.read(configProvider.notifier).change(config.copyWith(size: t));
           },

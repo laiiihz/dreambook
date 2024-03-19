@@ -1,14 +1,13 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first, unused_local_variable
-import 'package:code_builder/code_builder.dart';
+import 'package:dreambook/src/codes/painting/edge_insets.dart';
+import 'package:dreambook/src/codes/widgets/stateful_widget.dart';
+import 'package:dreambook/src/l10n/l10n_helper.dart';
+import 'package:dreambook/src/ui/pages/shared/code_space/code_area.dart';
+import 'package:dreambook/src/ui/pages/shared/shared_code_view.dart';
 import 'package:dreambook/src/ui/pages/shared/tiles/slidable_tile.dart';
-import 'package:dreambook/src/utils/extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-
-import 'package:dreambook/src/l10n/l10n_helper.dart';
-import 'package:dreambook/src/ui/pages/shared/code_space/code_space.dart';
-import 'package:dreambook/src/ui/pages/shared/shared_code_view.dart';
 
 part 'padding.g.dart';
 
@@ -60,28 +59,18 @@ class TheCode extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final config = ref.watch(configProvider);
-    final top = config.top.readableStr();
-    final left = config.left.readableStr();
-    final right = config.right.readableStr();
-    final bottom = config.bottom.readableStr();
-    return AutoCode(
-      'Padding',
-      apiUrl: '/flutter/widgets/Padding-class.html',
-      named: {
-        'padding': InvokeExpression.newOf(
-          refer('EdgeInsets'),
-          [],
-          {
-            if (top != '0') 'top': refer(top),
-            if (left != '0') 'left': refer(left),
-            if (right != '0') 'right': refer(right),
-            if (bottom != '0') 'bottom': refer(bottom),
-          },
-          [],
-          'only',
+    return CodeArea(
+      api: '/flutter/widgets/Padding-class.html',
+      codes: [
+        StatefulWidgetX(
+          buildReturn: EdgeInsets.only(
+            top: config.top,
+            left: config.left,
+            right: config.right,
+            bottom: config.bottom,
+          ).$exp,
         ),
-        'child': refer('Container(color: Colors.green[800])'),
-      },
+      ],
     );
   }
 }
@@ -116,6 +105,7 @@ class TheWidget extends ConsumerWidget {
           title: 'Top',
           value: config.top,
           max: 64,
+          divisions: 16,
           onChanged: (t) {
             ref.read(configProvider.notifier).change(config.copyWith(top: t));
           },
@@ -124,6 +114,7 @@ class TheWidget extends ConsumerWidget {
           title: 'Left',
           value: config.left,
           max: 64,
+          divisions: 16,
           onChanged: (t) {
             ref.read(configProvider.notifier).change(config.copyWith(left: t));
           },
@@ -132,6 +123,7 @@ class TheWidget extends ConsumerWidget {
           title: 'Right',
           value: config.right,
           max: 64,
+          divisions: 16,
           onChanged: (t) {
             ref.read(configProvider.notifier).change(config.copyWith(right: t));
           },
@@ -140,6 +132,7 @@ class TheWidget extends ConsumerWidget {
           title: 'Bottom',
           value: config.bottom,
           max: 64,
+          divisions: 16,
           onChanged: (t) {
             ref
                 .read(configProvider.notifier)

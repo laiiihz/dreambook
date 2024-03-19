@@ -1,7 +1,5 @@
 import 'package:code_builder/code_builder.dart';
-import 'package:dreambook/src/codes/animation/curve.dart';
-import 'package:dreambook/src/codes/engine/duration.dart';
-import 'package:dreambook/src/codes/engine/painting.dart';
+import 'package:dreambook/src/codes/material/material.dart';
 import 'package:flutter/material.dart';
 
 /// code expression for [FlutterLogo]

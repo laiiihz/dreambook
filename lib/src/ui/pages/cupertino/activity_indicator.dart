@@ -1,15 +1,13 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first, unused_local_variable
-import 'package:code_builder/code_builder.dart';
+import 'package:dreambook/src/codes/cupertino/cupertino.dart';
 import 'package:dreambook/src/l10n/l10n_helper.dart';
+import 'package:dreambook/src/ui/pages/shared/code_space/code_area.dart';
+import 'package:dreambook/src/ui/pages/shared/shared_code_view.dart';
 import 'package:dreambook/src/ui/pages/shared/tiles/slidable_tile.dart';
-import 'package:dreambook/src/utils/extensions.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-
-import 'package:dreambook/src/ui/pages/shared/code_space/code_space.dart';
-import 'package:dreambook/src/ui/pages/shared/shared_code_view.dart';
 
 part 'activity_indicator.g.dart';
 
@@ -62,21 +60,21 @@ class TheCode extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final config = ref.watch(configProvider);
-    final radius = config.radius.readableStr();
-    final progress = config.value.readableStr();
-    return AutoCode(
-      config.partiallyRevealed
-          ? 'CupertinoActivityIndicator'
-          : 'CupertinoActivityIndicator.partiallyRevealed',
-      apiUrl: '/flutter/cupertino/CupertinoActivityIndicator-class.html',
-      named: {
-        if (radius != '10') 'radius': refer(radius),
-        if (config.partiallyRevealed) ...{
-          if (progress != '1') 'progress': refer(progress),
-        } else ...{
-          'animating': literal(config.animated),
-        }
-      },
+    return CodeArea(
+      api: '/flutter/cupertino/CupertinoActivityIndicator-class.html',
+      codes: [
+        StatelessWidgetX(
+          buildReturn: config.partiallyRevealed
+              ? CupertinoActivityIndicatorX.partiallyRevealed(
+                  radius: config.radius,
+                  progress: config.value,
+                )
+              : CupertinoActivityIndicatorX(
+                  animating: config.animated,
+                  radius: config.radius,
+                ),
+        ),
+      ],
     );
   }
 }
@@ -112,6 +110,7 @@ class TheWidget extends ConsumerWidget {
           value: config.radius,
           min: 4,
           max: 48,
+          divisions: 11,
           onChanged: (t) {
             ref
                 .read(configProvider.notifier)
@@ -122,6 +121,7 @@ class TheWidget extends ConsumerWidget {
           SlidableTile(
             title: context.tr.value,
             value: config.value,
+            divisions: 8,
             onChanged: (t) {
               ref
                   .read(configProvider.notifier)

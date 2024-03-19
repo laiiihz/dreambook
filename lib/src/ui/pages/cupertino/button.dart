@@ -1,14 +1,15 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first, unused_local_variable
 import 'package:code_builder/code_builder.dart';
+import 'package:dreambook/src/codes/cupertino/cupertino.dart';
 import 'package:dreambook/src/l10n/l10n_helper.dart';
+import 'package:dreambook/src/ui/pages/shared/code_gen.dart';
+import 'package:dreambook/src/ui/pages/shared/code_space/code_area.dart';
+import 'package:dreambook/src/ui/pages/shared/shared_code_view.dart';
 import 'package:dreambook/src/ui/pages/shared/tiles/menu_tile.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-
-import 'package:dreambook/src/ui/pages/shared/code_space/code_space.dart';
-import 'package:dreambook/src/ui/pages/shared/shared_code_view.dart';
 
 part 'button.g.dart';
 
@@ -20,7 +21,7 @@ final buttonItem = CodeItem(
 
 enum ButtonType {
   normal('CupertinoButton'),
-  filled('CupertinoButton.fiiled'),
+  filled('CupertinoButton.filled'),
   ;
 
   const ButtonType(this.code);
@@ -62,13 +63,21 @@ class TheCode extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final config = ref.watch(configProvider);
-    return AutoCode(
-      config.type.code,
-      apiUrl: '/flutter/cupertino/CupertinoButton-class.html',
-      named: {
-        'onPressed': config.canTap ? refer('() {}') : refer('null'),
-        'child': refer("Text('${config.type.code}')"),
-      },
+    return CodeArea(
+      api: '/flutter/cupertino/CupertinoButton-class.html',
+      codes: [
+        StatelessWidgetX(
+            buildReturn: switch (config.type) {
+          ButtonType.normal => CupertinoButtonX(
+              child: Text(config.type.code).$exp,
+              onPressed: config.canTap ? CodeGen.voidCallback : literalNull,
+            ),
+          ButtonType.filled => CupertinoButtonX.filled(
+              child: Text(config.type.code).$exp,
+              onPressed: config.canTap ? CodeGen.voidCallback : literalNull,
+            ),
+        }),
+      ],
     );
   }
 }

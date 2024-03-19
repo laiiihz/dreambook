@@ -5,10 +5,10 @@ import 'package:dreambook/src/codes/painting/text_style.dart';
 import 'package:flutter/material.dart';
 
 /// code expression for [Text]
-class DText extends InvokeExpression {
-  DText(
+class TextX extends InvokeExpression {
+  TextX(
     Expression ref, {
-    DTextStyle? style,
+    TextStyle? style,
     TextAlign? textAlign,
     TextDirection? textDirection,
     bool? softWrap,
@@ -18,7 +18,7 @@ class DText extends InvokeExpression {
           refer('Text'),
           [ref],
           {
-            if (style != null) 'style': style,
+            if (style != null) 'style': style.$exp,
             if (textAlign != null) 'textAlign': textAlign.toCode,
             if (textDirection != null) 'textDirection': textDirection.$exp,
             if (softWrap != null) 'softWrap': literalBool(softWrap),
@@ -26,4 +26,16 @@ class DText extends InvokeExpression {
             if (maxLines != null) 'maxLines': literalNum(maxLines),
           },
         );
+}
+
+extension TextXCodeExt on Text {
+  Expression get $exp => TextX(
+        literalString(data ?? ''),
+        style: style,
+        textAlign: textAlign,
+        textDirection: textDirection,
+        softWrap: softWrap,
+        overflow: overflow,
+        maxLines: maxLines,
+      );
 }

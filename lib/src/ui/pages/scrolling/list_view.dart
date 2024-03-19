@@ -102,7 +102,7 @@ class TheCode extends ConsumerWidget {
           ListViewType.children => {
               'children': literalList(List.generate(6, (index) {
                 return CodeGen.outlinedButton(
-                  child: DText(refer('$index')),
+                  child: TextX(refer('$index')),
                   onPressed: CodeGen.voidCallback,
                 );
               })),

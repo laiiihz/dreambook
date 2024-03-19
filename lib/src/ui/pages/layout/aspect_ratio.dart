@@ -1,14 +1,14 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first, unused_local_variable
 import 'package:code_builder/code_builder.dart';
+import 'package:dreambook/src/codes/cupertino/cupertino.dart';
+import 'package:dreambook/src/l10n/l10n_helper.dart';
+import 'package:dreambook/src/ui/pages/shared/code_space/code_area.dart';
+import 'package:dreambook/src/ui/pages/shared/shared_code_view.dart';
 import 'package:dreambook/src/ui/pages/shared/tiles/slidable_tile.dart';
 import 'package:dreambook/src/utils/extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-
-import 'package:dreambook/src/l10n/l10n_helper.dart';
-import 'package:dreambook/src/ui/pages/shared/code_space/code_space.dart';
-import 'package:dreambook/src/ui/pages/shared/shared_code_view.dart';
 
 part 'aspect_ratio.g.dart';
 
@@ -50,15 +50,22 @@ class TheCode extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final config = ref.watch(configProvider);
     final aspectRatio = config.aspectRatio.readableStr();
-    return AutoCode(
-      'AspectRatio',
-      apiUrl: '/flutter/widgets/AspectRatio-class.html',
-      named: {
-        if (aspectRatio != '1') 'aspectRatio': refer(aspectRatio),
-        'child': refer(
-            'Container(color: Theme.of(context).colorScheme.primaryContainer)'),
-      },
-    );
+    return CodeArea(api: '/flutter/widgets/AspectRatio-class.html', codes: [
+      StatelessWidgetX(
+        buildReturn: AspectRatioX(
+          aspectRatio: config.aspectRatio,
+          child: ContainerX(
+            color$: refer('Theme')
+                .newInstanceNamed(
+                  'of',
+                  [refer('context')],
+                )
+                .property('colorScheme')
+                .property('primaryContainer'),
+          ),
+        ),
+      ),
+    ]);
   }
 }
 

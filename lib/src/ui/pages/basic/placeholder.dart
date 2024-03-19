@@ -1,14 +1,14 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first, unused_local_variable
-import 'package:code_builder/code_builder.dart';
+import 'package:dreambook/src/codes/widgets/placeholder.dart';
+import 'package:dreambook/src/codes/widgets/stateless_widget.dart';
+import 'package:dreambook/src/l10n/l10n_helper.dart';
+import 'package:dreambook/src/ui/pages/shared/code_space/code_area.dart';
+import 'package:dreambook/src/ui/pages/shared/shared_code_view.dart';
 import 'package:dreambook/src/ui/pages/shared/tiles/slidable_tile.dart';
 import 'package:dreambook/src/utils/extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-
-import 'package:dreambook/src/l10n/l10n_helper.dart';
-import 'package:dreambook/src/ui/pages/shared/code_space/code_space.dart';
-import 'package:dreambook/src/ui/pages/shared/shared_code_view.dart';
 
 part 'placeholder.g.dart';
 
@@ -50,12 +50,12 @@ class TheCode extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final config = ref.watch(configProvider);
     final width = config.width.readableStr();
-    return AutoCode(
-      'Placeholder',
-      apiUrl: '/flutter/widgets/Placeholder-class.html',
-      named: {
-        if (width != '2') 'width': refer(width),
-      },
+    return CodeArea(
+      api: '/flutter/widgets/Placeholder-class.html',
+      codes: [
+        StatelessWidgetX(
+            buildReturn: Placeholder(strokeWidth: config.width).$exp),
+      ],
     );
   }
 }
@@ -75,7 +75,8 @@ class TheWidget extends ConsumerWidget {
           title: 'Stroke Width',
           value: config.width,
           min: 0.5,
-          max: 32,
+          max: 16.5,
+          divisions: 32,
           onChanged: (t) {
             ref.read(configProvider.notifier).change(config.copyWith(width: t));
           },

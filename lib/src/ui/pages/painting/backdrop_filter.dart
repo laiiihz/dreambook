@@ -1,16 +1,15 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first, unused_local_variable
 import 'dart:ui';
 
-import 'package:code_builder/code_builder.dart';
+import 'package:dreambook/src/codes/widgets/widgets.dart';
 import 'package:dreambook/src/l10n/l10n_helper.dart';
+import 'package:dreambook/src/ui/pages/shared/code_space/code_area.dart';
+import 'package:dreambook/src/ui/pages/shared/shared_code_view.dart';
 import 'package:dreambook/src/ui/pages/shared/tiles/menu_tile.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-
-import 'package:dreambook/src/ui/pages/shared/code_space/code_space.dart';
-import 'package:dreambook/src/ui/pages/shared/shared_code_view.dart';
 
 part 'backdrop_filter.g.dart';
 
@@ -55,36 +54,30 @@ class TheCode extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final config = ref.watch(configProvider);
-    return AutoCode(
-      'Stack',
-      apiUrl: '/flutter/widgets/BackdropFilter-class.html',
-      named: {
-        'children': literalList([
-          InvokeExpression.constOf(
-              refer('FlutterLog'), [], {'size': refer('128')}),
-          InvokeExpression.newOf(
-            refer('ClipRect'),
-            [],
-            {
-              'child': InvokeExpression.newOf(
-                refer('BackdropFilter'),
-                [],
-                {
-                  'filter': switch (config.mode) {
+    return CodeArea(
+      api: '/flutter/widgets/BackdropFilter-class.html',
+      codes: [
+        StatelessWidgetX(
+          buildReturn: StackX(
+            children: [
+              FlutterLogoX(size: 128),
+              ClipRectX(
+                child: BackdropFilterX(
+                  filter: switch (config.mode) {
                     BackdropMode.erode =>
-                      refer('ImageFilter.erode(radiusX: 4, radiusY: 4)'),
+                      ImageFilterX.erode(radiusX: 4, radiusY: 4),
                     BackdropMode.blur =>
-                      refer('ImageFilter.blur(sigmaX: 12, sigmaY: 12)'),
+                      ImageFilterX.blur(sigmaX: 12, sigmaY: 12),
                     BackdropMode.dilate =>
-                      refer('ImageFilter.dilate(radiusX: 4, radiusY: 4)'),
+                      ImageFilterX.dilate(radiusX: 4, radiusY: 4),
                   },
-                  'child': refer(' const SizedBox.square(dimension: 128)'),
-                },
+                  child: SizedBoxX.square(dimension: 128),
+                ),
               ),
-            },
+            ],
           ),
-        ]),
-      },
+        ),
+      ],
     );
   }
 }
