@@ -1,10 +1,10 @@
 import 'package:adaptive_breakpoints/adaptive_breakpoints.dart';
 import 'package:animations/animations.dart';
-import 'package:devtools_app_shared/ui.dart';
+import 'package:devtools_app_shared/ui.dart' as ui;
 import 'package:dreambook/src/ui/widgets/about_button.dart';
 import 'package:dreambook/src/ui/widgets/github_button.dart';
 import 'package:dreambook/src/ui/widgets/theme_mode_button.dart';
-import 'package:flutter/material.dart' hide Split;
+import 'package:flutter/material.dart';
 
 class NamedCodeScaffold extends StatefulWidget {
   const NamedCodeScaffold({
@@ -134,7 +134,7 @@ class _SharedCodeViewState extends State<SharedCodeView> {
     if (hasDrawer) {
       return content;
     } else {
-      return Split(
+      return ui.Split(
         axis: Axis.horizontal,
         initialFractions: const [0.2, 0.8],
         children: [
@@ -193,7 +193,7 @@ class _AdaptiveSplitCodeViewState extends State<AdaptiveSplitCodeView> {
               ),
             ],
           )
-        : Split(
+        : ui.Split(
             axis: Axis.horizontal,
             initialFractions: const [0.4, 0.6],
             children: [
@@ -310,7 +310,7 @@ class WidgetWithConfiguration extends StatelessWidget {
     );
 
     if (configs != null && configs!.isNotEmpty) {
-      return Split(
+      return ui.Split(
         axis: axis,
         initialFractions: initialFractions,
         children: [
