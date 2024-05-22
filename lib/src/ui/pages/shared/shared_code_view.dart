@@ -134,7 +134,7 @@ class _SharedCodeViewState extends State<SharedCodeView> {
     if (hasDrawer) {
       return content;
     } else {
-      return ui.Split(
+      return ui.SplitPane(
         axis: Axis.horizontal,
         initialFractions: const [0.2, 0.8],
         children: [
@@ -193,7 +193,7 @@ class _AdaptiveSplitCodeViewState extends State<AdaptiveSplitCodeView> {
               ),
             ],
           )
-        : ui.Split(
+        : ui.SplitPane(
             axis: Axis.horizontal,
             initialFractions: const [0.4, 0.6],
             children: [
@@ -310,7 +310,7 @@ class WidgetWithConfiguration extends StatelessWidget {
     );
 
     if (configs != null && configs!.isNotEmpty) {
-      return ui.Split(
+      return ui.SplitPane(
         axis: axis,
         initialFractions: initialFractions,
         children: [
