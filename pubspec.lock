@@ -221,26 +221,26 @@ packages:
     dependency: "direct main"
     description:
       name: devtools_app_shared
-      sha256: "6d25b09c98d9d4241d704a2fdd2d562fa433e552e679e96831d54659df665a63"
+      sha256: ce205ca88895e2d44321e6f92f33db761132e2927f4edcc63221cc10267c2f61
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "0.0.10"
+    version: "0.1.1"
   devtools_shared:
     dependency: transitive
     description:
       name: devtools_shared
-      sha256: "1f46a18cf389dd47b10e1b963cff463c0fede747b8c0fc787d2455eb034135e8"
+      sha256: e5fa35a08b7728bb835982784f4b261f35cec0eec897698cc91e815caa92d10e
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "6.0.4"
+    version: "8.1.1"
   dtd:
     dependency: transitive
     description:
       name: dtd
-      sha256: "9aeacf38e9522426034c7f5162ad110e08fa836835a0b726c413adf29cbb5a69"
+      sha256: "0d4a51ab223090d2d6b86477f414052db78cad1b2de020619f454a2a39369fec"
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "1.0.0"
+    version: "2.1.0"
   extension_discovery:
     dependency: transitive
     description:
@@ -373,6 +373,14 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "0.9.5"
+  http:
+    dependency: transitive
+    description:
+      name: http
+      sha256: a2bbf9d017fcced29139daa8ed2bba4ece450ab222871df93ca9eec6f80c34ba
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "1.2.0"
   http_multi_server:
     dependency: transitive
     description:
@@ -819,6 +827,14 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "1.3.2"
+  unified_analytics:
+    dependency: transitive
+    description:
+      name: unified_analytics
+      sha256: "57f594f2eff970a74e43aedc9bdec8eb8e3d3c860da8e9e6bcdf7594a07dba6b"
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "5.8.8+1"
   url_launcher:
     dependency: "direct main"
     description:
@@ -972,5 +988,5 @@ packages:
     source: hosted
     version: "2.2.0"
 sdks:
-  dart: ">=3.3.0 <4.0.0"
-  flutter: ">=3.18.0-18.0.pre.54"
+  dart: ">=3.4.0-282.1.beta <4.0.0"
+  flutter: ">=3.22.0-0.1.pre"
