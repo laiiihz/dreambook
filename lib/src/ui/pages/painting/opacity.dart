@@ -1,10 +1,9 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first, unused_local_variable
-import 'package:code_builder/code_builder.dart';
+import 'package:dreambook/src/codes/widgets/widgets.dart';
 import 'package:dreambook/src/l10n/l10n_helper.dart';
-import 'package:dreambook/src/ui/pages/shared/code_space/code_space.dart';
+import 'package:dreambook/src/ui/pages/shared/code_space/code_area.dart';
 import 'package:dreambook/src/ui/pages/shared/shared_code_view.dart';
 import 'package:dreambook/src/ui/pages/shared/tiles/slidable_tile.dart';
-import 'package:dreambook/src/utils/extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -48,14 +47,16 @@ class TheCode extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final config = ref.watch(configProvider);
-    final opacity = config.value.readableStr();
-    return AutoCode(
-      'Opacity',
-      apiUrl: '/flutter/widgets/Opacity-class.html',
-      named: {
-        'value': refer(opacity),
-        'child': refer('const FlutterLogo(size: 128)'),
-      },
+    return CodeArea(
+      api: '/flutter/widgets/Opacity-class.html',
+      codes: [
+        StatelessWidgetX(
+          buildReturn: OpacityX(
+            opacity: config.value,
+            child: FlutterLogoX(size: 128),
+          ),
+        ),
+      ],
     );
   }
 }
@@ -75,6 +76,7 @@ class TheWidget extends ConsumerWidget {
         SlidableTile(
           title: context.tr.value,
           value: config.value,
+          divisions: 10,
           onChanged: (t) {
             ref.read(configProvider.notifier).change(config.copyWith(value: t));
           },

@@ -1,8 +1,5 @@
 import 'package:code_builder/code_builder.dart';
-import 'package:dreambook/src/codes/engine/basic_types.dart';
 import 'package:dreambook/src/codes/engine/engine.dart';
-import 'package:dreambook/src/codes/engine/painting.dart';
-import 'package:dreambook/src/codes/engine/text.dart';
 import 'package:dreambook/src/codes/painting/alignment.dart';
 import 'package:dreambook/src/codes/rendering/rendering.dart';
 import 'package:flutter/material.dart';
@@ -251,7 +248,18 @@ class SizedBoxX extends InvokeExpression {
         extra: {},
         child: child,
       );
-  test() {
-    SizedBox.square();
-  }
+}
+
+class OpacityX extends InvokeExpression {
+  OpacityX({
+    double? opacity,
+    Expression? opacity$,
+    Expression? child,
+  }) : super.newOf(refer('Opacity'), [], {
+          if (opacity$ != null)
+            'opacity': opacity$
+          else if (opacity != null)
+            'opacity': literalNum(opacity),
+          if (child != null) 'child': child,
+        });
 }

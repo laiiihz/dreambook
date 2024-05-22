@@ -4,7 +4,7 @@ import 'package:devtools_app_shared/ui.dart';
 import 'package:dreambook/src/ui/widgets/about_button.dart';
 import 'package:dreambook/src/ui/widgets/github_button.dart';
 import 'package:dreambook/src/ui/widgets/theme_mode_button.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide Split;
 
 class NamedCodeScaffold extends StatefulWidget {
   const NamedCodeScaffold({
