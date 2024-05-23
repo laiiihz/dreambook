@@ -1,11 +1,14 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:code_builder/code_builder.dart';
+import 'package:dreambook/src/codes/widgets/stateless_widget.dart';
 import 'package:dreambook/src/l10n/l10n_helper.dart';
-import 'package:dreambook/src/ui/pages/shared/code_space/code_space.dart';
+import 'package:dreambook/src/ui/pages/shared/code_space/code_area.dart';
 import 'package:dreambook/src/ui/pages/shared/shared_code_view.dart';
 import 'package:dreambook/src/ui/pages/shared/tiles/menu_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+
 part 'action_buttons.g.dart';
 
 final actionButtonsItem = CodeItem(
@@ -56,7 +59,23 @@ class TheCode extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final config = ref.watch(configProvider);
-    return AutoCode(config.type.rawName);
+    // return AutoCode(config.type.rawName);
+    return CodeArea(codes: [
+      StatelessWidgetX(
+        buildReturn: refer('Scaffold').call([], {
+          'drawer': refer('Drawer').constInstance([]),
+          'endDrawer': refer('Drawer').constInstance([]),
+          'body': refer('Center').call([], {
+            'child': switch (config.type) {
+              ActionButtonType.back => refer('BackButton').call([]),
+              ActionButtonType.close => refer('CloseButton').call([]),
+              ActionButtonType.drawer => refer('DrawerButton').call([]),
+              ActionButtonType.endDrawer => refer('EndDrawerButton').call([]),
+            },
+          }),
+        }),
+      ),
+    ]);
   }
 }
 
@@ -66,12 +85,18 @@ class TheWidget extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final config = ref.watch(configProvider);
     return WidgetWithConfiguration(
-      content: switch (config.type) {
-        ActionButtonType.back => const BackButton(),
-        ActionButtonType.close => const CloseButton(),
-        ActionButtonType.drawer => const DrawerButton(),
-        ActionButtonType.endDrawer => const EndDrawerButton(),
-      },
+      content: Scaffold(
+        drawer: const Drawer(),
+        endDrawer: const Drawer(),
+        body: Center(
+          child: switch (config.type) {
+            ActionButtonType.back => const BackButton(),
+            ActionButtonType.close => const CloseButton(),
+            ActionButtonType.drawer => const DrawerButton(),
+            ActionButtonType.endDrawer => const EndDrawerButton(),
+          },
+        ),
+      ),
       configs: [
         MenuTile(
           title: context.tr.theType,

@@ -16,7 +16,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
 # In Windows, build-name is used as the major, minor, and patch parts
 # of the product and file versions while build-number is used as the build suffix.
-version: 1.2.0+17
+version: 1.2.1+18
 
 environment:
   sdk: '>=3.3.0 <4.0.0'
@@ -35,7 +35,7 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.6
-  go_router: ^13.2.1
+  go_router: ^14.1.3
   flutter_riverpod: ^2.5.1
   riverpod_annotation: ^2.3.5
   devtools_app_shared: ^0.1.1
@@ -46,22 +46,20 @@ dependencies:
       ref: develop
   code_builder: ^4.10.0
   dart_style: ^2.3.6
-  url_launcher: ^6.2.5
-  shared_preferences: ^2.2.2
+  url_launcher: ^6.2.6
+  shared_preferences: ^2.2.3
   flutter_localizations:
     sdk: flutter
   intl: ^0.19.0
   adaptive_breakpoints: ^0.1.7
   collection: ^1.18.0
   recase: ^4.1.0
-  web: ^0.4.2
+  web: ^0.4.1
 
 dev_dependencies:
-  flutter_test:
-    sdk: flutter
-  flutter_lints: ^3.0.1
-  go_router_builder: ^2.4.1
-  build_runner: ^2.4.8
+  flutter_lints: ^4.0.0
+  go_router_builder: ^2.7.0
+  build_runner: ^2.4.10
   riverpod_generator: ^2.4.0
   grinder: ^0.9.5
 

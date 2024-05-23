@@ -17,14 +17,14 @@ class Footer extends StatelessWidget {
             context.tr.releasedMIT,
             style: TextStyle(
               fontSize: 12,
-              color: colorScheme.onBackground.withOpacity(0.8),
+              color: colorScheme.onSurface.withOpacity(0.8),
             ),
           ),
           Text(
             context.tr.copyright(year),
             style: TextStyle(
               fontSize: 12,
-              color: colorScheme.onBackground.withOpacity(0.8),
+              color: colorScheme.onSurface.withOpacity(0.8),
             ),
           ),
         ],

@@ -1,6 +1,9 @@
-## Unreleased
+## 1.2.1+18 - 2024-05-23
 ### Added
 - text widgets
+
+### Changed
+- use wasm build
 
 ## 1.2.0+17 - 2024-03-14
 ### Added

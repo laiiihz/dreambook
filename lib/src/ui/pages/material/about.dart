@@ -1,6 +1,8 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:code_builder/code_builder.dart';
+import 'package:dreambook/src/codes/widgets/widgets.dart';
 import 'package:dreambook/src/l10n/l10n_helper.dart';
-import 'package:dreambook/src/ui/pages/shared/code_space/code_space.dart';
+import 'package:dreambook/src/ui/pages/shared/code_space/code_area.dart';
 import 'package:dreambook/src/ui/pages/shared/shared_code_view.dart';
 import 'package:dreambook/src/ui/pages/shared/tiles/menu_tile.dart';
 import 'package:flutter/material.dart';
@@ -53,8 +55,18 @@ class TheCode extends ConsumerWidget {
   const TheCode({super.key});
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    print(Theme.of(context).primaryColor);
     final config = ref.watch(configProvider);
-    return AutoCode(config.type.rawName);
+    // return AutoCode(config.type.rawName);
+    return CodeArea(codes: [
+      StatefulWidgetX(
+        buildReturn: switch (config.type) {
+          AboutType.listTile => refer('AboutListTile').call([]),
+          AboutType.dialog => refer('AboutDialog').call([]),
+          AboutType.licensePage => refer('LicensePage').call([]),
+        },
+      ),
+    ]);
   }
 }
 

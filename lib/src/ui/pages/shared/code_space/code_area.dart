@@ -31,7 +31,7 @@ class _CodeAreaState extends ConsumerState<CodeArea> {
   static final _formatter = DartFormatter();
   @override
   Widget build(BuildContext context) {
-    final background = Theme.of(context).colorScheme.background;
+    final background = Theme.of(context).colorScheme.surface;
     final specs = [
       ...widget.imports ?? [Imports.material],
       for (final code in widget.codes)

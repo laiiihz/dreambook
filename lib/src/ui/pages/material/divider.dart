@@ -102,7 +102,7 @@ class TheWidget extends ConsumerWidget {
       color: Theme.of(context).colorScheme.primaryContainer,
       child: const SizedBox.square(dimension: 64),
     );
-    final color = Theme.of(context).colorScheme.onBackground;
+    final color = Theme.of(context).colorScheme.onSurface;
     return WidgetWithConfiguration(
       initialFractions: const [0.5, 0.5],
       content: switch (config.axis) {

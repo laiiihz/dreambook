@@ -116,12 +116,11 @@ class TheWidget extends ConsumerWidget {
               }
             : null,
         thumbIcon: config.showThumbIcons
-            ? MaterialStateProperty.resolveWith<Icon?>(
-                (Set<MaterialState> states) {
-                if (states.contains(MaterialState.disabled)) {
+            ? WidgetStateProperty.resolveWith<Icon?>((Set<WidgetState> states) {
+                if (states.contains(WidgetState.disabled)) {
                   return const Icon(Icons.close_rounded);
                 }
-                if (states.contains(MaterialState.selected)) {
+                if (states.contains(WidgetState.selected)) {
                   return const Icon(Icons.circle_outlined);
                 }
                 return null;
